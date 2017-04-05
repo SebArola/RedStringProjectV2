@@ -1,8 +1,8 @@
 package model;
 
-public class ComparaisonFichier {
+public class Descripteur {
 
-	public ComparaisonFichier() {
+	public Descripteur() {
 		// TODO Auto-generated constructor stub
 	}
 
