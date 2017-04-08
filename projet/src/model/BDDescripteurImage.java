@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BDDescripteurImage {
+	//avec hashmap
 	//private List<DescripteurImage> listeDescripteurImage = new ArrayList<>();
 	private HashMap<String, DescripteurImage> listeDescripteurImage = new HashMap();
 	private BDDescripteurImage(){
