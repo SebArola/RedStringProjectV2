@@ -18,9 +18,5 @@ public class Fichier {
 	public String getType() {
 		return type;
 	}
-	
-	public String getDescripteur(){
-		return this.descripteur;
-	}
 
 }
