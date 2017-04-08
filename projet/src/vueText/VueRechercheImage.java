@@ -16,7 +16,7 @@ public class VueRechercheImage {
 	public void rechercheImage(){
 		int choix;
 		boolean choixBon;
-		HashMap<String, Integer> resultat = new HashMap();
+		String resultat = new String();
 		Scanner clavier = new Scanner(System.in);
 		do{
 			System.out.println("Quelle couleur recherchez-vous ?\n1: Rouge\n2: Vert\n3: Bleu");

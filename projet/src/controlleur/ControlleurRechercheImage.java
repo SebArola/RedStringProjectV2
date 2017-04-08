@@ -12,9 +12,10 @@ public class ControlleurRechercheImage {
 		
 	}
 	
-	public HashMap<String, Integer> rechercheImage(Couleur c){
+	public String rechercheImage(Couleur c){
 		HashMap<String, Integer> resultat = new HashMap();
-		for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage()){
+		String stringResultat = "";
+		for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
 			switch (c){
 			case ROUGE:
 				if(d.couleurDominante().equals(Couleur.ROUGE))
@@ -30,6 +31,15 @@ public class ControlleurRechercheImage {
 				break;
 			}
 		}
-		return resultat;
+		if(resultat.isEmpty()){
+			stringResultat = "Aucune correspondance.";
+		}
+		else{
+			for(String chemin : resultat.keySet()){
+				stringResultat = stringResultat + chemin + " : "  + resultat.get(chemin) + "% de dominance\n";
+			}
+		}
+		return stringResultat;
 	}
+	
 }
