@@ -18,7 +18,7 @@ public class fichierConfig {
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		this.seuilComparaisonFichier = 80;
+		this.seuilComparaisonFichier = 50;
 	}
 
 	public int getSeuilComparaisonFichier() {
