@@ -22,5 +22,4 @@ public class Fichier {
 	public String getDescripteur(){
 		return this.descripteur;
 	}
-
 }

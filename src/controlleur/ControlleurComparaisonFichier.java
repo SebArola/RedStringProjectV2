@@ -12,12 +12,8 @@ import model.fichierConfig;
  * @author sebastien
  *
  */
+
 public class ControlleurComparaisonFichier {
-
-	public ControlleurComparaisonFichier() {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Méthode principal calculant le pourcentage de similaritée entre le
 	 * fichier donne et les fichiers de la base du même type.

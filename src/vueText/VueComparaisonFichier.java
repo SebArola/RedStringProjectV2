@@ -1,7 +1,6 @@
 package vueText;
 
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 
 import controlleur.ControlleurComparaisonFichier;
@@ -43,7 +42,7 @@ public class VueComparaisonFichier {
 		return tab;
 	}
 
-	public void vueComparaisonFichier() {
+	public void vueComparaisonFichier(){
 		Scanner clavier = new Scanner(System.in);
 		String cheminFic, type;
 		System.out.println("Entrez le chemin vers le fichier :");
