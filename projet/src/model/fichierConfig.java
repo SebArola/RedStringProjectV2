@@ -12,6 +12,8 @@ public class fichierConfig {
 
 	private static fichierConfig instance;
 	private int seuilComparaisonFichier;
+	private int nbQuantif;
+	private int nbMots;
 	private String cheminBD;
 
 	/**
@@ -20,6 +22,15 @@ public class fichierConfig {
 	 */
 	private fichierConfig() {
 		this.seuilComparaisonFichier = 80;
+		this.nbQuantif = 3;
+		this.nbMots = 5;
+	}
+	
+	public static fichierConfig getInstance() {
+		if (instance == null) {
+			instance = new fichierConfig();
+		}
+		return instance;
 	}
 
 	public int getSeuilComparaisonFichier() {
@@ -38,11 +49,20 @@ public class fichierConfig {
 		this.cheminBD = c;
 	}
 
-	public static fichierConfig getInstance() {
-		if (instance == null) {
-			instance = new fichierConfig();
-		}
-		return instance;
+	public int getNbQuantif() {
+		return nbQuantif;
+	}
+
+	public void setNbQuantif(int nbQuantif) {
+		this.nbQuantif = nbQuantif;
+	}
+
+	public int getNbMots() {
+		return nbMots;
+	}
+
+	public void setNbMots(int nbMots) {
+		this.nbMots = nbMots;
 	}
 
 }

@@ -39,6 +39,6 @@ public class VueRechercheImage {
 				System.out.println("Attention, entrez 1, 2 ou 3");
 			}
 		}while(!choixBon);
-		System.out.println(resultat.toString());
+		//System.out.println(resultat.toString());
 	}
 }
