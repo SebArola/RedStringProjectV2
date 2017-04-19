@@ -27,7 +27,7 @@ public class PanelRechercheMotCles extends JPanel {
 		this.panelTypeFic = new JPanel(new GridLayout(3,4));
 
 		this.jtxtf_barRecherche = new JTextField("Entrez les mots clés");
-		this.panelBar.add(new JButton("2"));
+		this.panelBar.add(new JLabel(" "));
 		this.panelBar.add(this.jtxtf_barRecherche);
 		
 		this.jcb_typeFic = new JComboBox<String>();
@@ -36,20 +36,20 @@ public class PanelRechercheMotCles extends JPanel {
 		this.jcb_typeFic.addItem("Son");
 
 		this.panelTypeFic.add(this.jcb_typeFic);
-		this.panelTypeFic.add(new JButton("2"));
-		this.panelTypeFic.add(new JButton("2"));
-		this.panelTypeFic.add(new JButton("2"));
-		this.panelTypeFic.add(new JButton("2"));
-		this.panelTypeFic.add(new JButton("2"));
-		this.panelTypeFic.add(new JButton("2"));
+		this.panelTypeFic.add(new JLabel(" "));
+		this.panelTypeFic.add(new JLabel(" "));
+		this.panelTypeFic.add(new JLabel(" "));
+		this.panelTypeFic.add(new JLabel(" "));
+		this.panelTypeFic.add(new JLabel(" "));
+		this.panelTypeFic.add(new JLabel(" "));
 
-		this.add(new JButton("2"));this.add(new JButton("2"));this.add(new JButton("2"));
-		this.add(new JButton("2"));this.add(new JButton("2"));this.add(new JButton("2"));
+		this.add(new JLabel(" "));this.add(new JLabel(" "));this.add(new JLabel(" "));
+		this.add(new JLabel(" "));this.add(new JLabel(" "));this.add(new JLabel(" "));
 
-		this.add(new JButton("2"));this.add(panelBar);this.add(new JButton("2"));
-		this.add(new JButton("2"));this.add(panelTypeFic);this.add(new JButton("2"));
-		this.add(new JButton("2"));this.add(new JButton("2"));this.add(new JButton("2"));
-		this.add(new JButton("2"));this.add(new JButton("2"));this.add(new JButton("2"));
+		this.add(new JLabel(" "));this.add(panelBar);this.add(new JLabel(" "));
+		this.add(new JLabel(" "));this.add(panelTypeFic);this.add(new JLabel(" "));
+		this.add(new JLabel(" "));this.add(new JLabel(" "));this.add(new JLabel(" "));
+		this.add(new JLabel(" "));this.add(new JLabel(" "));this.add(new JLabel(" "));
 		this.gestionPanel();
 	}
 	
