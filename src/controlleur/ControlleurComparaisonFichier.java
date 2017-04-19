@@ -27,17 +27,16 @@ public class ControlleurComparaisonFichier {
 		int pourcentage = 0;
 		HashMap<String, Integer> resultat = new HashMap();// <pourcentage,
 															// chemin>
-		System.out.println("AA\n"+ControlleurFichier.getInstance().getAllFichier(type));
 		for (Fichier f : ControlleurFichier.getInstance().getAllFichier(type)) {
 			switch (type) {
-			case "texte":
+			case "Texte":
 				pourcentage = compareFichierTexte(fic, f.getDescripteur());
 
 				break;
-			case "image":
+			case "Image":
 				pourcentage = compareFichierImage(fic, f.getDescripteur());
 				break;
-			case "son":
+			case "Son":
 				pourcentage = compareFichierSon(fic, f.getDescripteur());
 
 				break;

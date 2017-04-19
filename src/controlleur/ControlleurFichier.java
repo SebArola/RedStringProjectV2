@@ -28,13 +28,13 @@ public class ControlleurFichier {
 
 	public void addFichier(String chemin, String type, String descripteur) {
 		switch (type) {
-		case "texte":
+		case "Texte":
 			this.al_fichierTxt.add(new Fichier(chemin, type, descripteur));
 			break;
-		case "image":
+		case "Image":
 			this.al_fichierIm.add(new Fichier(chemin, type, descripteur));
 			break;
-		case "son":
+		case "Son":
 			this.al_fichierSon.add(new Fichier(chemin, type, descripteur));
 			break;
 		}
@@ -47,11 +47,11 @@ public class ControlleurFichier {
 
 	public ArrayList<Fichier> getAllFichier(String type){
 		switch (type) {
-		case "texte":
+		case "Texte":
 			return this.al_fichierTxt;
-		case "image":
+		case "Image":
 			return this.al_fichierIm;
-		case "son":
+		case "Son":
 			return this.al_fichierSon;
 		}
 		return null;
