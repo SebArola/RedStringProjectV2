@@ -25,7 +25,7 @@ public class BDAdmin {
 			cle=i.next();
 			if(instance.listeAdmin.get(cle).selectionProfil(loginAdmin, mdpAdmin)){
 				numProfil=cle;
-				System.out.println("Valeur de cle:"+cle);
+				System.out.println("Valeur de cle:"+cle); //TODO test pour détecter la valeur de la clé
 				instance.listeAdmin.get(cle).connexionProfil();
 			}
 			
@@ -36,7 +36,7 @@ public class BDAdmin {
 	
 	public void ajouterAdmin(Administrateur administrateur){
 		numProfil++;
-		System.out.println("test de ajouterAdmin:"+numProfil);
+		//System.out.println("test de ajouterAdmin:"+numProfil); //Pour détecter que l'ajout a bien fonctionné
 		listeAdmin.put(numProfil, administrateur);
 	}
 
