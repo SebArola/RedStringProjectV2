@@ -1,9 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 
 public class DescripteurSon {
 	public String descripteur;
@@ -20,19 +18,25 @@ public class DescripteurSon {
 	public DescripteurSon(String nom){
 		String lecture="";
 		try{
-			InputStream ips=new FileInputStream(nom); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
-			while ((ligne=br.readLine())!=null){
-				lecture+=ligne+"\n";
-			}
+			//InputStream ips=new FileInputStream(nom); 
+			//InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(new FileReader(nom));
+			String ligne="";
+			do{
+				ligne=br.readLine();
+				if(ligne!=null)
+					lecture+=ligne+"\n";
+			}while (ligne!=null);
+				
+			
 			br.close(); 
 		}		
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
+		System.out.println("lecture: "+lecture);
 		this.descripteur=lecture;
+		System.out.println("lecture: "+descripteur);
 	    this.nom=nom;
 	    this.nombreOccurence=0;
 	}
