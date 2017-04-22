@@ -1,54 +1,31 @@
-package control;
+package controlleur;
 
-import java.io.File;
-import java.io.FileWriter;
+//import java.io.File;
+//import java.io.FileWriter;
 import java.io.IOException;
 
+import model.ModifierSeuilComparaison;
+import model.TypeFichier;
+
 public class ControleurModifierSeuilComparaison {
-
-	public boolean modificationSeuil(String nomFichier, int seuil) throws IOException {
-
+	private ModifierSeuilComparaison modifiSeuilComparaison =new ModifierSeuilComparaison();
+	public boolean modificationSeuil(TypeFichier nomFichier, int seuil) throws IOException {
+		boolean modifOk;
 		switch (nomFichier) {
-		case "texte":
-			System.out.println("Modification Seuil Texte");
-		    try{
-		    	File ff = new File("SeuilTexte.txt");
-		    	FileWriter ffw=new FileWriter(ff);
-		    	ffw.write(String.valueOf( seuil ));
-		    	ffw.write("\n"); 
-		    	ffw.close(); 
-		    	//System.out.println("Chemin absolu du fichier : " + ff.getAbsolutePath());
-		    	} catch (Exception e) {}
+		case TEXTE:
+			modifOk=modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
 			break;
 
-		case "son":
-			System.out.println("Modification Seuil son");
-		    try{
-		    	File ff = new File("SeuilSon.txt");
-		    	FileWriter ffw=new FileWriter(ff);
-		    	ffw.write(String.valueOf( seuil ));
-		    	ffw.write("\n"); 
-		    	ffw.close(); 
-		    	//System.out.println("Chemin absolu du fichier : " + ff.getAbsolutePath());
-		    	} catch (Exception e) {}
+		case SON:
+			modifOk=modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
 			break;
-
-		case "image":
-			System.out.println("Modification Seuil Image");
-		    try{
-		    	File ff = new File("SeuilImage.txt");
-		    	FileWriter ffw=new FileWriter(ff);
-		    	ffw.write(String.valueOf( seuil ));
-		    	ffw.write("\n"); 
-		    	ffw.close(); 
-		    	//System.out.println("Chemin absolu du fichier : " + ff.getAbsolutePath());
-		    	} catch (Exception e) {}
+		case IMAGE:
+			modifOk=modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
 			break;
-
 		default:
 			System.out.println("Erreur ecriture fichier"); return(false);
 
 		}
-		return (true);
+		return modifOk;
 	}	
 }
