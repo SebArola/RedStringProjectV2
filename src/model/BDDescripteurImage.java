@@ -63,7 +63,7 @@ public class BDDescripteurImage {
 				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin, r, v, b));		//on crée le descripteur
 			}else if(nbCouleurs == 1){
 				debutHistogramme = 2;
-				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin));
+				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin));				//on crée le descripteur
 			}
 			int i = 0;
 			for (String ligneHistogramme : ligneDesc){
@@ -73,7 +73,7 @@ public class BDDescripteurImage {
 				}
 				i++;
 			}
-			this.listeDescripteurImage.get(chemin).setHistogramme(histo);
+			this.listeDescripteurImage.get(chemin).setHistogramme(histo);		//on ajoute l'histogramme
 		}
 	}
 }

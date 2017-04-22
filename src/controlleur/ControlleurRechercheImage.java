@@ -36,10 +36,22 @@ public class ControlleurRechercheImage {
 		}
 		else{
 			for(String chemin : resultat.keySet()){
-				stringResultat = stringResultat + chemin + " : "  + resultat.get(chemin) + "% de dominance\n";
+				stringResultat = stringResultat + chemin + " : ";
+				switch (c){
+				case ROUGE:
+					stringResultat = stringResultat + "Le rouge domine à " + resultat.get(chemin) + "%\n";
+					break;
+				case VERT:
+					stringResultat = stringResultat + "Le vert domine à " + resultat.get(chemin) + "%\n";
+					break;
+				case BLEU:
+					stringResultat = stringResultat + "Le bleu domine à " + resultat.get(chemin) + "%\n";
+					break;
+				}
 			}
 		}
-		return stringResultat;
+		return stringResultat;	
 	}
+		
 	
 }
