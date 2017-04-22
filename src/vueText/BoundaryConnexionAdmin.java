@@ -19,7 +19,10 @@ public class BoundaryConnexionAdmin {
 		String mdpAdmin;
 		String loginAdmin;
 		
-		System.out.println("Entrez votre login!");
+		System.out.println("==========================================\n"
+				+ "===Mode administrateur de SATER Search====\n==========================================\n\n");		
+		
+		System.out.println("Entrez votre login!(VotreNom.VotrePrenom)");
 		loginAdmin=readScanner.nextLine();
 		
 		System.out.println("Entrer votre mot de passe!");

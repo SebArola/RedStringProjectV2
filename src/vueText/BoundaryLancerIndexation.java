@@ -27,30 +27,38 @@ public class BoundaryLancerIndexation implements Observer{
 	
 	public void lancerIndexation(int numProfil){
 		boolean verificationOK=ctrlVerifIdentification.verifierIdentification(numProfil);
-		int choixUser;
-		if(verificationOK){
-			System.out.println("=======Mode administrateur========\n\n");
-			System.out.println("\n===Lancement des indexations=====\n\n");
-			System.out.println("1. Indexation Image\n2. Indexation Texte\n3.Indexation Sonore");
-			choixUser=readScanner.nextInt();
-			
-			switch (choixUser) {
-			case 1:
-				ctrlIndexation.getDescripteur(TypeFichier.IMAGE);
-				System.out.println(baseDescripteurImage);
-				break;
-			case 2:
-				ctrlIndexation.getDescripteur(TypeFichier.TEXTE);
-				System.out.println(baseDescripteurTexte);
-				break;
-			case 3:
-				ctrlIndexation.getDescripteur(TypeFichier.SON);
-				System.out.println(baseDescripteurSon);
-				break;
-			default:
-				break;
+		int continuerPartie=1;
+		int choixUser, nbMots=1;
+		do {
+			if(verificationOK){
+				System.out.println("=======Mode administrateur========\n\n");
+				System.out.println("\n===Lancement des indexations=====\n\n");
+				System.out.println("1. Indexation Image\n2. Indexation Texte\n3.Indexation Sonore");
+				choixUser=readScanner.nextInt();
+				
+				switch (choixUser) {
+				case 1:					
+					ctrlIndexation.getDescripteur(TypeFichier.IMAGE, nbMots);
+					System.out.println(baseDescripteurImage);
+					break;
+				case 2:
+					System.out.println("Entrer le nombre de mot récurrent maximum (0<nbMot<6)");
+					nbMots=readScanner.nextInt();
+					ctrlIndexation.getDescripteur(TypeFichier.TEXTE, nbMots); //TODO test
+					System.out.println(baseDescripteurTexte);
+					break;
+				case 3:
+					ctrlIndexation.getDescripteur(TypeFichier.SON, nbMots);//TODO test, il est possible de l'enlever
+					System.out.println(baseDescripteurSon);
+					break;
+				default:
+					break;
+				}
+				System.out.println("Voulez-vous continuer les indexations?(1, si oui)");
+				continuerPartie=readScanner.nextInt();
 			}
-		}
+		} while (continuerPartie==1);
+		
 			
 	}
 

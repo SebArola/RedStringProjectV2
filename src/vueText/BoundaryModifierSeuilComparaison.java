@@ -1,15 +1,16 @@
-package vue;
+package vueText;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-import control.ControleurModifierSeuilComparaison;
-import control.ControleurVerificationIdentification;
+import controlleur.ControleurModifierSeuilComparaison;
+import controlleur.ControleurVerifIdentification;
+import model.TypeFichier;;
 
 public class BoundaryModifierSeuilComparaison {
 	
 	ControleurModifierSeuilComparaison cmsc = new ControleurModifierSeuilComparaison();
-	ControleurVerificationIdentification cvi = new ControleurVerificationIdentification();
+	ControleurVerifIdentification cvi = new ControleurVerifIdentification();
 	boolean verifOk;
 	boolean ecritureOK;
 	int choix;
@@ -17,12 +18,13 @@ public class BoundaryModifierSeuilComparaison {
 	Scanner clavier = new Scanner(System.in);
 	
 
-	public void modifierSeuilComparaison() throws IOException{
+	public void modifierSeuilComparaison(int numProfil) throws IOException{
 		
-		verifOk=cvi.verifierIdentification();
+		verifOk=cvi.verifierIdentification(numProfil);
 		
 		if (verifOk){
 			do{
+				System.out.println("===Modification parametre indexation=====\n\n");
 				System.out.println("Choisir un choix : ");
 				System.out.println("1.Modifier parametre indexation son");
 				System.out.println("2.Modifier parametre indexation image");
@@ -38,13 +40,13 @@ public class BoundaryModifierSeuilComparaison {
 			switch (choix)
 			{
 				case 1: 
-					ecritureOK = cmsc.modificationSeuil("son", seuil);
+					ecritureOK = cmsc.modificationSeuil(TypeFichier.SON, seuil);
 					break;
 				case 2: 
-					ecritureOK = cmsc.modificationSeuil("image", seuil);
+					ecritureOK = cmsc.modificationSeuil(TypeFichier.IMAGE, seuil);
 					break;
 				case 3:	
-					ecritureOK = cmsc.modificationSeuil("texte", seuil);
+					ecritureOK = cmsc.modificationSeuil(TypeFichier.TEXTE, seuil);
 					break;	
 				default : System.out.println("Une erreur a été detectée lors de la lecture.");
 			}

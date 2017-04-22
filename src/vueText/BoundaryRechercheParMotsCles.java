@@ -1,14 +1,18 @@
-package vue;
+package vueText;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import control.ControlleurRechercheParMotsCles;
+import controlleur.ControlleurRechercheParMotsCles;
 
 public class BoundaryRechercheParMotsCles {
 
 	Scanner clavier = new Scanner(System.in);
-	public ControlleurRechercheParMotsCles crpmc = new ControlleurRechercheParMotsCles();
+	private ControlleurRechercheParMotsCles crpmc;// = new ControlleurRechercheParMotsCles();
+
+	public BoundaryRechercheParMotsCles(ControlleurRechercheParMotsCles controlrpmc) {
+		crpmc=controlrpmc;
+	}
 
 	public void rechercheParMotsCles() {
 		ArrayList<String> listeTexte = new ArrayList<String>();
