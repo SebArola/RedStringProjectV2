@@ -17,7 +17,7 @@ public class Administrateur {
 		prenomAdmin=prenom;
 		mdpAdmin=mdp;
 		bdAdmin.ajouterAdmin(this);
-		System.out.println("test Administrateur");
+		
 	}
 
 	public String getLoginAdmin() {
@@ -36,8 +36,8 @@ public class Administrateur {
 	}
 
 	public boolean selectionProfil(String loginAdmin2, String mdpAdmin2) {
-		System.out.println("Login Admin2="+loginAdmin2);
-		System.out.println("Login Admin:"+loginAdmin);
+		//System.out.println("Login Admin2="+loginAdmin2); 	//TODO test pour détecter passage dans selection profil
+		//System.out.println("Login Admin:"+loginAdmin);
 		boolean profilOk=false;
 		if(this.loginAdmin.equalsIgnoreCase(loginAdmin2) || this.mdpAdmin.equals(mdpAdmin2))
 			profilOk=true;
