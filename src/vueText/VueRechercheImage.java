@@ -35,7 +35,7 @@ public class VueRechercheImage {
 				resultat = controlleurRechercheImage.rechercheImage(Couleur.BLEU);
 				break;
 			default:
-				choixBon = false;//TODO enleve �a
+				choixBon = false;
 				System.out.println("Attention, entrez 1, 2 ou 3");
 			}
 		}while(!choixBon);
