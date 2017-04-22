@@ -9,7 +9,7 @@ public class ControleurCreerProfil {
 	public void creerProfilAdmin(String nomAdmin, String prenom, String mdp){
 		String login=""+nomAdmin+"."+prenom;
 		if(!(bdAdmin.rechercherAdmin(login, mdp))){
-			System.out.println("test rechercherAdmin de controlcrerProfil");
+			//System.out.println("test rechercherAdmin de controlcrerProfil"); //TODO test pour detecter passage
 			new Administrateur(nomAdmin, prenom, mdp, login);
 		}
 	}
