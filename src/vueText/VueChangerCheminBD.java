@@ -12,8 +12,9 @@ public class VueChangerCheminBD {
 	}
 	
 	public void changerCheminBD(){
+		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
-		System.out.println("Entrez le chemin de votre base de donnée:");
+		System.out.println("Entrez le chemin de votre base de donnï¿½e:");
 		String chemin = clavier.nextLine();
 		controlleurChangerCheminBD.changerCheminBD(chemin);
 	}

@@ -12,25 +12,26 @@ public class VueChangerParametresIndexation {
 	}
 	
 	public void changerParametresIndexation(){
+		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
 		int choix;
 		int param;
 		boolean choixBon;
 		do{
-			System.out.println("Quelle paramètre souhaitez-vous modifier ?"
-					+ "\n1: Nombres de quantifications (image)"
-					+ "\n2: Nombres de mots-clés par descripteur (texte)");
+			System.out.println("Quelle parametre souhaitez-vous modifier ?"
+					+ "\n1: Nombres de bits de quantifications (image)"
+					+ "\n2: Nombres de mots-cles par descripteur (texte)");
 			choix = clavier.nextInt();
 			switch(choix){
 			case 1:
 				choixBon = true;
-				System.out.println("Combien de quantifications lors de l'indexation image ?");
+				System.out.println("Combien de bits de quantifications lors de l'indexation image ?");
 				param = clavier.nextInt();
 				controlleurChangerParametresIndexation.changerNbQuantif(param);
 				break;
 			case 2:
 				choixBon = true;
-				System.out.println("Combien de mots-clé par descripteur ?");
+				System.out.println("Combien de mots-clÃ© par descripteur ?");
 				param = clavier.nextInt();
 				controlleurChangerParametresIndexation.changerNbMots(param);
 				break;

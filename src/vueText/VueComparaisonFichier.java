@@ -43,6 +43,7 @@ public class VueComparaisonFichier {
 	}
 
 	public void vueComparaisonFichier(){
+		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
 		String cheminFic, type;
 		System.out.println("Entrez le chemin vers le fichier :");
