@@ -16,9 +16,9 @@ public class Descripteur extends Observable{
 	BufferedReader lectureTexte;
 
 	
-	public void getDescripteurGenere(TypeFichier typeFichier ){
+	public void getDescripteurGenere(TypeFichier typeFichier,int nbMots ){
 		String descripteurParcours=""; //permet denregistrer ligne a ligne le fichier
-		
+		//int nbMot;
 		try{
 
 			lectureImage=new BufferedReader(new FileReader("./Data/base_descripteur_image.txt"));
@@ -45,6 +45,7 @@ public class Descripteur extends Observable{
 				} while (descripteurParcours!=null);
 				break;
 			case TEXTE:
+				//nbMot=nbMots; //ceci correspond au nombre d'occurence de mots sera considéré lors de l'indexation
 				do {
 					super.setChanged();
 					//String descripteurFichier=" ";	//permet d'enregistrer le fichier descripteur
