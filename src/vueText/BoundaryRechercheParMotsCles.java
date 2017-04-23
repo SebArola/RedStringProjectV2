@@ -17,10 +17,11 @@ public class BoundaryRechercheParMotsCles {
 	public void rechercheParMotsCles() {
 		ArrayList<String> listeTexte = new ArrayList<String>();
 		boolean isCorrect;
+		String lecture;
 
 		do {
 			System.out.println("Veulliez rentrez les mots cles : ");
-			String lecture = clavier.nextLine();
+			lecture = clavier.nextLine();
 			//System.out.println("LOL =" + lecture + "=");
 			isCorrect = crpmc.verifierMotsCles(lecture);
 			if (!isCorrect)
@@ -30,7 +31,7 @@ public class BoundaryRechercheParMotsCles {
 		} while (!isCorrect);
 		
 		
-		listeTexte=crpmc.rechercheTexte();
+		listeTexte=crpmc.rechercheTexte(lecture);
 		if (listeTexte.size() > 0)
 			for(int i=0;i< listeTexte.size();i++)
 				System.out.println("Resultat "+(i+1)+" = "+listeTexte.get(i));
