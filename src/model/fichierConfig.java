@@ -11,17 +11,21 @@ package model;
 public class fichierConfig {
 
 	private static fichierConfig instance;
-	private int seuilComparaisonFichier;
+	//private int seuilComparaisonFichier;
 	private int nbQuantif;
 	private int nbMots;
 	private String cheminBD;
+	private int seuilComparaisonImage;
+	private int seuilComparaisonTexte;
 
 	/**
 	 * Dans le constructeur les attributs seront initialisé en fonction du
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		this.seuilComparaisonFichier = 80;
+		//this.seuilComparaisonFichier = 80;
+		this.seuilComparaisonImage = 60;
+		this.seuilComparaisonTexte = 20;
 		this.nbQuantif = 3;
 		this.nbMots = 5;
 	}
@@ -33,13 +37,13 @@ public class fichierConfig {
 		return instance;
 	}
 
-	public int getSeuilComparaisonFichier() {
+	/*public int getSeuilComparaisonFichier() {
 		return seuilComparaisonFichier;
 	}
 
 	public void setSeuilComparaisonFichier(int seuilComparaisonFichier) {
 		this.seuilComparaisonFichier = seuilComparaisonFichier;
-	}
+	}*/ //TODO enlever seuilComapraisonFichier
 	
 	public String getCheminBD(){
 		return this.cheminBD;
@@ -64,5 +68,23 @@ public class fichierConfig {
 	public void setNbMots(int nbMots) {
 		this.nbMots = nbMots;
 	}
+
+	public int getSeuilComparaisonImage() {
+		return seuilComparaisonImage;
+	}
+
+	public void setSeuilComparaisonImage(int seuilComparaisonImage) {
+		this.seuilComparaisonImage = seuilComparaisonImage;
+	}
+
+	public int getSeuilComparaisonTexte() {
+		return seuilComparaisonTexte;
+	}
+
+	public void setSeuilComparaisonTexte(int seuilComparaisonTexte) {
+		this.seuilComparaisonTexte = seuilComparaisonTexte;
+	}
+	
+	
 
 }
