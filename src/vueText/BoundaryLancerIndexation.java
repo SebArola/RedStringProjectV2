@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import model.Descripteur;
 import model.TypeFichier;
-import controlleur.ControleurIndexation;
-import controlleur.ControleurVerifIdentification;
+import controleur.ControleurIndexation;
+import controleur.ControleurVerifIdentification;
 
 public class BoundaryLancerIndexation implements Observer{
 	private ControleurIndexation ctrlIndexation;

@@ -3,7 +3,7 @@ package vueText;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import controlleur.ControlleurRechercheImage;
+import controleur.ControlleurRechercheImage;
 import model.Couleur;
 
 public class VueRechercheImage {

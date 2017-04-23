@@ -3,8 +3,8 @@ package vueText;
 import java.io.IOException;
 import java.util.Scanner;
 
-import controlleur.ControleurModifierSeuilComparaison;
-import controlleur.ControleurVerifIdentification;
+import controleur.ControleurModifierSeuilComparaison;
+import controleur.ControleurVerifIdentification;
 import model.TypeFichier;;
 
 public class BoundaryModifierSeuilComparaison {

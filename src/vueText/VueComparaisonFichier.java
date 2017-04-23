@@ -3,7 +3,7 @@ package vueText;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import controlleur.ControlleurComparaisonFichier;
+import controleur.ControlleurComparaisonFichier;
 
 public class VueComparaisonFichier {
 

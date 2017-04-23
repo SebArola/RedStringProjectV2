@@ -3,7 +3,7 @@ package vueText;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import controlleur.ControlleurRechercheParMotsCles;
+import controleur.ControlleurRechercheParMotsCles;
 
 public class BoundaryRechercheParMotsCles {
 

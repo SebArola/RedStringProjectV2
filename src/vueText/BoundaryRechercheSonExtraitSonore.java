@@ -3,7 +3,7 @@ package vueText;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import controlleur.ControleurRechercheSonExtraitSonore;
+import controleur.ControleurRechercheSonExtraitSonore;
 import model.DescripteurSon;
 
 public class BoundaryRechercheSonExtraitSonore {
