@@ -1,11 +1,12 @@
 package controleur;
 
-
 import java.util.HashMap;
 import java.util.List;
 
+import model.BDDescripteurImage;
 import model.DescripteurImage;
 import model.Fichier;
+import model.TypeFichier;
 import model.fichierConfig;
 
 /**
@@ -25,39 +26,37 @@ public class ControlleurComparaisonFichier {
 	 * @param type
 	 * @return resultat
 	 */
-	public HashMap<String, Integer> comparaisonFichier(String chemin, String type) {
-		Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
+	public HashMap<String, Integer> comparaisonFichier(String chemin, TypeFichier type) {
+		//Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
 		int pourcentage = 0;
 		HashMap<String, Integer> resultat = new HashMap();// <pourcentage,
 															// chemin>
-		for (Fichier f : ControlleurFichier.getInstance().getAllFichier(type)) {
-			switch (type) {
-			case "Texte":
-				pourcentage = compareFichierTexte(fic, f.getDescripteur());
-
-				break;
-			case "Image":
-				if(!chemin.equals(f.getChemin())){
-					pourcentage = compareFichierImage(BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin), 
-							BDDescripteurImage.getInstance().getAllDescripteursImage().get(f.getChemin()));
+		switch (type) {
+		case TEXTE:
+			//pourcentage = compareFichierTexte(fic, f.getDescripteur());
+			break;
+		case IMAGE:
+			DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
+			for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
+				if(!chemin.equals(d.getChemin(){
+					pourcentage = compareFichierImage(descDonne, d);
 				}
 				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonImage()){
-					resultat.put(f.getChemin(), pourcentage);
+					resultat.put(d.getChemin(), pourcentage);
 				}
-				break;
-			case "Son":
-				pourcentage = compareFichierSon(fic, f.getDescripteur());
-
-				break;
 			}
+			break;
+		case SON:
+			//pourcentage = compareFichierSon(fic, f.getDescripteur());
+			break;
+		}
 			/*if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonFichier()) {
 			resultat.put(f.getChemin(), pourcentage);
 		}*/ //TODO enlever ça
-			}
+			return resultat;
 		}
 
-		return resultat;
-	}
+	
 
 	/**
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
@@ -67,25 +66,27 @@ public class ControlleurComparaisonFichier {
 	 * @param descripteur
 	 * @return pourcentage
 	 */
-private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
-	List<Integer> histo1 = desc1.getHistogramme();
-	List<Integer> histo2 = desc2.getHistogramme();
-	int diff = 0; int total = 0; int pourcentage = 0;
-	if(desc1.getNbCouleurs() == desc2.getNbCouleurs()){
-		for(int i=0; i<histo1.size(); i++){
-			diff = diff + Math.abs(histo1.get(i) - histo2.get(i));
-			total = total + histo1.get(i);
+	private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
+		List<Integer> histo1 = desc1.getHistogramme();
+		List<Integer> histo2 = desc2.getHistogramme();
+		int diff = 0;
+		int total = 0;
+		int pourcentage = 0;
+		if (desc1.getNbCouleurs() == desc2.getNbCouleurs()) {
+			for (int i = 0; i < histo1.size(); i++) {
+				diff = diff + Math.abs(histo1.get(i) - histo2.get(i));
+				total = total + histo1.get(i);
+			}
+		} else {
+			return -1;
 		}
-	}else{
-		return -1;
+		pourcentage = (1 - ((diff * 100) / total));
+		if (pourcentage > 0) {
+			return pourcentage;
+		} else {
+			return 0;
+		}
 	}
-	pourcentage=(1-((diff*100)/total));
-	if(pourcentage > 0){
-		return pourcentage;
-	}else{
-		return 0;
-	}
-}
 
 	/**
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour

@@ -3,6 +3,7 @@ package controleur;
 import java.util.ArrayList;
 
 import model.Fichier;
+import model.TypeFichier;
 
 public class ControlleurFichier {
 
@@ -41,7 +42,7 @@ public class ControlleurFichier {
 	}
 	
 	//Appelle la méthode en C permettant de générer un descripteur pour un fichier donné.
-	public String genDescripteur(String chemin, String type){
+	public String genDescripteur(String chemin, TypeFichier type){
 		return "desc";
 	}
 
