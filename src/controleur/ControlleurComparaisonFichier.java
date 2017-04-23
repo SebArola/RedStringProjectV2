@@ -1,7 +1,10 @@
 package controleur;
 
-import java.util.HashMap;
 
+import java.util.HashMap;
+import java.util.List;
+
+import model.DescripteurImage;
 import model.Fichier;
 import model.fichierConfig;
 
@@ -34,15 +37,22 @@ public class ControlleurComparaisonFichier {
 
 				break;
 			case "Image":
-				pourcentage = compareFichierImage(fic, f.getDescripteur());
+				if(!chemin.equals(f.getChemin())){
+					pourcentage = compareFichierImage(BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin), 
+							BDDescripteurImage.getInstance().getAllDescripteursImage().get(f.getChemin()));
+				}
+				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonImage()){
+					resultat.put(f.getChemin(), pourcentage);
+				}
 				break;
 			case "Son":
 				pourcentage = compareFichierSon(fic, f.getDescripteur());
 
 				break;
 			}
-			if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonFichier()) {
-				resultat.put(f.getChemin(), pourcentage);
+			/*if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonFichier()) {
+			resultat.put(f.getChemin(), pourcentage);
+		}*/ //TODO enlever ça
 			}
 		}
 
@@ -57,35 +67,25 @@ public class ControlleurComparaisonFichier {
 	 * @param descripteur
 	 * @return pourcentage
 	 */
-	private int compareFichierImage(Fichier fichierCompare, String descripteur) {
-		switch (fichierCompare.getChemin()) {
-		case "im1":
-			if (descripteur.equals("descIM195")) {
-				return 95;
-			} else if (descripteur.equals("descIM185")) {
-				return 85;
-			} else {
-				return 0;
-			}
-		case "im2":
-			if (descripteur.equals("descIM295")) {
-				return 95;
-			} else if (descripteur.equals("descIM285")) {
-				return 85;
-			} else {
-				return 0;
-			}
-		case "im3":
-			if (descripteur.equals("descIM295")) {
-				return 95;
-			} else if (descripteur.equals("descIM285")) {
-				return 85;
-			} else {
-				return 0;
-			}
+private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
+	List<Integer> histo1 = desc1.getHistogramme();
+	List<Integer> histo2 = desc2.getHistogramme();
+	int diff = 0; int total = 0; int pourcentage = 0;
+	if(desc1.getNbCouleurs() == desc2.getNbCouleurs()){
+		for(int i=0; i<histo1.size(); i++){
+			diff = diff + Math.abs(histo1.get(i) - histo2.get(i));
+			total = total + histo1.get(i);
 		}
+	}else{
+		return -1;
+	}
+	pourcentage=(1-((diff*100)/total));
+	if(pourcentage > 0){
+		return pourcentage;
+	}else{
 		return 0;
 	}
+}
 
 	/**
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
