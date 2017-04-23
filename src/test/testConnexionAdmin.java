@@ -1,8 +1,8 @@
 package test;
 
+import controleur.ControleurConnexionAdmin;
+import controleur.ControleurCreerProfil;
 import vueText.BoundaryConnexionAdmin;
-import controlleur.ControleurConnexionAdmin;
-import controlleur.ControleurCreerProfil;
 
 public class testConnexionAdmin {
 	

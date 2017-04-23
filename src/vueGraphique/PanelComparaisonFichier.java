@@ -22,10 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controlleur.ControlleurComparaisonFichier;
+import controleur.ControlleurComparaisonFichier;
 
 @SuppressWarnings("serial")
-public class PanelRechercheFichier extends JPanel {
+public class PanelComparaisonFichier extends JPanel {
 
 	private JTextField jtxtf_barRecherche;
 	private JPanel panelBar;
@@ -35,14 +35,14 @@ public class PanelRechercheFichier extends JPanel {
 	private HashMap<String, Integer> resultat;
 	private JButton jb_confirm;
 
-	public PanelRechercheFichier() {
+	public PanelComparaisonFichier() {
 		super();
 		this.ctrl_comparraison = new ControlleurComparaisonFichier();
 		this.setLayout(new GridLayout(6, 3));
 		this.panelBar = new JPanel(new GridLayout(2, 1));
 		this.panelTypeFic = new JPanel(new GridLayout(3, 4));
 		this.jb_confirm = new JButton();
-		this.jb_confirm.setIcon(new ImageIcon("confirm.png"));
+		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
 
 		this.jtxtf_barRecherche = new JTextField("Entrez le chemin vers le fichier");
 		this.panelBar.add(new JLabel(" "));

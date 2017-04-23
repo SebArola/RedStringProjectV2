@@ -3,14 +3,14 @@ package test;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import controlleur.ControlleurFichier;
+import controleur.ControlleurFichier;
 import vueGraphique.Fenetre;
 import vueText.VueComparaisonFichier;
 
 public class testComparaison {
 	
 	public static void main(String args[]){
-		VueComparaisonFichier vue = new VueComparaisonFichier();
+		//VueComparaisonFichier vue = new VueComparaisonFichier();
 		ControlleurFichier ctrl_fic = ControlleurFichier.getInstance();
 		//Image 1
 		ctrl_fic.addFichier("cheminIM195", "Image", "descIM195");

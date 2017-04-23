@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame {
 	private JPanel jp_mainPanel;
-	private PanelRechercheFichier panelRFichier;
+	private PanelComparaisonFichier panelRFichier;
 	private PanelRechercheMotCles panelRMotCles;
 	private JMenu jm_menu;
 	private JMenuBar jmb_barmenu;
@@ -40,16 +40,16 @@ public class Fenetre extends JFrame {
 		
 		this.setContentPane(jp_mainPanel);
 
-		this.panelRFichier = new PanelRechercheFichier();
+		this.panelRFichier = new PanelComparaisonFichier();
 		this.panelRMotCles = new PanelRechercheMotCles();
 
 		this.jmb_barmenu = new JMenuBar();
 		this.jm_menu = new JMenu();
-		this.jm_menu.setIcon(new ImageIcon("menu_icon.png"));
+		this.jm_menu.setIcon(new ImageIcon("Icon/menu_icon.png"));
 		this.jmitem_menu = new JMenuItem[4];
 
 		this.jmitem_menu[0] = new JMenuItem("Recherche par mots clés");
-		this.jmitem_menu[1] = new JMenuItem("Recherche par fichier");
+		this.jmitem_menu[1] = new JMenuItem("Comparaison de fichier");
 		this.jmitem_menu[2] = new JMenuItem("Connexion Administrateur");
 		this.jmitem_menu[3] = new JMenuItem("Quitter");
 
