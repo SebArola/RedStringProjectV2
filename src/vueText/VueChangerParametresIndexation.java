@@ -2,7 +2,7 @@ package vueText;
 
 import java.util.Scanner;
 
-import controlleur.ControlleurChangerParametresIndexation;
+import controleur.ControlleurChangerParametresIndexation;
 
 public class VueChangerParametresIndexation {
 	private ControlleurChangerParametresIndexation controlleurChangerParametresIndexation;

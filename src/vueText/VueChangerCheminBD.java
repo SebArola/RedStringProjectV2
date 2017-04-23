@@ -2,7 +2,7 @@ package vueText;
 
 import java.util.Scanner;
 
-import controlleur.ControlleurChangerCheminBD;
+import controleur.ControlleurChangerCheminBD;
 
 public class VueChangerCheminBD {
 	private ControlleurChangerCheminBD controlleurChangerCheminBD;

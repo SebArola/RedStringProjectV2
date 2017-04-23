@@ -2,7 +2,7 @@ package vueText;
 
 import java.util.Scanner;
 
-import controlleur.ControleurConnexionAdmin;
+import controleur.ControleurConnexionAdmin;
 
 public class BoundaryConnexionAdmin {
 	private ControleurConnexionAdmin controleurConnexionAdmin;
