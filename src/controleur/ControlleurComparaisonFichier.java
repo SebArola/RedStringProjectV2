@@ -98,17 +98,7 @@ public class ControlleurComparaisonFichier {
 	private int compareFichierTexte(Fichier fichierCompare, String descripteur) {
 		switch (fichierCompare.getChemin()) {
 		case "txt1":
-			if (descripteur.equals("descTXT195")) {
-				return 95;
-			} else if (descripteur.equals("descTXT185")) {
-				return 85;
-			} else if (descripteur.equals("descTXT175")) {
-				return 75;
-			} else if (descripteur.equals("descTXT165")) {
-				return 65;
-			} else {
-				return 0;
-			}
+			return 95;
 		case "txt2":
 			if (descripteur.equals("descTXT295")) {
 				return 95;

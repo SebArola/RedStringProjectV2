@@ -28,7 +28,7 @@ public class Fenetre extends JFrame {
 
 	public Fenetre() {
 		super("2SATER");
-		this.setSize(740, 425);
+		this.setSize(840, 475);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

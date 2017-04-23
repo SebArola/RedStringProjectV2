@@ -1,5 +1,6 @@
 package vueGraphique;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -30,11 +31,13 @@ public class PanelComparaisonFichier extends JPanel {
 	private JTextField jtxtf_barRecherche;
 	private JPanel panelBar;
 	private JPanel panelTypeFic;
+	private JPanel panelResultat[];
 	private JComboBox<String> jcb_typeFic;
 	private ControlleurComparaisonFichier ctrl_comparraison;
 	private HashMap<String, Integer> resultat;
 	private JButton jb_confirm;
-
+	private Object tabChemin[];
+	private int i; //ça c'est gitan faite pas gaffe
 	public PanelComparaisonFichier() {
 		super();
 		this.ctrl_comparraison = new ControlleurComparaisonFichier();
@@ -84,14 +87,14 @@ public class PanelComparaisonFichier extends JPanel {
 		this.add(jp_bouttonConfirm);
 		this.add(new JLabel(" "));
 		this.add(panelTypeFic);
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-
+		this.panelResultat = new JPanel[6];
+		this.add(new JLabel());
+		for(int i=0;i<6; i++){
+			this.panelResultat[i] = new JPanel(new GridLayout(2,1));
+			this.panelResultat[i].add(new JLabel(""));
+			this.panelResultat[i].add(new JLabel(""));
+			this.add(this.panelResultat[i]);
+		}
 		this.gestionPanel();
 	}
 
@@ -207,7 +210,7 @@ public class PanelComparaisonFichier extends JPanel {
 	public void lancementComparaisonFichier(String chemin, String type) {
 		this.jtxtf_barRecherche.setText("Entrez le chemin vers le fichier");
 		this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, type);
-		Object tabChemin[] = resultat.keySet().toArray();
+		tabChemin = resultat.keySet().toArray();
 		tabChemin = this.quickSort(tabChemin, 0, tabChemin.length - 1);
 		// for (Object chemin : tabPourcentage) {
 		// System.out.println("Resultat n°" + i + " :\n - Fichier : " + chemin +
@@ -225,6 +228,55 @@ public class PanelComparaisonFichier extends JPanel {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				int j =-1;
+				int k =0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabChemin.length];
+				if(tabChemin.length>12){
+					for(int i=0;i<6; i++){
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3,1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				}else if(tabChemin.length>18){
+					for(int i=0;i<6; i++){
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3,2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for(i=0; i<tabChemin.length; i++){
+					if(i%nbElementParZone==0){
+						if(j>-1){
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k=0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton((String) tabChemin[i] + " "+ resultat.get((String) tabChemin[i] )+"%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Runtime runtime = Runtime.getRuntime();
+							try {
+								
+								runtime.exec(new String[] { "gedit", (String) tabChemin[i] });
+							} catch (IOException exception) {
+								exception.printStackTrace();
+							}
+							
+						}
+					});
+					
+					this.panelResultat[j].add(jb_resultat[i]);	
+				}
+				
 			} else if (type.equals("Image")) {
 				JFrame image = new JFrame("Premier résultat");
 				class panelImage extends JPanel {
