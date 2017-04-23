@@ -1,27 +1,22 @@
 package vueGraphique;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.plaf.ColorChooserUI;
 
 import controleur.ControlleurComparaisonFichier;
 
@@ -38,6 +33,7 @@ public class PanelRechercheMotCles extends JPanel {
 	private JButton jb_confirm;
 	private Object tabChemin[];
 	private int i; // ça c'est gitan faite pas gaffe
+
 
 	public PanelRechercheMotCles() {
 		super();
@@ -100,7 +96,8 @@ public class PanelRechercheMotCles extends JPanel {
 	}
 
 	public void gestionPanel() {
-		this.jtxtf_barRecherche.addMouseListener(new MouseListener() {
+
+		this.jtxtf_barRecherche.addMouseListener(new MouseListener(){
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -213,22 +210,15 @@ public class PanelRechercheMotCles extends JPanel {
 					panelResultat[i].repaint();
 				}
 				lancementRechercheMotCles(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
-				
-			}
-		});
-	
-		this.jcb_typeFic.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(jcb_typeFic.getSelectedItem().equals("Image"))
+
 			}
 		});
 	}
 
 	public void lancementRechercheMotCles(String chemin, String type) {
-		
-		
+		if(type.equals("Image")){
+			
+		}
 	}
 
 	private int partitionner(Object[] tab, int premier, int dernier) {
