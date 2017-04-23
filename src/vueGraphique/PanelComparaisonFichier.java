@@ -37,7 +37,8 @@ public class PanelComparaisonFichier extends JPanel {
 	private HashMap<String, Integer> resultat;
 	private JButton jb_confirm;
 	private Object tabChemin[];
-	private int i; //ça c'est gitan faite pas gaffe
+	private int i; // ça c'est gitan faite pas gaffe
+
 	public PanelComparaisonFichier() {
 		super();
 		this.ctrl_comparraison = new ControlleurComparaisonFichier();
@@ -89,8 +90,8 @@ public class PanelComparaisonFichier extends JPanel {
 		this.add(panelTypeFic);
 		this.panelResultat = new JPanel[6];
 		this.add(new JLabel());
-		for(int i=0;i<6; i++){
-			this.panelResultat[i] = new JPanel(new GridLayout(2,1));
+		for (int i = 0; i < 6; i++) {
+			this.panelResultat[i] = new JPanel(new GridLayout(2, 1));
 			this.panelResultat[i].add(new JLabel(""));
 			this.panelResultat[i].add(new JLabel(""));
 			this.add(this.panelResultat[i]);
@@ -202,7 +203,17 @@ public class PanelComparaisonFichier extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < 6; i++) {
+					remove(panelResultat[i]);
+					panelResultat[i] = new JPanel(new GridLayout(2, 1));
+					panelResultat[i].add(new JLabel(""));
+					panelResultat[i].add(new JLabel(""));
+					add(panelResultat[i]);
+					panelResultat[i].revalidate();
+					panelResultat[i].repaint();
+				}
 				lancementComparaisonFichier(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
+				
 			}
 		});
 	}
@@ -218,65 +229,66 @@ public class PanelComparaisonFichier extends JPanel {
 		// + resultat.get(chemin));
 		// i++;
 		// }
-		if(tabChemin.length>0){
+		if (tabChemin.length > 0) {
 
 			if (type.equals("Texte")) {
 				Runtime runtime = Runtime.getRuntime();
 				try {
-					
+
 					runtime.exec(new String[] { "gedit", (String) tabChemin[0] });
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				int j =-1;
-				int k =0;
+				int j = -1;
+				int k = 0;
 				int nbElementParZone = 2;
 				JButton jb_resultat[] = new JButton[tabChemin.length];
-				if(tabChemin.length>12){
-					for(int i=0;i<6; i++){
+				if (tabChemin.length > 12) {
+					for (int i = 0; i < 6; i++) {
 						this.remove(this.panelResultat[i]);
-						this.panelResultat[i] = new JPanel(new GridLayout(3,1));
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
 						this.add(this.panelResultat[i]);
 						nbElementParZone = 3;
 					}
 
-				}else if(tabChemin.length>18){
-					for(int i=0;i<6; i++){
+				} else if (tabChemin.length > 18) {
+					for (int i = 0; i < 6; i++) {
 						this.remove(this.panelResultat[i]);
-						this.panelResultat[i] = new JPanel(new GridLayout(3,2));
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
 						this.add(this.panelResultat[i]);
 						nbElementParZone = 6;
 					}
 				}
-				for(i=0; i<tabChemin.length; i++){
-					if(i%nbElementParZone==0){
-						if(j>-1){
+				for (i = 0; i < tabChemin.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
 							this.panelResultat[j].repaint();
 							this.panelResultat[j].revalidate();
 						}
 						j++;
-						k=0;
+						k = 0;
 						this.panelResultat[j].removeAll();
 					}
-					jb_resultat[i] = new JButton((String) tabChemin[i] + " "+ resultat.get((String) tabChemin[i] )+"%");
+					jb_resultat[i] = new JButton(
+							(String) tabChemin[i] + " " + resultat.get((String) tabChemin[i]) + "%");
 					jb_resultat[i].addActionListener(new ActionListener() {
-						
+
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							Runtime runtime = Runtime.getRuntime();
 							try {
-								
-								runtime.exec(new String[] { "gedit", (String) tabChemin[i] });
+								JButton thisJB = (JButton) e.getSource();
+								runtime.exec(new String[] { "gedit", thisJB.getText()});
 							} catch (IOException exception) {
 								exception.printStackTrace();
 							}
-							
+
 						}
 					});
-					
-					this.panelResultat[j].add(jb_resultat[i]);	
+
+					this.panelResultat[j].add(jb_resultat[i]);
 				}
-				
+
 			} else if (type.equals("Image")) {
 				JFrame image = new JFrame("Premier résultat");
 				class panelImage extends JPanel {
@@ -292,14 +304,78 @@ public class PanelComparaisonFichier extends JPanel {
 					}
 				}
 				image.add(new panelImage((String) tabChemin[0]));
-				image.setSize(300,200);
+				image.setSize(300, 200);
 				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 				image.setLocation(dim.width / 2 - image.getWidth() / 2, dim.height / 2 - image.getHeight() / 2);
-				
+
 				image.setVisible(true);
+
+				int j = -1;
+				int k = 0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabChemin.length];
+				if (tabChemin.length > 12) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				} else if (tabChemin.length > 18) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for (i = 0; i < tabChemin.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k = 0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton(
+							(String) tabChemin[i] + " " + resultat.get((String) tabChemin[i]) + "%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JFrame image = new JFrame("Premier résultat");
+							class panelImage extends JPanel {
+								Image resultat;
+
+								public panelImage(String s) {
+									resultat = getToolkit().getImage(s);
+								}
+
+								public void paintComponent(Graphics g) {
+									super.paintComponent(g);
+									g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
+								}
+							}
+							JButton thisJB = (JButton) e.getSource();
+							image.add(new panelImage(thisJB.getText()));
+							image.setSize(300, 200);
+							Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							image.setLocation(dim.width / 2 - image.getWidth() / 2,
+									dim.height / 2 - image.getHeight() / 2);
+
+							image.setVisible(true);
+						}
+					});
+
+					this.panelResultat[j].add(jb_resultat[i]);
+				}
 			}
-	
+
 		}
+		
 	}
 
 	private int partitionner(Object[] tab, int premier, int dernier) {

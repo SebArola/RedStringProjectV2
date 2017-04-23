@@ -60,13 +60,7 @@ public class ControlleurComparaisonFichier {
 	private int compareFichierImage(Fichier fichierCompare, String descripteur) {
 		switch (fichierCompare.getChemin()) {
 		case "im1":
-			if (descripteur.equals("descIM195")) {
-				return 95;
-			} else if (descripteur.equals("descIM185")) {
-				return 85;
-			} else {
-				return 0;
-			}
+			return 95;
 		case "im2":
 			if (descripteur.equals("descIM295")) {
 				return 95;
