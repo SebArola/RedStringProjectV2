@@ -69,9 +69,9 @@ public class ControlleurComparaisonFichier {
 	private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
 		List<Integer> histo1 = desc1.getHistogramme();
 		List<Integer> histo2 = desc2.getHistogramme();
-		int diff = 0;
-		int total = 0;
-		int pourcentage = 0;
+		float diff = 0;
+		float total = 0;
+		float pourcentage = 0;
 		if (desc1.getNbCouleurs() == desc2.getNbCouleurs()) {
 			for (int i = 0; i < histo1.size(); i++) {
 				diff = diff + Math.abs(histo1.get(i) - histo2.get(i));
@@ -80,9 +80,9 @@ public class ControlleurComparaisonFichier {
 		} else {
 			return -1;
 		}
-		pourcentage = (1 - ((diff * 100) / total));
+		pourcentage =  (100 -((diff*100) / total));
 		if (pourcentage > 0) {
-			return pourcentage;
+			return (int) pourcentage;
 		} else {
 			return 0;
 		}

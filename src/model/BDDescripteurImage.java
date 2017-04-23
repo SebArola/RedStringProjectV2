@@ -36,7 +36,6 @@ public class BDDescripteurImage {
 		String[] ligneDesc;
 		String[] ligneHisto;
 		int debutHistogramme = 0;
-		List<Integer> histo = new ArrayList<>();
 		try{
 			InputStream ips=new FileInputStream("/home/etienne/workspace/RedStringProjectV2/Data/base_descripteur_image.txt"); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
@@ -52,6 +51,7 @@ public class BDDescripteurImage {
 		}
 		descSplit = lecture.split("\n;\n");		//on sépare les différents descripteurs
 		for(String s : descSplit){
+			List<Integer> histo = new ArrayList<>();
 			ligneDesc = s.split("\n");			//on sépare les lignes du descripteur
 			String chemin = ligneDesc[0];
 			int nbCouleurs = Integer.parseInt(ligneDesc[1]);

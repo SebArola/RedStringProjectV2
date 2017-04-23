@@ -78,7 +78,7 @@ public class VueComparaisonFichier {
 		tabPourcentage = this.quickSort(tabPourcentage, 0, tabPourcentage.length - 1);
 		for (Object chemin : tabPourcentage) {
 			System.out.println("Resultat n°" + i + " :\n	- Fichier : " + chemin + "\n	- Similaritée : "
-					+ resultat.get(chemin));
+					+ resultat.get(chemin) + "%");
 			i++;
 		}
 	}

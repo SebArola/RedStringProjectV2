@@ -24,7 +24,7 @@ public class fichierConfig {
 	 */
 	private fichierConfig() {
 		//this.seuilComparaisonFichier = 80;
-		this.seuilComparaisonImage = 60;
+		this.seuilComparaisonImage = 40;
 		this.seuilComparaisonTexte = 20;
 		this.nbQuantif = 3;
 		this.nbMots = 5;
