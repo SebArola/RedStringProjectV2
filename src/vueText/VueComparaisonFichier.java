@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import controleur.ControlleurComparaisonFichier;
+import model.Couleur;
+import model.TypeFichier;
 
 public class VueComparaisonFichier {
 
@@ -42,15 +44,35 @@ public class VueComparaisonFichier {
 		return tab;
 	}
 
-	public void vueComparaisonFichier(){
+	public void comparaisonFichier(){
 		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
 		String cheminFic, type;
+		boolean choixBon = false;
+		int choix;
 		System.out.println("Entrez le chemin vers le fichier :");
 		cheminFic = clavier.nextLine();
-		System.out.println("Entrez le type de fichier :");
-		type = clavier.nextLine();
-		resultat = this.ctrl_compareFichier.comparaisonFichier(cheminFic, type);
+		do{
+			System.out.println("Type de fichier\n1: Texte\n2: Image\n3: Son");
+			choix = clavier.nextInt();
+			switch(choix){
+			case 1:
+				choixBon = true;
+				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.TEXTE);
+				break;
+			case 2:
+				choixBon = true;
+				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.IMAGE);
+				break;
+			case 3:
+				choixBon = true;
+				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.SON);
+				break;
+			default:
+				choixBon = false;
+				System.out.println("Attention, entrez 1, 2 ou 3");
+			}
+		}while(!choixBon);
 		int i = 1;
 		Object tabPourcentage[] = resultat.keySet().toArray();
 		tabPourcentage = this.quickSort(tabPourcentage, 0, tabPourcentage.length - 1);

@@ -62,8 +62,8 @@ public class ControlleurComparaisonFichier {
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
 	 * l'instant ces méthodes retourne des résultats prédéfini
 	 * 
-	 * @param fichierCompare
-	 * @param descripteur
+	 * @param descripteur image n°1
+	 * @param descripteur image n°2
 	 * @return pourcentage
 	 */
 	private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
