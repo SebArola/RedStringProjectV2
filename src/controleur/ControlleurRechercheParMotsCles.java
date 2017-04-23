@@ -2,27 +2,15 @@ package controleur;
 
 import java.util.ArrayList;
 
-import model.TexteMotsCles;
+import model.DescripteurTexte;
 
 public class ControlleurRechercheParMotsCles {
 	public ArrayList<String> listeMotsPlus = new ArrayList<String>();
 	public ArrayList<String> listeMotsMoins = new ArrayList<String>();
-	public ArrayList<TexteMotsCles> listeTexteMotCles = new ArrayList<TexteMotsCles>();
+	public ArrayList<DescripteurTexte> listeDescripteurTexte = new ArrayList<DescripteurTexte>();
 
 	public boolean verifierMotsCles(String lecture) {
-
-		int nombre = (" " + lecture + " ").split(" ").length - 1;
-		String[] decoupe = lecture.split(" ");
-		for (int i = 0; i < nombre; i++) {
-			char lettre = decoupe[i].charAt(0);
-			if (lettre == '-') {
-				decoupe[i] = decoupe[i].substring(1);
-				listeMotsMoins.add(decoupe[i]);
-			} else {
-				listeMotsPlus.add(decoupe[i]);
-			}
-		}
-
+		// todo petit probleme je sais pas comment
 		return (true);
 	}
 
@@ -36,48 +24,60 @@ public class ControlleurRechercheParMotsCles {
 			System.out.println("=" + listeMotsPlus.get(i) + "=");
 	}
 
-	public ArrayList<String> rechercheTexte() {
+	public ArrayList<String> rechercheTexte(String lecture) {
+
+		int nombre = (" " + lecture + " ").split(" ").length - 1;
+		String[] decoupe = lecture.split(" ");
+		for (int i = 0; i < nombre; i++) {
+			char lettre = decoupe[i].charAt(0);
+			if (lettre == '-') {
+				decoupe[i] = decoupe[i].substring(1);
+				listeMotsMoins.add(decoupe[i]);
+			} else {
+				listeMotsPlus.add(decoupe[i]);
+			}
+		}
+
 		ArrayList<String> listeTexte = new ArrayList<String>();
 		ArrayList<String> listeTexteARemove = new ArrayList<String>();
-		for (int i = 0; i < listeTexteMotCles.size(); i++) {
-			String Texte = listeTexteMotCles.get(i).texte;
+		for (int i = 0; i < listeDescripteurTexte.size(); i++) {
+			String Texte = listeDescripteurTexte.get(i).texte;
 			for (int j = 0; j < listeMotsPlus.size(); j++) {
 				String mot = listeMotsPlus.get(j);
-				int nombre = (" " + Texte + " ").split(mot).length - 1;
+				nombre = (" " + Texte + " ").split(mot).length - 1;
 				if (nombre != 0)
-					if( !listeTexte.contains(listeTexteMotCles.get(i).nom))
-						listeTexte.add(listeTexteMotCles.get(i).nom);
+					if (!listeTexte.contains(listeDescripteurTexte.get(i).nom))
+						listeTexte.add(listeDescripteurTexte.get(i).nom);
 			}
 			for (int j = 0; j < listeMotsMoins.size(); j++) {
 				String mot = listeMotsMoins.get(j);
-				int nombre = (" " + Texte + " ").split(mot).length - 1;
-				if (nombre != 0){
-					if( !listeTexteARemove.contains(listeTexteMotCles.get(i).nom))
-						listeTexteARemove.add(listeTexteMotCles.get(i).nom);
+				nombre = (" " + Texte + " ").split(mot).length - 1;
+				if (nombre != 0) {
+					if (!listeTexteARemove.contains(listeDescripteurTexte.get(i).nom))
+						listeTexteARemove.add(listeDescripteurTexte.get(i).nom);
 				}
 			}
 		}
-		
-		for (int i=0 ; i < listeTexteARemove.size() ; i++)
-		{
-			while(listeTexte.contains(listeTexteARemove.get(i))){
+
+		for (int i = 0; i < listeTexteARemove.size(); i++) {
+			while (listeTexte.contains(listeTexteARemove.get(i))) {
 				int numero = listeTexte.indexOf(listeTexteARemove.get(i));
 				listeTexte.remove(numero);
 			}
-										
+
 		}
 		return listeTexte;
 	}
 
-	public void ajouterDescripteurListe(String nom) {
-		TexteMotsCles nouveau = new TexteMotsCles(nom);
-		listeTexteMotCles.add(nouveau);
+	public void ajouterDescripteurListe(ArrayList<DescripteurTexte> liste) {
+		this.listeDescripteurTexte = liste;
 	}
 
 	public void afficherListe() {
-		for (int i = 0; i < listeTexteMotCles.size(); i++) {
-			TexteMotsCles lecture = listeTexteMotCles.get(i);
+		for (int i = 0; i < listeDescripteurTexte.size(); i++) {
+			DescripteurTexte lecture = listeDescripteurTexte.get(i);
 			System.out.println(lecture.toString());
 		}
 	}
 }
+
