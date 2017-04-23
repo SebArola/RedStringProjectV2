@@ -38,7 +38,7 @@ public class ControlleurComparaisonFichier {
 		case IMAGE:
 			DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
 			for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
-				if(!chemin.equals(d.getChemin(){
+				if(!chemin.equals(d.getChemin())){
 					pourcentage = compareFichierImage(descDonne, d);
 				}
 				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonImage()){
