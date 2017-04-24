@@ -1,24 +1,31 @@
 package vueGraphique;
 
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.plaf.ColorChooserUI;
 
 import controleur.ControlleurComparaisonFichier;
+import controleur.ControlleurRechercheImage;
+import controleur.ControlleurRechercheParMotsCles;
+import model.TypeFichier;
 
 @SuppressWarnings("serial")
 public class PanelRechercheMotCles extends JPanel {
@@ -31,20 +38,23 @@ public class PanelRechercheMotCles extends JPanel {
 	private ControlleurComparaisonFichier ctrl_comparraison;
 	private HashMap<String, Integer> resultat;
 	private JButton jb_confirm;
-	private Object tabChemin[];
+	private Object tabMotCles[];
 	private int i; // ça c'est gitan faite pas gaffe
-
+	private ControlleurRechercheParMotsCles ctrl_rechercheMotClesTXT;
+	private ControlleurRechercheImage ctrl_rechercheMotClesIm;
 
 	public PanelRechercheMotCles() {
 		super();
 		this.ctrl_comparraison = new ControlleurComparaisonFichier();
+		this.ctrl_rechercheMotClesTXT = new ControlleurRechercheParMotsCles();
+		this.ctrl_rechercheMotClesIm = new ControlleurRechercheImage();
 		this.setLayout(new GridLayout(6, 3));
 		this.panelBar = new JPanel(new GridLayout(2, 1));
 		this.panelTypeFic = new JPanel(new GridLayout(3, 4));
 		this.jb_confirm = new JButton();
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
 
-		this.jtxtf_barRecherche = new JTextField("Entrez le chemin vers le fichier");
+		this.jtxtf_barRecherche = new JTextField("Entrez le motcles vers le fichier");
 		this.panelBar.add(new JLabel(" "));
 		this.panelBar.add(this.jtxtf_barRecherche);
 
@@ -97,7 +107,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 	public void gestionPanel() {
 
-		this.jtxtf_barRecherche.addMouseListener(new MouseListener(){
+		this.jtxtf_barRecherche.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -125,7 +135,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (jtxtf_barRecherche.getText().equals("Entrez le chemin vers le fichier"))
+				if (jtxtf_barRecherche.getText().equals("Entrez le motcles vers le fichier"))
 					jtxtf_barRecherche.setText("");
 			}
 		});
@@ -242,10 +252,231 @@ public class PanelRechercheMotCles extends JPanel {
 		});
 	}
 
-	public void lancementRechercheMotCles(String chemin, String type) {
-		if(type.equals("Image")){
-			
+	public void lancementRechercheMotCles(String motcles, String type) {
+		this.jtxtf_barRecherche.setText("Entrez le motcles vers le fichier");
+		switch (type) {
+		case "Texte":
+			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
+			break;
+		case "Image":
+			this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.IMAGE);
+			break;
+		case "Son":
+			this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.SON);
+			break;
 		}
+		tabMotCles = resultat.keySet().toArray();
+		tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
+		// for (Object motcles : tabPourcentage) {
+		// System.out.println("Resultat n°" + i + " :\n - Fichier : " + motcles +
+		// "\n - Similaritée : "
+		// + resultat.get(motcles));
+		// i++;
+		// }
+		if (tabMotCles.length > 0) {
+
+			if (type.equals("Texte")) {
+				Runtime runtime = Runtime.getRuntime();
+				try {
+
+					runtime.exec(new String[] { "gedit", (String) tabMotCles[0] });
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				int j = -1;
+				int k = 0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabMotCles.length];
+				if (tabMotCles.length > 12) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				} else if (tabMotCles.length > 18) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for (i = 0; i < tabMotCles.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k = 0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton(
+							(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Runtime runtime = Runtime.getRuntime();
+							try {
+								JButton thisJB = (JButton) e.getSource();
+								runtime.exec(new String[] { "gedit", thisJB.getText() });
+							} catch (IOException exception) {
+								exception.printStackTrace();
+							}
+
+						}
+					});
+
+					this.panelResultat[j].add(jb_resultat[i]);
+				}
+
+			} else if (type.equals("Image")) {
+				JFrame image = new JFrame("Premier résultat");
+				class panelImage extends JPanel {
+					Image resultat;
+
+					public panelImage(String s) {
+						resultat = getToolkit().getImage(s);
+					}
+
+					public void paintComponent(Graphics g) {
+						super.paintComponent(g);
+						g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
+					}
+				}
+				image.add(new panelImage((String) tabMotCles[0]));
+				image.setSize(300, 200);
+				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+				image.setLocation(dim.width / 2 - image.getWidth() / 2, dim.height / 2 - image.getHeight() / 2);
+
+				image.setVisible(true);
+
+				int j = -1;
+				int k = 0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabMotCles.length];
+				if (tabMotCles.length > 12) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				} else if (tabMotCles.length > 18) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for (i = 0; i < tabMotCles.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k = 0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton(
+							(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JFrame image = new JFrame("Premier résultat");
+							class panelImage extends JPanel {
+								Image resultat;
+
+								public panelImage(String s) {
+									resultat = getToolkit().getImage(s);
+								}
+
+								public void paintComponent(Graphics g) {
+									super.paintComponent(g);
+									g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
+								}
+							}
+							JButton thisJB = (JButton) e.getSource();
+							image.add(new panelImage(thisJB.getText()));
+							image.setSize(300, 200);
+							Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							image.setLocation(dim.width / 2 - image.getWidth() / 2,
+									dim.height / 2 - image.getHeight() / 2);
+
+							image.setVisible(true);
+						}
+					});
+
+					this.panelResultat[j].add(jb_resultat[i]);
+				}
+			} else if (type.equals("Son")) {
+				Runtime runtime = Runtime.getRuntime();
+				try {
+
+					runtime.exec(new String[] { "play", (String) tabMotCles[0] });
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				int j = -1;
+				int k = 0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabMotCles.length];
+				if (tabMotCles.length > 12) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				} else if (tabMotCles.length > 18) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for (i = 0; i < tabMotCles.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k = 0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton(
+							(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Runtime runtime = Runtime.getRuntime();
+							try {
+								JButton thisJB = (JButton) e.getSource();
+								runtime.exec(new String[] { "play", thisJB.getText() });
+							} catch (IOException exception) {
+								exception.printStackTrace();
+							}
+
+						}
+					});
+
+					this.panelResultat[j].add(jb_resultat[i]);
+				}
+			}
+
+		}
+
 	}
 
 	private int partitionner(Object[] tab, int premier, int dernier) {
