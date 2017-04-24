@@ -1,6 +1,7 @@
 package controleur;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.DescripteurTexte;
 
@@ -24,7 +25,8 @@ public class ControlleurRechercheParMotsCles {
 			System.out.println("=" + listeMotsPlus.get(i) + "=");
 	}
 
-	public ArrayList<String> rechercheTexte(String lecture) {
+	public HashMap<Integer, String> rechercheTexte(String lecture) {
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
 
 		int nombre = (" " + lecture + " ").split(" ").length - 1;
 		String[] decoupe = lecture.split(" ");
@@ -66,7 +68,9 @@ public class ControlleurRechercheParMotsCles {
 			}
 
 		}
-		return listeTexte;
+		for (int i = 0; i < listeTexte.size(); i++)
+			map.put(i, listeTexte.get(i));
+		return map;
 	}
 
 	public void ajouterDescripteurListe(ArrayList<DescripteurTexte> liste) {
@@ -80,4 +84,3 @@ public class ControlleurRechercheParMotsCles {
 		}
 	}
 }
-
