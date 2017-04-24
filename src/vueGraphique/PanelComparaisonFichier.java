@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controleur.ControlleurComparaisonFichier;
+import model.TypeFichier;
 
 @SuppressWarnings("serial")
 public class PanelComparaisonFichier extends JPanel {
@@ -150,6 +151,15 @@ public class PanelComparaisonFichier extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementComparaisonFichier(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
@@ -172,6 +182,15 @@ public class PanelComparaisonFichier extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementComparaisonFichier(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
@@ -194,6 +213,15 @@ public class PanelComparaisonFichier extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementComparaisonFichier(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
@@ -213,14 +241,24 @@ public class PanelComparaisonFichier extends JPanel {
 					panelResultat[i].repaint();
 				}
 				lancementComparaisonFichier(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
-				
+
 			}
 		});
 	}
 
 	public void lancementComparaisonFichier(String chemin, String type) {
 		this.jtxtf_barRecherche.setText("Entrez le chemin vers le fichier");
-		this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, type);
+		switch(type){
+		case "Texte":
+			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.TEXTE);
+			break;
+		case "Image":
+			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.IMAGE);
+			break;
+		case "Son":
+			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.SON);
+			break;
+		}
 		tabChemin = resultat.keySet().toArray();
 		tabChemin = this.quickSort(tabChemin, 0, tabChemin.length - 1);
 		// for (Object chemin : tabPourcentage) {
@@ -278,7 +316,7 @@ public class PanelComparaisonFichier extends JPanel {
 							Runtime runtime = Runtime.getRuntime();
 							try {
 								JButton thisJB = (JButton) e.getSource();
-								runtime.exec(new String[] { "gedit", thisJB.getText()});
+								runtime.exec(new String[] { "gedit", thisJB.getText() });
 							} catch (IOException exception) {
 								exception.printStackTrace();
 							}
@@ -372,10 +410,67 @@ public class PanelComparaisonFichier extends JPanel {
 
 					this.panelResultat[j].add(jb_resultat[i]);
 				}
+			} else if (type.equals("Son")) {
+				Runtime runtime = Runtime.getRuntime();
+				try {
+
+					runtime.exec(new String[] { "play", (String) tabChemin[0] });
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				int j = -1;
+				int k = 0;
+				int nbElementParZone = 2;
+				JButton jb_resultat[] = new JButton[tabChemin.length];
+				if (tabChemin.length > 12) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 1));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 3;
+					}
+
+				} else if (tabChemin.length > 18) {
+					for (int i = 0; i < 6; i++) {
+						this.remove(this.panelResultat[i]);
+						this.panelResultat[i] = new JPanel(new GridLayout(3, 2));
+						this.add(this.panelResultat[i]);
+						nbElementParZone = 6;
+					}
+				}
+				for (i = 0; i < tabChemin.length; i++) {
+					if (i % nbElementParZone == 0) {
+						if (j > -1) {
+							this.panelResultat[j].repaint();
+							this.panelResultat[j].revalidate();
+						}
+						j++;
+						k = 0;
+						this.panelResultat[j].removeAll();
+					}
+					jb_resultat[i] = new JButton(
+							(String) tabChemin[i] + " " + resultat.get((String) tabChemin[i]) + "%");
+					jb_resultat[i].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Runtime runtime = Runtime.getRuntime();
+							try {
+								JButton thisJB = (JButton) e.getSource();
+								runtime.exec(new String[] { "play", thisJB.getText() });
+							} catch (IOException exception) {
+								exception.printStackTrace();
+							}
+
+						}
+					});
+
+					this.panelResultat[j].add(jb_resultat[i]);
+				}
 			}
 
 		}
-		
+
 	}
 
 	private int partitionner(Object[] tab, int premier, int dernier) {

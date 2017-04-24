@@ -147,6 +147,15 @@ public class PanelRechercheMotCles extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementRechercheMotCles(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
@@ -169,6 +178,15 @@ public class PanelRechercheMotCles extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementRechercheMotCles(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
@@ -191,6 +209,15 @@ public class PanelRechercheMotCles extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
+					for (int i = 0; i < 6; i++) {
+						remove(panelResultat[i]);
+						panelResultat[i] = new JPanel(new GridLayout(2, 1));
+						panelResultat[i].add(new JLabel(""));
+						panelResultat[i].add(new JLabel(""));
+						add(panelResultat[i]);
+						panelResultat[i].revalidate();
+						panelResultat[i].repaint();
+					}
 					lancementRechercheMotCles(jtxtf_barRecherche.getText(), (String) jcb_typeFic.getSelectedItem());
 				}
 			}
