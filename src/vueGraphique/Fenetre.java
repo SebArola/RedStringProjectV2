@@ -1,8 +1,6 @@
 package vueGraphique;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,6 +14,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controleur.ControleurConnexionAdmin;
+
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame {
 	private JPanel jp_mainPanel;
@@ -26,6 +26,7 @@ public class Fenetre extends JFrame {
 	private JMenuItem[] jmitem_menu;
 	private JPanel jpn_souspanel;
 	private PanelMenuAdministrateur panelMenuAdmin;
+	private ControleurConnexionAdmin ctrl_coAdmin;
 
 	public Fenetre() {
 		super("2SATER");
@@ -36,14 +37,15 @@ public class Fenetre extends JFrame {
 				fermer();
 			}
 		});
-		
+
 		this.jp_mainPanel = new JPanel(new BorderLayout());
-		
+
 		this.setContentPane(jp_mainPanel);
 
 		this.panelRFichier = new PanelComparaisonFichier();
 		this.panelRMotCles = new PanelRechercheMotCles();
 		this.panelMenuAdmin = new PanelMenuAdministrateur();
+		this.ctrl_coAdmin = new ControleurConnexionAdmin();
 
 		this.jmb_barmenu = new JMenuBar();
 		this.jm_menu = new JMenu();
@@ -106,12 +108,22 @@ public class Fenetre extends JFrame {
 		});
 
 	}
-	
-	protected void panelMenuAdministrateur(){
-		this.jp_mainPanel.remove(this.panelMenuAdmin);
-		this.jp_mainPanel.add(this.panelMenuAdmin);
-		this.jp_mainPanel.repaint();
-		this.jp_mainPanel.revalidate();
+
+	protected void panelMenuAdministrateur() {
+		String mdp = "";
+		String login = (String) JOptionPane.showInputDialog(null, "Entrez le login :", "Identification",
+				JOptionPane.PLAIN_MESSAGE);
+		if(login!=null){
+			mdp = (String) JOptionPane.showInputDialog(null, "Entrez le mdp :", "Identification",
+					JOptionPane.PLAIN_MESSAGE);
+		}
+		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
+			this.jp_mainPanel.remove(this.panelMenuAdmin);
+			this.jp_mainPanel.add(this.panelMenuAdmin);
+			this.jp_mainPanel.repaint();
+			this.jp_mainPanel.revalidate();
+		}
+		
 	}
 
 	protected void panelRMotCles() {
@@ -133,13 +145,6 @@ public class Fenetre extends JFrame {
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			this.dispose();
 		}
-	}
-
-	public static void main(String args[]) {
-		Fenetre fen = new Fenetre();
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		fen.setLocation(dim.width / 2 - fen.getWidth() / 2, dim.height / 2 - fen.getHeight() / 2);
-		fen.setVisible(true);
 	}
 
 }
