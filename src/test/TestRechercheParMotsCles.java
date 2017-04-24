@@ -1,21 +1,21 @@
 package test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import control.ControlleurRechercheParMotsCles;
-import vue.BoundaryRechercheParMotsCles;
+import controleur.ControleurGenerationDescripteurTexte;
+import controleur.ControlleurRechercheParMotsCles;
+import model.DescripteurTexte;
+import vueText.BoundaryRechercheParMotsCles;
 
 public class TestRechercheParMotsCles {
 	public static void main(String[] args) throws IOException {
-		BoundaryRechercheParMotsCles brpmc = new BoundaryRechercheParMotsCles();
 		ControlleurRechercheParMotsCles controlrpmc = new ControlleurRechercheParMotsCles();
-		controlrpmc.ajouterDescripteurListe("Texte1.txt");
-		controlrpmc.ajouterDescripteurListe("Texte2.txt");
-		controlrpmc.ajouterDescripteurListe("Texte3.txt");
-		controlrpmc.ajouterDescripteurListe("Texte4.txt");
+		BoundaryRechercheParMotsCles brpmc = new BoundaryRechercheParMotsCles(controlrpmc);
 
-		brpmc.crpmc = controlrpmc;
+		ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
+		ArrayList<DescripteurTexte> liste = cgdt.creationDescripteurTexte("C:\\Users\\alegu\\git\\RedStringProjectV2\\Data\\base_descripteur_texte.txt");
+		controlrpmc.ajouterDescripteurListe(liste);
 		brpmc.rechercheParMotsCles();
 	}
-
 }
