@@ -25,6 +25,7 @@ public class Fenetre extends JFrame {
 	private JMenuBar jmb_barmenu;
 	private JMenuItem[] jmitem_menu;
 	private JPanel jpn_souspanel;
+	private PanelMenuAdministrateur panelMenuAdmin;
 
 	public Fenetre() {
 		super("2SATER");
@@ -42,6 +43,7 @@ public class Fenetre extends JFrame {
 
 		this.panelRFichier = new PanelComparaisonFichier();
 		this.panelRMotCles = new PanelRechercheMotCles();
+		this.panelMenuAdmin = new PanelMenuAdministrateur();
 
 		this.jmb_barmenu = new JMenuBar();
 		this.jm_menu = new JMenu();
@@ -91,7 +93,7 @@ public class Fenetre extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				panelMenuAdministrateur();
 			}
 		});
 
@@ -103,6 +105,13 @@ public class Fenetre extends JFrame {
 			}
 		});
 
+	}
+	
+	protected void panelMenuAdministrateur(){
+		this.jp_mainPanel.remove(this.panelMenuAdmin);
+		this.jp_mainPanel.add(this.panelMenuAdmin);
+		this.jp_mainPanel.repaint();
+		this.jp_mainPanel.revalidate();
 	}
 
 	protected void panelRMotCles() {
