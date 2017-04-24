@@ -16,9 +16,16 @@ public class DescripteurTexte {
 		String[] decoupe3 = decoupe[1].split("</descripteur>");
 		this.nom = decoupe2[1];
 		this.texte = decoupe3[0].replaceAll("[\\d]", "");
-
-
 	}
+	
+	public String getnom() {
+		return nom;
+	}
+	
+	public String gettexte() {
+		return texte;
+	}
+	
 	public String toString() {
 		return ("Nom :" + this.nom + " \nDescripteur :" + this.texte);
 	}
