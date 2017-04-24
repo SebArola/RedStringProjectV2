@@ -33,7 +33,20 @@ public class ControlleurComparaisonFichier {
 															// chemin>
 		switch (type) {
 		case TEXTE:
-			//pourcentage = compareFichierTexte(fic, f.getDescripteur());
+			ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
+			ArrayList<DescripteurTexte> listeDonne = cgdt.creationDescripteurTexte(chemin);
+			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte("C:\\Users\\alegu\\git\\RedStringProjectV2\\Data\\base_descripteur_texte.txt"); // todo a changer crée class BDDescripteur texte
+			DescripteurTexte descTextDonne = listeDonne.get(0);
+			for (int i=0 ; i < listeBaseDeDonnee.size(); i++)
+			{
+				DescripteurTexte desCompare = listeBaseDeDonnee.get(i);
+				pourcentage = compareFichierTexte(descTextDonne, desCompare);
+				
+				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()){
+					resultat.put(desCompare.getnom(), pourcentage);
+				}
+			}
+				
 			break;
 		case IMAGE:
 			DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
@@ -96,38 +109,31 @@ public class ControlleurComparaisonFichier {
 	 * @param descripteur
 	 * @return pourcentage
 	 */
-	private int compareFichierTexte(Fichier fichierCompare, String descripteur) {
-		switch (fichierCompare.getChemin()) {
-		case "txt1":
-			if (descripteur.equals("descTXT195")) {
-				return 95;
-			} else if (descripteur.equals("descTXT185")) {
-				return 85;
-			} else if (descripteur.equals("descTXT175")) {
-				return 75;
-			} else if (descripteur.equals("descTXT165")) {
-				return 65;
-			} else {
-				return 0;
-			}
-		case "txt2":
-			if (descripteur.equals("descTXT295")) {
-				return 95;
-			} else if (descripteur.equals("descTXT285")) {
-				return 85;
-			} else {
-				return 0;
-			}
-		case "im3":
-			if (descripteur.equals("descTXT295")) {
-				return 95;
-			} else if (descripteur.equals("descTXT285")) {
-				return 85;
-			} else {
-				return 0;
+	private int compareFichierTexte(DescripteurTexte desDonne, DescripteurTexte desCompare) {
+		String texteCompare = desCompare.gettexte();
+		String texteDonne = desDonne.gettexte();
+		String[] decoupeCompare = texteCompare.split(" ");
+		String[] decoupeDonne = texteDonne.split(" ");
+		int nbCompare = (" " + texteCompare + " ").split(" ").length - 1;
+		int nbDonne  = (" " + texteDonne + " ").split(" ").length - 1;
+		int pourcentage = 0;
+		fichierConfig f = fichierConfig.getInstance();
+		int nbMots = f.getNbMots();
+		for ( int i=nbDonne-nbMots-1; i< nbDonne ;i++)
+		{
+			for ( int j=nbCompare-nbMots-1 ; j<nbCompare-1;j++)
+			{
+				if(decoupeDonne[i].equals(decoupeCompare[j]))
+				{
+					pourcentage = pourcentage+(int)100/nbMots;
+					System.out.println("Pourcentage actu ="+pourcentage);
+					System.out.println("If ="+decoupeDonne[i]+"=ET="+decoupeCompare[j]+"=");
+				}
 			}
 		}
-		return 0;
+		if(pourcentage >100)
+			pourcentage =100;
+		return(pourcentage);
 	}
 
 	/**
