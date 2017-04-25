@@ -30,13 +30,14 @@ public class ControlleurComparaisonFichier {
 	 * @return resultat
 	 * @throws IOException 
 	 */
-	public HashMap<String, Integer> comparaisonFichier(String chemin, TypeFichier type) throws IOException {
+	public HashMap<String, Integer> comparaisonFichier(String nom, TypeFichier type) throws IOException {
 		//Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
 		int pourcentage = 0;
 		HashMap<String, Integer> resultat = new HashMap<String, Integer>();// <pourcentage,
-															// chemin>
+		String chemin = "";													// chemin>
 		switch (type) {
 		case TEXTE:
+			chemin = fichierConfig.getInstance().getCheminBD()+"/Textes/"+nom;
 			ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
 			ArrayList<DescripteurTexte> listeDonne = cgdt.creationDescripteurTexte(chemin);
 			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte("C:\\Users\\alegu\\git\\RedStringProjectV2\\Data\\base_descripteur_texte.txt"); // todo a changer crée class BDDescripteur texte
@@ -53,6 +54,11 @@ public class ControlleurComparaisonFichier {
 				
 			break;
 		case IMAGE:
+			if(nom.contains(".jpg")){
+				chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_RGB/"+nom;
+			}else if(nom.contains(".bmp")){
+				chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_NB/"+nom;
+			}
 			DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
 			for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
 				if(!chemin.equals(d.getChemin())){

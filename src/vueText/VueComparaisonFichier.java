@@ -47,26 +47,26 @@ public class VueComparaisonFichier {
 	public void comparaisonFichier() throws IOException {
 		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
-		String cheminFic;
+		String nomFic;
 		boolean choixBon = false;
 		int choix;
-		System.out.println("Entrez le chemin vers le fichier :");
-		cheminFic = clavier.nextLine();
+		System.out.println("Entrez le nom du fichier :");
+		nomFic = clavier.nextLine();
 		do {
 			System.out.println("Type de fichier\n1: Texte\n2: Image\n3: Son");
 			choix = clavier.nextInt();
 			switch (choix) {
 			case 1:
 				choixBon = true;
-				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.TEXTE);
+				resultat = ctrl_compareFichier.comparaisonFichier(nomFic, TypeFichier.TEXTE);
 				break;
 			case 2:
 				choixBon = true;
-				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.IMAGE);
+				resultat = ctrl_compareFichier.comparaisonFichier(nomFic, TypeFichier.IMAGE);
 				break;
 			case 3:
 				choixBon = true;
-				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.SON);
+				resultat = ctrl_compareFichier.comparaisonFichier(nomFic, TypeFichier.SON);
 				break;
 			default:
 				choixBon = false;

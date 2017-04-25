@@ -30,7 +30,9 @@ public class fichierConfig {
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		loadFichierConfig();
+		//loadFichierConfig();
+		this.seuilComparaisonImage = 50;
+		this.cheminBD = "/home/etienne/RedStringProject/Data";
 	}
 
 	public static fichierConfig getInstance() {
