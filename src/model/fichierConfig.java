@@ -63,7 +63,7 @@ public class fichierConfig {
 		try {
 			FileInputStream fis = new FileInputStream("Data/config.txt");
 
-			byte[] buf = new byte[8];  
+			byte[] buf = new byte[1];  
 		    int n = 0;
 		    while ((n = fis.read(buf)) >= 0) {
 		    	for (byte bit : buf) {
