@@ -30,12 +30,7 @@ public class fichierConfig {
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		// this.seuilComparaisonFichier = 80;
-		this.seuilComparaisonImage = 40;
-		this.seuilComparaisonTexte = 20;
-		this.seuilComparaisonSon = 20;
-		this.nbQuantif = 3;
-		this.nbMots = 5;
+		loadFichierConfig();
 	}
 
 	public static fichierConfig getInstance() {
