@@ -122,7 +122,7 @@ public class ControlleurComparaisonFichier {
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
 	 * l'instant ces méthodes retourne des résultats prédéfini
 	 * 
-	 * @param fichierCompare
+	 * @param fichierCompare//
 	 * @param descripteur
 	 * @return pourcentage
 	 */
