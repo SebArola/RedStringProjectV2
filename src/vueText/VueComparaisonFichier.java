@@ -1,10 +1,10 @@
 package vueText;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import controleur.ControlleurComparaisonFichier;
-import model.Couleur;
 import model.TypeFichier;
 
 public class VueComparaisonFichier {
@@ -21,7 +21,7 @@ public class VueComparaisonFichier {
 		int j = premier;
 		Object temp;
 		int pivot = premier;
-		for (int i = premier+1; i <= dernier; i++) {
+		for (int i = premier + 1; i <= dernier; i++) {
 			if (this.resultat.get(tab[i]) >= this.resultat.get(tab[pivot])) {
 				temp = tab[i];
 				tab[i] = tab[j];
@@ -44,18 +44,18 @@ public class VueComparaisonFichier {
 		return tab;
 	}
 
-	public void comparaisonFichier(){
+	public void comparaisonFichier() throws IOException {
 		@SuppressWarnings("resource")
 		Scanner clavier = new Scanner(System.in);
-		String cheminFic, type;
+		String cheminFic;
 		boolean choixBon = false;
 		int choix;
 		System.out.println("Entrez le chemin vers le fichier :");
 		cheminFic = clavier.nextLine();
-		do{
+		do {
 			System.out.println("Type de fichier\n1: Texte\n2: Image\n3: Son");
 			choix = clavier.nextInt();
-			switch(choix){
+			switch (choix) {
 			case 1:
 				choixBon = true;
 				resultat = ctrl_compareFichier.comparaisonFichier(cheminFic, TypeFichier.TEXTE);
@@ -72,7 +72,7 @@ public class VueComparaisonFichier {
 				choixBon = false;
 				System.out.println("Attention, entrez 1, 2 ou 3");
 			}
-		}while(!choixBon);
+		} while (!choixBon);
 		int i = 1;
 		Object tabPourcentage[] = resultat.keySet().toArray();
 		tabPourcentage = this.quickSort(tabPourcentage, 0, tabPourcentage.length - 1);
