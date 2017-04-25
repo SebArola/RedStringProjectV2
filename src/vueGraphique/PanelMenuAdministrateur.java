@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import model.fichierConfig;
@@ -20,8 +21,13 @@ public class PanelMenuAdministrateur extends JPanel{
 	private JPanel jp_button;
 	private JPanel grid_panel;
 	private JTextField[] jtxtf_tab;
-	
+	private JPanel jp_ficConfig;
+	private JPanel jp_indexation;
+    private JTabbedPane tabbedPane;	
 	public PanelMenuAdministrateur(){
+		this.jp_ficConfig = new JPanel();
+		this.jp_indexation = new JPanel();
+		this.tabbedPane = new JTabbedPane();
 		this.grid_layout = new GridLayout(7,2);
 		this.grid_layout.setVgap(25);
 		GridLayout grid = new GridLayout(1,2);
@@ -33,7 +39,7 @@ public class PanelMenuAdministrateur extends JPanel{
 		this.jp_button.add(this.jb_cancel);
 		this.grid_panel = new JPanel(this.grid_layout);
 
-		this.setLayout(new BorderLayout());
+		this.jp_ficConfig.setLayout(new BorderLayout());
 		this.jtxtf_tab = new JTextField[5];
 		this.jtxtf_tab[0] = new JTextField(fichierConfig.getInstance().getCheminBD());
 		this.jtxtf_tab[1] = new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonImage());
@@ -54,11 +60,14 @@ public class PanelMenuAdministrateur extends JPanel{
 		
 	
 		this.grid_panel.add(this.jp_button);
-		this.add(grid_panel,BorderLayout.CENTER);
-		this.add(new JLabel("             "),BorderLayout.WEST);
-		this.add(new JLabel("                                              "),BorderLayout.EAST);
-		this.add(new JLabel("       "),BorderLayout.NORTH);
+		this.jp_ficConfig.add(grid_panel,BorderLayout.CENTER);
+		this.jp_ficConfig.add(new JLabel("             "),BorderLayout.WEST);
+		this.jp_ficConfig.add(new JLabel("                                              "),BorderLayout.EAST);
+		this.jp_ficConfig.add(new JLabel("       "),BorderLayout.NORTH);
 
+		this.tabbedPane.add(this.jp_ficConfig,"Fichier de configuration");
+		this.tabbedPane.add(this.jp_indexation,"Lancement indexation");
+		this.add(tabbedPane);
 		this.gestionPanel();
 		
 	}
