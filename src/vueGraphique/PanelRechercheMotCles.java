@@ -259,10 +259,18 @@ public class PanelRechercheMotCles extends JPanel {
 			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
 			break;
 		case "Image":
-			this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.IMAGE);
+			try {
+				this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.IMAGE);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "Son":
-			this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.SON);
+			try {
+				this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.SON);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		}
 		tabMotCles = resultat.keySet().toArray();

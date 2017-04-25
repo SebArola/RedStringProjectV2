@@ -250,13 +250,25 @@ public class PanelComparaisonFichier extends JPanel {
 		this.jtxtf_barRecherche.setText("Entrez le chemin vers le fichier");
 		switch(type){
 		case "Texte":
-			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.TEXTE);
+			try {
+				this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.TEXTE);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "Image":
-			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.IMAGE);
+			try {
+				this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.IMAGE);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "Son":
-			this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.SON);
+			try {
+				this.resultat = this.ctrl_comparraison.comparaisonFichier(chemin, TypeFichier.SON);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		}
 		tabChemin = resultat.keySet().toArray();

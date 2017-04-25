@@ -15,7 +15,7 @@ public class ControlleurRechercheParMotsCles {
 		return (true);
 	}
 
-	public void affciherArray() {
+	public void afficherArray() {
 
 		System.out.println("Les mots en moins sont =>");
 		for (int i = 0; i < listeMotsMoins.size(); i++)

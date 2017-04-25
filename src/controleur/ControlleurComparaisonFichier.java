@@ -1,10 +1,13 @@
 package controleur;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import model.BDDescripteurImage;
 import model.DescripteurImage;
+import model.DescripteurTexte;
 import model.Fichier;
 import model.TypeFichier;
 import model.fichierConfig;
@@ -25,8 +28,9 @@ public class ControlleurComparaisonFichier {
 	 * @param chemin
 	 * @param type
 	 * @return resultat
+	 * @throws IOException 
 	 */
-	public HashMap<String, Integer> comparaisonFichier(String chemin, TypeFichier type) {
+	public HashMap<String, Integer> comparaisonFichier(String chemin, TypeFichier type) throws IOException {
 		//Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
 		int pourcentage = 0;
 		HashMap<String, Integer> resultat = new HashMap();// <pourcentage,
