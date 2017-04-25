@@ -16,7 +16,7 @@ public class BoundaryRechercheParMotsCles {
 	}
 
 	public void rechercheParMotsCles() {
-		HashMap<Integer, String> mapTxt = new HashMap<Integer, String>();
+		HashMap<String, Integer> mapTxt = new HashMap<String, Integer>();
 		boolean isCorrect;
 		String lecture;
 
