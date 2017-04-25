@@ -66,14 +66,16 @@ public class fichierConfig {
 			byte[] buf = new byte[8];  
 		    int n = 0;
 		    while ((n = fis.read(buf)) >= 0) {
-		    	load+=buf;
+		    	for (byte bit : buf) {
+		            load += (char) bit ;
+		        }
 		    }
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println(load);
 		String split[] = load.split(";");
 		this.seuilComparaisonImage = Integer.parseInt(split[0]);
 		this.seuilComparaisonTexte = Integer.parseInt(split[1]);

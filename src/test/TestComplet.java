@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import controleur.ControleurConnexionAdmin;
 import controleur.ControleurCreerProfil;
 import model.BDDescripteurImage;
+import model.fichierConfig;
 import vueGraphique.Fenetre;
 import vueText.BoundaryConnexionAdmin;
 
@@ -26,6 +27,7 @@ public class TestComplet {
 		BDDescripteurImage.getInstance().genBaseDescripteurImage();
 		Fenetre fen = new Fenetre();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		fichierConfig.getInstance().loadFichierConfig();
 		fen.setLocation(dim.width / 2 - fen.getWidth() / 2, dim.height / 2 - fen.getHeight() / 2);
 
 		fen.setVisible(true);
