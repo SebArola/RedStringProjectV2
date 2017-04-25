@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -36,20 +37,20 @@ public class PanelMenuAdministrateur extends JPanel{
 		this.jtxtf_tab = new JTextField[5];
 		this.jtxtf_tab[0] = new JTextField(fichierConfig.getInstance().getCheminBD());
 		this.jtxtf_tab[1] = new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonImage());
-		this.jtxtf_tab[2] = new JTextField(fichierConfig.getInstance().getCheminBD());
-		this.jtxtf_tab[3] = new JTextField(fichierConfig.getInstance().getCheminBD());
-		this.jtxtf_tab[4] = new JTextField(fichierConfig.getInstance().getCheminBD());
+		this.jtxtf_tab[2] = new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonTexte());
+		this.jtxtf_tab[3] = new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonSon());
+		this.jtxtf_tab[4] = new JTextField(""+fichierConfig.getInstance().getNbQuantif());
 
 		this.grid_panel.add(new JLabel("Chemin base de données"));
 		this.grid_panel.add(this.jtxtf_tab[0]);
 		this.grid_panel.add(new JLabel("Seuil comparaison image"));
 		this.grid_panel.add(this.jtxtf_tab[1]);
 		this.grid_panel.add(new JLabel("Seuil comparaison texte"));
-		this.grid_panel.add(new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonTexte()));
+		this.grid_panel.add(this.jtxtf_tab[2]);
 		this.grid_panel.add(new JLabel("Seuil comparaison son"));
-		this.grid_panel.add(new JTextField(""+fichierConfig.getInstance().getSeuilComparaisonSon()));
+		this.grid_panel.add(this.jtxtf_tab[3]);
 		this.grid_panel.add(new JLabel("Nombre de quantification"));
-		this.grid_panel.add(new JTextField(""+fichierConfig.getInstance().getNbQuantif()));
+		this.grid_panel.add(this.jtxtf_tab[4]);
 		
 	
 		this.grid_panel.add(this.jp_button);
@@ -82,10 +83,36 @@ public class PanelMenuAdministrateur extends JPanel{
 	}
 	
 	protected void jb_cancel_action() {
-		
+		if (JOptionPane.showConfirmDialog(this, "Voulez vous annuler les modifications ?", "Annuler",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			this.jtxtf_tab[0].setText(fichierConfig.getInstance().getCheminBD());
+			this.jtxtf_tab[1].setText(""+fichierConfig.getInstance().getSeuilComparaisonImage());
+			this.jtxtf_tab[2].setText(""+fichierConfig.getInstance().getSeuilComparaisonTexte());
+			this.jtxtf_tab[3].setText(""+fichierConfig.getInstance().getSeuilComparaisonSon());
+			this.jtxtf_tab[4].setText(""+fichierConfig.getInstance().getNbQuantif());
+		}
 	}
 
 	protected void jb_save_action(){
-		
+		if (JOptionPane.showConfirmDialog(this, "Sauvegarder ?", "Sauvegarder",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			if(this.jtxtf_tab[0].getText().contains(" ")){
+				String tab_temp[] = this.jtxtf_tab[0].getText().split(" ");
+				String temp= "";
+				for (int i=0; i<tab_temp.length;i++){
+					temp += tab_temp[i];
+				}
+				this.jtxtf_tab[0].setText(temp);
+				
+			}
+			fichierConfig.getInstance().setCheminBD(this.jtxtf_tab[0].getText());
+			fichierConfig.getInstance().setSeuilComparaisonImage(Integer.parseInt(this.jtxtf_tab[1].getText()));
+			fichierConfig.getInstance().setSeuilComparaisonTexte(Integer.parseInt(this.jtxtf_tab[2].getText()));
+			fichierConfig.getInstance().setSeuilComparaisonSon(Integer.parseInt(this.jtxtf_tab[3].getText()));
+			fichierConfig.getInstance().setNbQuantif(Integer.parseInt(this.jtxtf_tab[4].getText()));
+			if(!fichierConfig.getInstance().saveFichierConfig()){
+				JOptionPane.showMessageDialog(this, "Chemin d'accés introuvable\nSauvegarde annulée");
+			}
+		}
 	}
 }

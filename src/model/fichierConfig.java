@@ -45,17 +45,18 @@ public class fichierConfig {
 		return instance;
 	}
 
-	public void saveFichierConfig() {
+	public boolean saveFichierConfig() {
 		String fic = this.seuilComparaisonImage + ";" + this.seuilComparaisonTexte + ";" + this.seuilComparaisonSon
 				+ ";" + this.nbQuantif + ";" + this.nbMots + ";" + this.cheminBD;
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(this.cheminBD + "/Data/config.txt"));
 			fos.write(fic.getBytes());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public void loadFichierConfig(){

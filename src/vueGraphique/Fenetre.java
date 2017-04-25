@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controleur.ControleurConnexionAdmin;
+import model.fichierConfig;
 
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame {
@@ -118,6 +119,7 @@ public class Fenetre extends JFrame {
 					JOptionPane.PLAIN_MESSAGE);
 		}
 		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
+			fichierConfig.getInstance().loadFichierConfig();
 			this.jp_mainPanel.remove(this.panelRFichier);
 			this.jp_mainPanel.remove(this.panelRMotCles);
 			this.jp_mainPanel.add(this.panelMenuAdmin);
