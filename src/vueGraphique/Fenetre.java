@@ -125,6 +125,9 @@ public class Fenetre extends JFrame {
 			this.jp_mainPanel.add(this.panelMenuAdmin);
 			this.jp_mainPanel.repaint();
 			this.jp_mainPanel.revalidate();
+		}else{
+			JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
+
 		}
 		
 	}
