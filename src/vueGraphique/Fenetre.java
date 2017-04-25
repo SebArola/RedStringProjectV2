@@ -118,7 +118,8 @@ public class Fenetre extends JFrame {
 					JOptionPane.PLAIN_MESSAGE);
 		}
 		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
-			this.jp_mainPanel.remove(this.panelMenuAdmin);
+			this.jp_mainPanel.remove(this.panelRFichier);
+			this.jp_mainPanel.remove(this.panelRMotCles);
 			this.jp_mainPanel.add(this.panelMenuAdmin);
 			this.jp_mainPanel.repaint();
 			this.jp_mainPanel.revalidate();
@@ -128,6 +129,8 @@ public class Fenetre extends JFrame {
 
 	protected void panelRMotCles() {
 		this.jp_mainPanel.remove(this.panelRFichier);
+		this.jp_mainPanel.remove(this.panelMenuAdmin);
+
 		this.jp_mainPanel.add(this.panelRMotCles);
 		this.jp_mainPanel.repaint();
 		this.jp_mainPanel.revalidate();
@@ -135,6 +138,8 @@ public class Fenetre extends JFrame {
 
 	protected void panelRFichier() {
 		this.jp_mainPanel.remove(this.panelRMotCles);
+		this.jp_mainPanel.remove(this.panelMenuAdmin);
+
 		this.jp_mainPanel.add(this.panelRFichier);
 		this.jp_mainPanel.repaint();
 		this.jp_mainPanel.revalidate();

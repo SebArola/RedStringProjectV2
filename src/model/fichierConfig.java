@@ -75,7 +75,6 @@ public class fichierConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(load);
 		String split[] = load.split(";");
 		this.seuilComparaisonImage = Integer.parseInt(split[0]);
 		this.seuilComparaisonTexte = Integer.parseInt(split[1]);
