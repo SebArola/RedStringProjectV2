@@ -25,8 +25,8 @@ public class ControlleurRechercheParMotsCles {
 			System.out.println("=" + listeMotsPlus.get(i) + "=");
 	}
 
-	public HashMap<Integer, String> rechercheTexte(String lecture) {
-		HashMap<Integer, String> map = new HashMap<Integer, String>();
+	public HashMap<String, Integer> rechercheTexte(String lecture) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 
 		int nombre = (" " + lecture + " ").split(" ").length - 1;
 		String[] decoupe = lecture.split(" ");
@@ -69,7 +69,7 @@ public class ControlleurRechercheParMotsCles {
 
 		}
 		for (int i = 0; i < listeTexte.size(); i++)
-			map.put(i, listeTexte.get(i));
+			map.put(listeTexte.get(i),i+1 );
 		return map;
 	}
 
