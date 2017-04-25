@@ -33,7 +33,7 @@ public class ControlleurComparaisonFichier {
 	public HashMap<String, Integer> comparaisonFichier(String chemin, TypeFichier type) throws IOException {
 		//Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
 		int pourcentage = 0;
-		HashMap<String, Integer> resultat = new HashMap();// <pourcentage,
+		HashMap<String, Integer> resultat = new HashMap<String, Integer>();// <pourcentage,
 															// chemin>
 		switch (type) {
 		case TEXTE:
