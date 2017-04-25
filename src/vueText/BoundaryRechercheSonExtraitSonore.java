@@ -1,41 +1,50 @@
 package vueText;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import controleur.ControleurGenerationDescripteurSon;
 import controleur.ControleurRechercheSonExtraitSonore;
 import model.DescripteurSon;
 
 public class BoundaryRechercheSonExtraitSonore {
 	private ControleurRechercheSonExtraitSonore crses;
 	int nombreOccurence;
-	DescripteurSon resultat;
 	String nom;
 	String descripteur = "";
 	DescripteurSon choixEnregistrement;
 	Scanner clavier = new Scanner(System.in);
 
 	public BoundaryRechercheSonExtraitSonore(ControleurRechercheSonExtraitSonore controlrses) {
-		crses=controlrses;
+		crses = controlrses;
 	}
 
-	public void rechercheSon() throws FileNotFoundException{
-		System.out.println("Veuliiez choisir un extrait sonore (le nom de son descripteur. e.g:./Data/Descripteur1.txt) :");
+	public void rechercheSon() throws IOException {
+		HashMap<String, Integer> mapSon = new HashMap<String, Integer>();
+		System.out.println("Veuliiez choisir un extrait sonore (le chemin du fihcier):");
 		nom = clavier.nextLine();
 
-		DescripteurSon extrait = new DescripteurSon(nom);
+		ControleurGenerationDescripteurSon cgds = new ControleurGenerationDescripteurSon();
+		ArrayList<DescripteurSon> list = cgds.creationDescripteurSon(nom);
+		DescripteurSon extrait = list.get(0);
 
 		System.out.println("Veuliiez choisir le nombre d'occurences minimum");
 		nombreOccurence = clavier.nextInt();
 
-		//System.out.println("resultat de vueRecchercheSon: "+resultat+"  extrait:"+extrait);
-		resultat = crses.rechercheEnregistrementAudio(extrait);
-		//System.out.println("resultat de vueRecchercheSon: "+resultat+"  extrait:"+extrait); //TODO test Vue recherche son
-		if (resultat.nombreOccurence < nombreOccurence) {
-			System.out.println("Aucun resultat n'as été trouvé");
-		} else {
-			System.out.println(
-					"L'extrait est joué " + resultat.nombreOccurence + " fois dans le corpus nommé " + resultat.nom);
+		mapSon = crses.rechercheEnregistrementAudio(extrait);
+       // System.out.println("NUMERO : "+mapSon.size());
+		for (Map.Entry<String, Integer> entry : mapSon.entrySet()) {
+			String nom = entry.getKey();
+			Integer valeur = entry.getValue();
+
+			if (valeur < nombreOccurence) {
+				System.out.println("Aucun resultat n'as été trouvé");
+			} else {
+				System.out.println("L'extrait est joué " + valeur + " fois dans le corpus nommé " + nom);
+			}
 		}
 	}
 }
