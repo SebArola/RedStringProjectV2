@@ -9,7 +9,7 @@ import model.fichierConfig;
 
 public class ControleurModifierSeuilComparaison { // je fais un test
 	
-	public void modificationSeuil(TypeFichier typeFichier, int seuil) throws IOException {
+	public boolean modificationSeuil(TypeFichier typeFichier, int seuil) throws IOException {
 		switch (typeFichier) {
 		case TEXTE:
 			fichierConfig.getInstance().setSeuilComparaisonTexte(seuil);
@@ -21,7 +21,8 @@ public class ControleurModifierSeuilComparaison { // je fais un test
 		case IMAGE:
 			fichierConfig.getInstance().setSeuilComparaisonImage(seuil);			
 			break;
-			
+			 
 		}
+		return true; // todo acjouter un peu
 	}
 }
