@@ -64,7 +64,20 @@ public class ControlleurComparaisonFichier {
 			}
 			break;
 		case SON:
-			//pourcentage = compareFichierSon(fic, f.getDescripteur());
+			int cpt=0;
+				int nb_random = (int)(Math.random()*3)+1;
+				if(nb_random == 1){
+					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
+				}
+				else if(nb_random == 2){
+					resultat.put("jingle_fi.wav", (int)(Math.random()*100));
+					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
+				}
+				else if(nb_random == 3){
+					resultat.put("corpus_fi.wav", (int)(Math.random()*100));
+					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
+					resultat.put("jingle_fi.wav", (int)(Math.random()*100));
+				}
 			break;
 		}
 			/*if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonFichier()) {
@@ -138,18 +151,6 @@ public class ControlleurComparaisonFichier {
 		if(pourcentage >100)
 			pourcentage =100;
 		return(pourcentage);
-	}
-
-	/**
-	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
-	 * l'instant ces méthodes retourne des résultats prédéfini
-	 * 
-	 * @param fichierCompare
-	 * @param descripteur
-	 * @return pourcentage
-	 */
-	private int compareFichierSon(Fichier fichierCompare, String descripteur) {
-		return 0;
 	}
 
 }
