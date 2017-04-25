@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import model.DescripteurSon;
 
 public class ControleurGenerationDescripteurSon {
-	// Va lire dans le fichier indiqué par le chemin, puis sépare les
-	// descripteur et crée
+	// Va lire dans le fichier indiquÃ© par le chemin, puis sÃ©pare les
+	// descripteur et crÃ©e
 	// pour chaque descripteur un objet descripteurTexte qui met ensuite dans
 	// une arraylist qu'il renvoie
 
@@ -31,9 +31,9 @@ public class ControleurGenerationDescripteurSon {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-
-		int nombre = (" " + lecture + " ").split(";").length - 1;
-		String[] decoupe = lecture.split(";");
+		
+		int nombre = (" " + lecture + " ").split("</descripteur>").length - 1;
+		String[] decoupe = lecture.split("</descripteur>");
 
 		for (int i = 0; i < nombre; i++) {
 			DescripteurSon ds = new DescripteurSon(decoupe[i]);
