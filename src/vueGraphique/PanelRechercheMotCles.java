@@ -54,7 +54,7 @@ public class PanelRechercheMotCles extends JPanel {
 		this.jb_confirm = new JButton();
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
 
-		this.jtxtf_barRecherche = new JTextField("Entrez le motcles vers le fichier");
+		this.jtxtf_barRecherche = new JTextField("Entrez les mot cles");
 		this.panelBar.add(new JLabel(" "));
 		this.panelBar.add(this.jtxtf_barRecherche);
 
@@ -135,7 +135,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (jtxtf_barRecherche.getText().equals("Entrez le motcles vers le fichier"))
+				if (jtxtf_barRecherche.getText().equals("Entrez les mot cles"))
 					jtxtf_barRecherche.setText("");
 			}
 		});
@@ -253,7 +253,7 @@ public class PanelRechercheMotCles extends JPanel {
 	}
 
 	public void lancementRechercheMotCles(String motcles, String type) {
-		this.jtxtf_barRecherche.setText("Entrez le motcles vers le fichier");
+		this.jtxtf_barRecherche.setText("Entrez les mot cles");
 		switch (type) {
 		case "Texte":
 			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
