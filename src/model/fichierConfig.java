@@ -1,5 +1,11 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 /**
  * Dans cette classe sont réunis tous les attributs midifiable dans le fichier
  * de configuration. Fichier config etant un singleton ils sont accessible
@@ -11,7 +17,7 @@ package model;
 public class fichierConfig {
 
 	private static fichierConfig instance;
-	//private int seuilComparaisonFichier;
+	// private int seuilComparaisonFichier;
 	private int nbQuantif;
 	private int nbMots;
 	private String cheminBD;
@@ -24,14 +30,14 @@ public class fichierConfig {
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		//this.seuilComparaisonFichier = 80;
+		// this.seuilComparaisonFichier = 80;
 		this.seuilComparaisonImage = 40;
 		this.seuilComparaisonTexte = 20;
 		this.seuilComparaisonSon = 20;
 		this.nbQuantif = 3;
 		this.nbMots = 5;
 	}
-	
+
 	public static fichierConfig getInstance() {
 		if (instance == null) {
 			instance = new fichierConfig();
@@ -39,16 +45,53 @@ public class fichierConfig {
 		return instance;
 	}
 
-	
+	public void saveFichierConfig() {
+		String fic = this.seuilComparaisonImage + ";" + this.seuilComparaisonTexte + ";" + this.seuilComparaisonSon
+				+ ";" + this.nbQuantif + ";" + this.nbMots + ";" + this.cheminBD;
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(this.cheminBD + "/Data/config.txt"));
+			fos.write(fic.getBytes());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-	public void setSeuilComparaisonSon(int seuil){
+	public void loadFichierConfig(){
+		String load= "";
+		try {
+			FileInputStream fis = new FileInputStream("Data/config.txt");
+
+			byte[] buf = new byte[8];  
+		    int n = 0;
+		    while ((n = fis.read(buf)) >= 0) {
+		    	load+=buf;
+		    }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String split[] = load.split(";");
+		this.seuilComparaisonImage = Integer.parseInt(split[0]);
+		this.seuilComparaisonTexte = Integer.parseInt(split[1]);
+		this.seuilComparaisonSon = Integer.parseInt(split[2]);
+		this.nbQuantif = Integer.parseInt(split[3]);
+		this.nbMots = Integer.parseInt(split[4]);
+		this.cheminBD = split[5];
+	}
+
+	public void setSeuilComparaisonSon(int seuil) {
 		this.seuilComparaisonSon = seuil;
 	}
-	public String getCheminBD(){
+
+	public String getCheminBD() {
 		return this.cheminBD;
 	}
-	
-	public void setCheminBD(String c){
+
+	public void setCheminBD(String c) {
 		this.cheminBD = c;
 	}
 
@@ -83,7 +126,5 @@ public class fichierConfig {
 	public void setSeuilComparaisonTexte(int seuilComparaisonTexte) {
 		this.seuilComparaisonTexte = seuilComparaisonTexte;
 	}
-	
-	
 
 }
