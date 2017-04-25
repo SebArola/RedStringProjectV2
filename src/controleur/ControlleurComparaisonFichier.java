@@ -110,7 +110,7 @@ public class ControlleurComparaisonFichier {
 		} else {
 			return -1;
 		}
-		pourcentage =  (100 -((diff*100) / total));
+		pourcentage =  (100 -((diff*50) / total));
 		if (pourcentage > 0) {
 			return (int) pourcentage;
 		} else {
