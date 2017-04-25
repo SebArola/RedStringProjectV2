@@ -87,6 +87,10 @@ public class fichierConfig {
 		this.seuilComparaisonSon = seuil;
 	}
 
+	public int getSeuilComparaisonSon(){
+		return this.seuilComparaisonSon;
+	}
+	
 	public String getCheminBD() {
 		return this.cheminBD;
 	}
