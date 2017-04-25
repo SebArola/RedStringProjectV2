@@ -1,22 +1,24 @@
 package test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import control.ControleurRechercheSonExtraitSonore;
-import vue.BoundaryRechercheSonExtraitSonore;
+import controleur.ControleurGenerationDescripteurSon;
+import controleur.ControleurRechercheSonExtraitSonore;
+import model.DescripteurSon;
+import vueText.BoundaryRechercheSonExtraitSonore;
 
 public class TesteRechercheExtraitSonore {
 
 	public static void main(String[] args) throws IOException {
 
 		ControleurRechercheSonExtraitSonore controlrses = new ControleurRechercheSonExtraitSonore();
-		BoundaryRechercheSonExtraitSonore brses = new BoundaryRechercheSonExtraitSonore();
-		controlrses.ajouterDescripteurListe("Descripteur1.txt");
-		controlrses.ajouterDescripteurListe("Descripteur2.txt");
-		controlrses.ajouterDescripteurListe("Descripteur3.txt");
-		controlrses.ajouterDescripteurListe("Descripteur4.txt");
-		brses.crses=controlrses;
-		brses.crses.afficherListe();
+		BoundaryRechercheSonExtraitSonore brses = new BoundaryRechercheSonExtraitSonore(controlrses);
+
+		ControleurGenerationDescripteurSon cgds = new ControleurGenerationDescripteurSon();
+		ArrayList<DescripteurSon> liste =cgds.creationDescripteurSon("C:\\Users\\alegu\\git\\loloed\\Data\\base_descripteur_son.txt");
+		controlrses.ajouterDescripteurListe(liste);
 		brses.rechercheSon();
+//"C:\\Users\\alegu\\git\\loloed\\Data\\des.txt
 	}
 }
