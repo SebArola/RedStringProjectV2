@@ -4,30 +4,24 @@ package controleur;
 //import java.io.FileWriter;
 import java.io.IOException;
 
-import model.ModifierSeuilComparaison;
 import model.TypeFichier;
+import model.fichierConfig;
 
 public class ControleurModifierSeuilComparaison { // je fais un test
-	private ModifierSeuilComparaison modifiSeuilComparaison = new ModifierSeuilComparaison();
-
-	public boolean modificationSeuil(TypeFichier nomFichier, int seuil) throws IOException {
-		boolean modifOk;
-		switch (nomFichier) {
+	
+	public void modificationSeuil(TypeFichier typeFichier, int seuil) throws IOException {
+		switch (typeFichier) {
 		case TEXTE:
-			modifOk = modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
+			fichierConfig.getInstance().setSeuilComparaisonTexte(seuil);
 			break;
 
 		case SON:
-			modifOk = modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
+			fichierConfig.getInstance().setSeuilComparaisonSon(seuil);
 			break;
 		case IMAGE:
-			modifOk = modifiSeuilComparaison.modifierSeuilComparaison(nomFichier, seuil);
+			fichierConfig.getInstance().setSeuilComparaisonImage(seuil);			
 			break;
-		default:
-			System.out.println("Erreur ecriture fichier");
-			return (false);
-
+			
 		}
-		return modifOk;
 	}
 }

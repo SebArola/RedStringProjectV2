@@ -17,6 +17,7 @@ public class fichierConfig {
 	private String cheminBD;
 	private int seuilComparaisonImage;
 	private int seuilComparaisonTexte;
+	private int seuilComparaisonSon;
 
 	/**
 	 * Dans le constructeur les attributs seront initialisé en fonction du
@@ -26,6 +27,7 @@ public class fichierConfig {
 		//this.seuilComparaisonFichier = 80;
 		this.seuilComparaisonImage = 40;
 		this.seuilComparaisonTexte = 20;
+		this.seuilComparaisonSon = 20;
 		this.nbQuantif = 3;
 		this.nbMots = 5;
 	}
@@ -37,14 +39,11 @@ public class fichierConfig {
 		return instance;
 	}
 
-	/*public int getSeuilComparaisonFichier() {
-		return seuilComparaisonFichier;
-	}
-
-	public void setSeuilComparaisonFichier(int seuilComparaisonFichier) {
-		this.seuilComparaisonFichier = seuilComparaisonFichier;
-	}*/ //TODO enlever seuilComapraisonFichier
 	
+
+	public void setSeuilComparaisonSon(int seuil){
+		this.seuilComparaisonSon = seuil;
+	}
 	public String getCheminBD(){
 		return this.cheminBD;
 	}
