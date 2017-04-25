@@ -13,7 +13,7 @@ public class ControlleurRechercheImage {
 	}
 	
 	public String rechercheImage(Couleur c){
-		HashMap<String, Integer> resultat = new HashMap();
+		HashMap<String, Integer> resultat = new HashMap<String, Integer>();
 		String stringResultat = "";
 		for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
 			switch (c){
