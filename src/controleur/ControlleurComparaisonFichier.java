@@ -134,19 +134,14 @@ public class ControlleurComparaisonFichier {
 		String texteDonne = desDonne.gettexte();
 		String[] decoupeCompare = texteCompare.split(" ");
 		String[] decoupeDonne = texteDonne.split(" ");
-		System.out.println("Texte compare : "+texteCompare);
-		System.out.println("Texte donnee : "+texteDonne);
+		
 		int nbCompare = (" " + texteCompare + " ").split(" ").length - 1;
 		int nbDonne = (" " + texteDonne + " ").split(" ").length - 1;
 		int pourcentage = 0;
-		fichierConfig f = fichierConfig.getInstance();
-		int nbMots = f.getNbMots();
-		for (int i = nbDonne - nbMots - 1; i < nbDonne; i++) {
-			for (int j = nbCompare - nbMots - 1; j < nbCompare - 1; j++) {
+		for (int i = 0; i < nbDonne; i++) {
+			for (int j = 0; j < nbCompare - 1; j++) {
 				if (decoupeDonne[i].equals(decoupeCompare[j])) {
-					pourcentage = pourcentage + (int) 100 / nbMots;
-					System.out.println("Pourcentage actu =" + pourcentage);
-					System.out.println("If =" + decoupeDonne[i] + "=ET=" + decoupeCompare[j] + "=");
+					pourcentage += 100/nbDonne;
 				}
 			}
 		}
