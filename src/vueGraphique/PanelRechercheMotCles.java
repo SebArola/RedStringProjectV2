@@ -58,7 +58,7 @@ public class PanelRechercheMotCles extends JPanel {
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
 
 		this.jtxtf_barRecherche = new JTextField("Entrez les mot cles");
-		this.panelBar.add(new JLabel(" "));
+		this.panelBar.add(new JLabel("Recherche par mot clés"));
 		this.panelBar.add(this.jtxtf_barRecherche);
 
 		this.jcb_typeFic = new JComboBox<String>();

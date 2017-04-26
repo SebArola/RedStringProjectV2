@@ -1,6 +1,5 @@
 package vueGraphique;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -52,7 +51,7 @@ public class PanelComparaisonFichier extends JPanel {
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
 
 		this.jtxtf_barRecherche = new JTextField("Entrez le nom du fichier");
-		this.panelBar.add(new JLabel(" "));
+		this.panelBar.add(new JLabel("Comparaison de fichier"));
 		this.panelBar.add(this.jtxtf_barRecherche);
 
 		this.jcb_typeFic = new JComboBox<String>();
@@ -68,12 +67,18 @@ public class PanelComparaisonFichier extends JPanel {
 		this.panelTypeFic.add(new JLabel(" "));
 		this.panelTypeFic.add(new JLabel(" "));
 
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("Icon/logo_haut.png")));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("Icon/logo_bas.png")));
+		this.add(new JLabel(new ImageIcon("")));
+//		this.add(new JButton());
+//		this.add(new JButton());
+//		this.add(new JButton());
+//		this.add(new JButton());
+//		this.add(new JButton());
+//		this.add(new JButton());
 
 		JPanel jp_bouttonConfirm = new JPanel(new GridLayout(2, 5));
 		jp_bouttonConfirm.add(new JLabel(" "));
