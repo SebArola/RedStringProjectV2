@@ -74,12 +74,12 @@ public class PanelRechercheMotCles extends JPanel {
 		this.panelTypeFic.add(new JLabel(" "));
 		this.panelTypeFic.add(new JLabel(" "));
 
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
-		this.add(new JLabel(" "));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("Icon/logo_haut.png")));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("")));
+		this.add(new JLabel(new ImageIcon("Icon/logo_bas.png")));
+		this.add(new JLabel(new ImageIcon("")));
 
 		JPanel jp_bouttonConfirm = new JPanel(new GridLayout(2, 5));
 		jp_bouttonConfirm.add(new JLabel(" "));
