@@ -20,7 +20,7 @@ public class FrameHistorique extends JFrame implements Observer {
 		this.ctrl_historique = new ControleurHistorique();
 		this.historique = new String[10][3];
 		this.nbElement = 0;
-		this.jt_tableau = new JTable(historique, new String[] {"Recherche","Type fichier", "Nombre de résultat"});
+		this.jt_tableau = new JTable(historique, new String[] {"Recherche","Type fichier", "Nb résultat"});
 		this.getContentPane().add(this.jt_tableau.getTableHeader(), BorderLayout.NORTH);
 		this.getContentPane().add(this.jt_tableau, BorderLayout.CENTER);
  
