@@ -12,7 +12,7 @@ public class ControlleurRechercheImage {
 		
 	}
 	
-	public String rechercheImage(Couleur c){
+	public HashMap<String, Integer> rechercheImage(Couleur c){
 		HashMap<String, Integer> resultat = new HashMap<String, Integer>();
 		String stringResultat = "";
 		for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
@@ -31,26 +31,7 @@ public class ControlleurRechercheImage {
 				break;
 			}
 		}
-		if(resultat.isEmpty()){
-			stringResultat = "Aucune correspondance.";
-		}
-		else{
-			for(String chemin : resultat.keySet()){
-				stringResultat = stringResultat + chemin + " : ";
-				switch (c){
-				case ROUGE:
-					stringResultat = stringResultat + "Le rouge domine à " + resultat.get(chemin) + "%\n";
-					break;
-				case VERT:
-					stringResultat = stringResultat + "Le vert domine à " + resultat.get(chemin) + "%\n";
-					break;
-				case BLEU:
-					stringResultat = stringResultat + "Le bleu domine à " + resultat.get(chemin) + "%\n";
-					break;
-				}
-			}
-		}
-		return stringResultat;	
+		return resultat;	
 	}
 		
 	

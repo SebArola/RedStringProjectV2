@@ -25,7 +25,7 @@ public class TestComplet {
 
 		fichierConfig.getInstance().loadFichierConfig();
 		BDDescripteurImage.getInstance().genBaseDescripteurImage();
-		
+			
 		Fenetre fen = new Fenetre();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		fen.setLocation(dim.width / 2 - fen.getWidth() / 2, dim.height / 2 - fen.getHeight() / 2);

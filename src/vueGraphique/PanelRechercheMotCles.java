@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import controleur.ControlleurComparaisonFichier;
 import controleur.ControlleurRechercheImage;
 import controleur.ControlleurRechercheParMotsCles;
+import model.Couleur;
 import model.TypeFichier;
 
 @SuppressWarnings("serial")
@@ -260,7 +261,11 @@ public class PanelRechercheMotCles extends JPanel {
 			break;
 		case "Image":
 			try {
-				this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.IMAGE);
+				switch(motcles){
+				case "Bleu":
+					this.resultat = this.ctrl_rechercheMotClesIm.rechercheImage(Couleur.BLEU);
+				}
+				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
