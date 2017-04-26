@@ -30,20 +30,20 @@ public class TestComplet {
 		controleuCreerProfil.creerProfilAdmin("admin", "admin", "0");
 		
 		ControlleurRechercheParMotsCles controlrpmc = ControlleurRechercheParMotsCles.getInstance();
-		ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
-		ArrayList<DescripteurTexte> liste;
-		try {
-			liste = cgdt.creationDescripteurTexte("Data/base_descripteur_texte.txt");
-			controlrpmc.ajouterDescripteurListe(liste);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ControleurGenerationDescripteurTexte cgdt = ControleurGenerationDescripteurTexte.getInstance();
+		
 		
 		
 
 		fichierConfig.getInstance().loadFichierConfig();
 		BDDescripteurImage.getInstance().genBaseDescripteurImage();
+		try {
+			cgdt.creationDescripteurTexte();
+			controlrpmc.ajouterDescripteurListe(cgdt.getListeDescripteurTexte());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Fenetre fen = new Fenetre();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

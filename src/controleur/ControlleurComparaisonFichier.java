@@ -21,6 +21,8 @@ import model.fichierConfig;
  */
 
 public class ControlleurComparaisonFichier {
+	
+	
 	/**
 	 * Méthode principal calculant le pourcentage de similaritée entre le
 	 * fichier donne et les fichiers de la base du même type.
@@ -39,17 +41,12 @@ public class ControlleurComparaisonFichier {
 		switch (type) {
 		case TEXTE:
 			chemin = fichierConfig.getInstance().getCheminBD() + "/Data/Textes/" + nom;
-			ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
-			System.out.println(chemin);
-			DescripteurTexte desc = cgdt.creationDescripteurTexte(chemin);
-			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte(
-					fichierConfig.getInstance().getCheminBD() + "/Data/base_descripteur_texte.txt");
+			ControleurGenerationDescripteurTexte cgdt = ControleurGenerationDescripteurTexte.getInstance();
+			DescripteurTexte desc = cgdt.getADescripteurTexte(nom);
+			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.getListeDescripteurTexte();
 			if(desc != null){
-				DescripteurTexte descTextDonne = desc;
-				for (int i = 0; i < listeBaseDeDonnee.size(); i++) {
-					DescripteurTexte desCompare = listeBaseDeDonnee.get(i);
-					pourcentage = compareFichierTexte(descTextDonne, desCompare);
-
+				for (DescripteurTexte desCompare : listeBaseDeDonnee) {
+					pourcentage = compareFichierTexte(desc, desCompare);
 					if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()) {
 						resultat.put(desCompare.getnom(), pourcentage);
 					}
@@ -137,6 +134,8 @@ public class ControlleurComparaisonFichier {
 		String texteDonne = desDonne.gettexte();
 		String[] decoupeCompare = texteCompare.split(" ");
 		String[] decoupeDonne = texteDonne.split(" ");
+		System.out.println("Texte compare : "+texteCompare);
+		System.out.println("Texte donnee : "+texteDonne);
 		int nbCompare = (" " + texteCompare + " ").split(" ").length - 1;
 		int nbDonne = (" " + texteDonne + " ").split(" ").length - 1;
 		int pourcentage = 0;
