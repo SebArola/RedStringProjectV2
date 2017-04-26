@@ -16,8 +16,9 @@ public class Descripteur extends Observable{
 	BufferedReader lectureTexte;
 
 	
-	public void getDescripteurGenere(TypeFichier typeFichier,int nbMots ){
+	public synchronized String getDescripteurGenere(TypeFichier typeFichier,int nbMots ){
 		String descripteurParcours=""; //permet denregistrer ligne a ligne le fichier
+		String descripteurFichier=" ";
 		//int nbMot;
 		try{
 
@@ -25,23 +26,34 @@ public class Descripteur extends Observable{
 			lectureSon=new BufferedReader(new FileReader("./Data/base_descripteur_son.txt"));
 			lectureTexte=new BufferedReader(new FileReader("./Data/base_descripteur_texte.txt"));
 			
-			String descripteurFichier=" ";
+			//try {
+				//Thread.sleep(2000);
+				//} catch (Exception e) {
+				// TODO: handle exception
+				//}
+			//String descripteurFichier=" ";
 			switch (typeFichier) {
 			case IMAGE:
+				
 				do {
+					
 					super.setChanged();
 						//permet d'enregistrer le fichier descripteur
-					String labels[]={"",""}; //le label contient le numéro correspondant au typeFichier, et la base
+					 //le label contient le numéro correspondant au typeFichier, et la base
 					//labels[]={"",""};new String[2]
+					String labels[]={"",""};
 					descripteurParcours=lectureImage.readLine();
-					descripteurFichier+=descripteurParcours+"\n";
+					if(descripteurParcours!=null)
+						descripteurFichier+=descripteurParcours+"\n";
 					
 					//System.out.println(descripteurFichier); 	//TODO test descripteurs
 					
 					labels[0]="1";
 					labels[1]=descripteurFichier;
-					if(descripteurParcours!=null)
+					
 						super.notifyObservers(labels); //descripteur ici est un toString, qui contiet tout mon descripteur
+						//System.out.println(labels[1]);
+					//}
 				} while (descripteurParcours!=null);
 				break;
 			case TEXTE:
@@ -51,36 +63,39 @@ public class Descripteur extends Observable{
 					//String descripteurFichier=" ";	//permet d'enregistrer le fichier descripteur
 					String labels[]=new String[2]; //le label contient le numéro correspondant au typeFichier, et la base
 					descripteurParcours=lectureTexte.readLine();
-					descripteurFichier+=descripteurParcours+"\n";
+					if(descripteurParcours!=null)
+						descripteurFichier+=descripteurParcours+"\n";
 					
 					labels[0]="2";
 					labels[1]=descripteurFichier;
-					if(descripteurParcours!=null)
+					if(descripteurParcours!=null){
 						super.notifyObservers(labels);
+					}
 				} while (descripteurParcours!=null);
 				break;
 			case SON:
 				do {
 					super.setChanged();
 					//String descripteurFichier=" ";	//permet d'enregistrer le fichier descripteur
-					String labels[]=new String[2]; //le label contient le numéro correspondant au typeFichier, et la base
+					String labels2[]=new String[2]; //le label contient le numéro correspondant au typeFichier, et la base
 					descripteurParcours+=lectureSon.readLine();
 					descripteurFichier+=descripteurParcours+"\n";
 					
-					labels[0]="3";
-					labels[1]=descripteurFichier;
+					labels2[0]="3";
+					labels2[1]=descripteurFichier;
 					if(descripteurParcours!=null)		//pour eviter d'afficher le null, marquant la fin du fichier
-						super.notifyObservers(labels);
+						super.notifyObservers(labels2);
 				} while (descripteurParcours!=null);
 				break;
 			default:
 				break;
-			}
+			}			
 		}
 		catch(IOException e)
 		{
 			
 		}
-		
-	}
+		return descripteurFichier;
+	}	
+
 }
