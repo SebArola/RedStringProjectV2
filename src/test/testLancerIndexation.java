@@ -3,12 +3,12 @@ package test;
 import java.io.IOException;
 import java.util.Scanner;
 
-import controlleur.ControleurConnexionAdmin;
-import controlleur.ControleurCreerProfil;
-import controlleur.ControleurIndexation;
-import controlleur.ControleurRechercheSonExtraitSonore;
-import controlleur.ControleurVerifIdentification;
-import controlleur.ControlleurRechercheParMotsCles;
+import controleur.ControleurConnexionAdmin;
+import controleur.ControleurCreerProfil;
+import controleur.ControleurIndexation;
+import controleur.ControleurRechercheSonExtraitSonore;
+import controleur.ControleurVerifIdentification;
+import controleur.ControlleurRechercheParMotsCles;
 import model.fichierConfig;
 import vueText.BoundaryConnexionAdmin;
 import vueText.BoundaryLancerIndexation;
@@ -35,11 +35,11 @@ public class testLancerIndexation {
 			ControleurRechercheSonExtraitSonore controlrses = new ControleurRechercheSonExtraitSonore();
 			ControlleurRechercheParMotsCles controlrpmc = new ControlleurRechercheParMotsCles();
 			
-			BoundaryRechercheParMotsCles brpmc = new BoundaryRechercheParMotsCles(controlrpmc);
+			//BoundaryRechercheParMotsCles brpmc = new BoundaryRechercheParMotsCles(controlrpmc);
 			BoundaryConnexionAdmin vueConnexionAdmin=new BoundaryConnexionAdmin(controleurConnexionAdmin);
 			BoundaryLancerIndexation vueLancerIndexation=new BoundaryLancerIndexation(ctrlIndexation, controlVerifId);
 			BoundaryModifierSeuilComparaison bmsc = new BoundaryModifierSeuilComparaison();//vue seuil comparaison
-			BoundaryRechercheSonExtraitSonore brses = new BoundaryRechercheSonExtraitSonore(controlrses);
+			//BoundaryRechercheSonExtraitSonore brses = new BoundaryRechercheSonExtraitSonore(controlrses);
 			
 			VueChangerParametresIndexation vueChangerParametresIndexation = new VueChangerParametresIndexation(); //
 			VueChangerCheminBD vueChangerCheminBD=new VueChangerCheminBD();
@@ -115,12 +115,12 @@ public class testLancerIndexation {
 					choixRecherche=readScanner.nextInt();
 					if(choixRecherche==1){
 						/*===Recherche par mots cles===*/
-						controlrpmc.ajouterDescripteurListe("./Data/Texte1.txt");
-						controlrpmc.ajouterDescripteurListe("./Data/Texte2.txt");
-						controlrpmc.ajouterDescripteurListe("./Data/Texte3.txt");
-						controlrpmc.ajouterDescripteurListe("./Data/Texte4.txt");
+						//controlrpmc.ajouterDescripteurListe("./Data/Texte1.txt");
+						//controlrpmc.ajouterDescripteurListe("./Data/Texte2.txt");
+						//controlrpmc.ajouterDescripteurListe("./Data/Texte3.txt");
+						//controlrpmc.ajouterDescripteurListe("./Data/Texte4.txt");
 						
-						brpmc.rechercheParMotsCles();
+						//brpmc.rechercheParMotsCles();
 					}	
 					else if(choixRecherche==2){
 						/*===Rechercher Image===*/
@@ -128,13 +128,13 @@ public class testLancerIndexation {
 					}
 					else if(choixRecherche==3){
 						/*======Recherche son====*/
-						controlrses.ajouterDescripteurListe("./Data/Descripteur1.txt");
-						controlrses.ajouterDescripteurListe("./Data/Descripteur2.txt");
-						controlrses.ajouterDescripteurListe("./Data/Descripteur3.txt");
-						controlrses.ajouterDescripteurListe("./Data/Descripteur4.txt");
+						//controlrses.ajouterDescripteurListe("./Data/Descripteur1.txt");
+						//controlrses.ajouterDescripteurListe("./Data/Descripteur2.txt");
+						//controlrses.ajouterDescripteurListe("./Data/Descripteur3.txt");
+						//controlrses.ajouterDescripteurListe("./Data/Descripteur4.txt");
 						
 						controlrses.afficherListe();
-						brses.rechercheSon();
+						//brses.rechercheSon();
 					}					
 				System.out.println("Voulez-vous continuer la recherche?(1, si oui)");
 				continueSearch=readScanner.nextInt();				
