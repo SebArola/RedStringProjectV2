@@ -434,8 +434,6 @@ public class PanelRechercheMotCles extends JPanel {
 									g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
 								}
 							}
-							System.out.println(
-									fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/" + thisJB.getText());
 							image.add(new panelImage(fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/"
 									+ thisJB.getText().substring(0, thisJB.getText().lastIndexOf(" "))));
 							image.setSize(300, 200);
