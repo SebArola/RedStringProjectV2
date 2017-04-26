@@ -28,78 +28,77 @@ public class ControlleurComparaisonFichier {
 	 * @param chemin
 	 * @param type
 	 * @return resultat
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public HashMap<String, Integer> comparaisonFichier(String nom, TypeFichier type) throws IOException {
-		//Fichier fic = new Fichier(chemin, type, ControlleurFichier.getInstance().genDescripteur(chemin, type));
+		// Fichier fic = new Fichier(chemin, type,
+		// ControlleurFichier.getInstance().genDescripteur(chemin, type));
 		int pourcentage = 0;
 		HashMap<String, Integer> resultat = new HashMap<String, Integer>();// <pourcentage,
-		String chemin = "";													// chemin>
+		String chemin = ""; // chemin>
 		switch (type) {
 		case TEXTE:
-			chemin = fichierConfig.getInstance().getCheminBD()+"/Textes/"+nom;
+			chemin = fichierConfig.getInstance().getCheminBD() + "/Textes/" + nom;
 			ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
 			ArrayList<DescripteurTexte> listeDonne = cgdt.creationDescripteurTexte(chemin);
-			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte("C:\\Users\\alegu\\git\\RedStringProjectV2\\Data\\base_descripteur_texte.txt"); // todo a changer crée class BDDescripteur texte
+			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte(
+					fichierConfig.getInstance().getCheminBD() + "/Data/base_descripteur_texte.txt");
+			// TODO a changer crée class BDDescripteur texte
 			DescripteurTexte descTextDonne = listeDonne.get(0);
-			for (int i=0 ; i < listeBaseDeDonnee.size(); i++)
-			{
+			for (int i = 0; i < listeBaseDeDonnee.size(); i++) {
 				DescripteurTexte desCompare = listeBaseDeDonnee.get(i);
 				pourcentage = compareFichierTexte(descTextDonne, desCompare);
-				
-				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()){
+
+				if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()) {
 					resultat.put(desCompare.getnom(), pourcentage);
 				}
 			}
-				
+
 			break;
 		case IMAGE:
-			if(nom.contains(".jpg")){
-				chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_RGB/"+nom;
-			}else if(nom.contains(".bmp")){
-				chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_NB/"+nom;
-			}
-			DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
-			for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
-				if(!chemin.equals(d.getChemin())){
-					pourcentage = compareFichierImage(descDonne, d);
+			if (nom.contains(".jpg") || nom.contains(".bmp")) {
+				if (nom.contains(".jpg")) {
+					chemin = fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/" + nom;
+				} else if (nom.contains(".bmp")) {
+					chemin = fichierConfig.getInstance().getCheminBD() + "/Data/IMG_NG/" + nom;
 				}
-				if(pourcentage >= fichierConfig.getInstance().getSeuilComparaisonImage()){
-					resultat.put(d.getChemin(), pourcentage);
+				DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
+				for (DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()) {
+					if (!chemin.equals(d.getChemin())) {
+						pourcentage = compareFichierImage(descDonne, d);
+					}
+					if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonImage()) {
+						resultat.put(d.getChemin(), pourcentage);
+					}
 				}
 			}
 			break;
 		case SON:
-			int cpt=0;
-				int nb_random = (int)(Math.random()*3)+1;
-				if(nb_random == 1){
-					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
-				}
-				else if(nb_random == 2){
-					resultat.put("jingle_fi.wav", (int)(Math.random()*100));
-					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
-				}
-				else if(nb_random == 3){
-					resultat.put("corpus_fi.wav", (int)(Math.random()*100));
-					resultat.put("corpus_m6.wav", (int)(Math.random()*100));
-					resultat.put("jingle_fi.wav", (int)(Math.random()*100));
-				}
+			int cpt = 0;
+			int nb_random = (int) (Math.random() * 3) + 1;
+			if (nb_random == 1) {
+				resultat.put("corpus_m6.wav", (int) (Math.random() * 100));
+			} else if (nb_random == 2) {
+				resultat.put("jingle_fi.wav", (int) (Math.random() * 100));
+				resultat.put("corpus_m6.wav", (int) (Math.random() * 100));
+			} else if (nb_random == 3) {
+				resultat.put("corpus_fi.wav", (int) (Math.random() * 100));
+				resultat.put("corpus_m6.wav", (int) (Math.random() * 100));
+				resultat.put("jingle_fi.wav", (int) (Math.random() * 100));
+			}
 			break;
 		}
-			/*if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonFichier()) {
-			resultat.put(f.getChemin(), pourcentage);
-		}*/ //TODO enlever ça
-			return resultat;
-		}
-
-	
+		return resultat;
+	}
 
 	/**
 	 * Méthodes permettant de comparer deux fixhier image entre eux Pour
 	 * l'instant ces méthodes retourne des résultats prédéfini
 	 * 
-	 * @param descripteur image n°1
-	 * @param descripteur image n°2
+	 * @param descripteur
+	 *            image n°1
+	 * @param descripteur
+	 *            image n°2
 	 * @return pourcentage
 	 */
 	private int compareFichierImage(DescripteurImage desc1, DescripteurImage desc2) {
@@ -116,7 +115,7 @@ public class ControlleurComparaisonFichier {
 		} else {
 			return -1;
 		}
-		pourcentage =  (100 -((diff*50) / total));
+		pourcentage = (100 - ((diff * 50) / total));
 		if (pourcentage > 0) {
 			return (int) pourcentage;
 		} else {
@@ -138,25 +137,22 @@ public class ControlleurComparaisonFichier {
 		String[] decoupeCompare = texteCompare.split(" ");
 		String[] decoupeDonne = texteDonne.split(" ");
 		int nbCompare = (" " + texteCompare + " ").split(" ").length - 1;
-		int nbDonne  = (" " + texteDonne + " ").split(" ").length - 1;
+		int nbDonne = (" " + texteDonne + " ").split(" ").length - 1;
 		int pourcentage = 0;
 		fichierConfig f = fichierConfig.getInstance();
 		int nbMots = f.getNbMots();
-		for ( int i=nbDonne-nbMots-1; i< nbDonne ;i++)
-		{
-			for ( int j=nbCompare-nbMots-1 ; j<nbCompare-1;j++)
-			{
-				if(decoupeDonne[i].equals(decoupeCompare[j]))
-				{
-					pourcentage = pourcentage+(int)100/nbMots;
-					System.out.println("Pourcentage actu ="+pourcentage);
-					System.out.println("If ="+decoupeDonne[i]+"=ET="+decoupeCompare[j]+"=");
+		for (int i = nbDonne - nbMots - 1; i < nbDonne; i++) {
+			for (int j = nbCompare - nbMots - 1; j < nbCompare - 1; j++) {
+				if (decoupeDonne[i].equals(decoupeCompare[j])) {
+					pourcentage = pourcentage + (int) 100 / nbMots;
+					System.out.println("Pourcentage actu =" + pourcentage);
+					System.out.println("If =" + decoupeDonne[i] + "=ET=" + decoupeCompare[j] + "=");
 				}
 			}
 		}
-		if(pourcentage >100)
-			pourcentage =100;
-		return(pourcentage);
+		if (pourcentage > 100)
+			pourcentage = 100;
+		return (pourcentage);
 	}
 
 }
