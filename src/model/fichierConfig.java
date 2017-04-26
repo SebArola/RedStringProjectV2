@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import controleur.ControlleurRechercheImage;
+
 /**
  * Dans cette classe sont réunis tous les attributs midifiable dans le fichier
  * de configuration. Fichier config etant un singleton ils sont accessible
@@ -53,6 +55,7 @@ public class fichierConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		BDDescripteurImage.getInstance().genBaseDescripteurImage();
 		return true;
 	}
 
