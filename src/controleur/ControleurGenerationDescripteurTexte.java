@@ -11,8 +11,8 @@ import model.DescripteurTexte;
 
 public class ControleurGenerationDescripteurTexte {
 
-	// Va lire dans le fichier indiqué par le chemin, puis sépare les
-	// descripteur et crée
+	// Va lire dans le fichier indiquï¿½ par le chemin, puis sï¿½pare les
+	// descripteur et crï¿½e
 	// pour chaque descripteur un objet descripteurTexte qui met ensuite dans
 	// une arraylist qu'il renvoie
 
@@ -21,14 +21,14 @@ public class ControleurGenerationDescripteurTexte {
 		String lecture = "";
 
 		try {
-			InputStream ips = new FileInputStream(chemin);
-			InputStreamReader ipsr = new InputStreamReader(ips);
-			BufferedReader br = new BufferedReader(ipsr);
-			String ligne;
-			while ((ligne = br.readLine()) != null) {
-				lecture += ligne + "\n";
+			FileInputStream fis = new FileInputStream(chemin);
+			byte[] buf =  new byte[1];
+		    int n = 0;
+		    while ((n = fis.read(buf)) >= 0) {
+		    	for (byte bit : buf) {
+		            lecture += (char) bit ;
+		        }
 			}
-			br.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

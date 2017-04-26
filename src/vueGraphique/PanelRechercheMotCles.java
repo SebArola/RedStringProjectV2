@@ -264,7 +264,6 @@ public class PanelRechercheMotCles extends JPanel {
 		switch (type) {
 		case "Texte":
 			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
-			System.out.println(this.resultat.keySet().size());
 			break;
 		case "Image":
 			Couleur c = null;

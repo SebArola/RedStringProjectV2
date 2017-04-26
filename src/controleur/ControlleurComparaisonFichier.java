@@ -38,22 +38,23 @@ public class ControlleurComparaisonFichier {
 		String chemin = ""; // chemin>
 		switch (type) {
 		case TEXTE:
-			chemin = fichierConfig.getInstance().getCheminBD() + "/Textes/" + nom;
+			chemin = fichierConfig.getInstance().getCheminBD() + "/Data/Textes/" + nom;
 			ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
-			ArrayList<DescripteurTexte> listeDonne = cgdt.creationDescripteurTexte(chemin);
+			System.out.println(chemin);
+			DescripteurTexte desc = cgdt.creationDescripteurTexte(chemin);
 			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.creationDescripteurTexte(
 					fichierConfig.getInstance().getCheminBD() + "/Data/base_descripteur_texte.txt");
-			// TODO a changer crée class BDDescripteur texte
-			DescripteurTexte descTextDonne = listeDonne.get(0);
-			for (int i = 0; i < listeBaseDeDonnee.size(); i++) {
-				DescripteurTexte desCompare = listeBaseDeDonnee.get(i);
-				pourcentage = compareFichierTexte(descTextDonne, desCompare);
+			if(desc != null){
+				DescripteurTexte descTextDonne = desc;
+				for (int i = 0; i < listeBaseDeDonnee.size(); i++) {
+					DescripteurTexte desCompare = listeBaseDeDonnee.get(i);
+					pourcentage = compareFichierTexte(descTextDonne, desCompare);
 
-				if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()) {
-					resultat.put(desCompare.getnom(), pourcentage);
+					if (pourcentage >= fichierConfig.getInstance().getSeuilComparaisonTexte()) {
+						resultat.put(desCompare.getnom(), pourcentage);
+					}
 				}
 			}
-
 			break;
 		case IMAGE:
 			if (nom.contains(".jpg") || nom.contains(".bmp")) {

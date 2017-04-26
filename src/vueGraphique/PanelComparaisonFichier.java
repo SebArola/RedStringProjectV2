@@ -76,12 +76,6 @@ public class PanelComparaisonFichier extends JPanel {
 		this.add(new JLabel(new ImageIcon("")));
 		this.add(new JLabel(new ImageIcon("Icon/logo_bas.png")));
 		this.add(new JLabel(new ImageIcon("")));
-//		this.add(new JButton());
-//		this.add(new JButton());
-//		this.add(new JButton());
-//		this.add(new JButton());
-//		this.add(new JButton());
-//		this.add(new JButton());
 
 		JPanel jp_bouttonConfirm = new JPanel(new GridLayout(2, 5));
 		jp_bouttonConfirm.add(new JLabel(" "));
