@@ -6,10 +6,24 @@ import java.util.HashMap;
 import model.DescripteurTexte;
 
 public class ControlleurRechercheParMotsCles {
-	public ArrayList<String> listeMotsPlus = new ArrayList<String>();
-	public ArrayList<String> listeMotsMoins = new ArrayList<String>();
-	public ArrayList<DescripteurTexte> listeDescripteurTexte = new ArrayList<DescripteurTexte>();
+	private ArrayList<String> listeMotsPlus;
+	private ArrayList<String> listeMotsMoins ;
+	private ArrayList<DescripteurTexte> listeDescripteurTexte;
+	private static ControlleurRechercheParMotsCles instance;
 
+	private  ControlleurRechercheParMotsCles(){
+		this.listeMotsPlus = new ArrayList<String>();
+		this.listeMotsMoins = new ArrayList<String>();
+		this.listeDescripteurTexte = new ArrayList<DescripteurTexte>();
+	}
+	
+	public static ControlleurRechercheParMotsCles getInstance(){
+		if(instance == null){
+			instance = new ControlleurRechercheParMotsCles();
+		}
+		return instance;
+	}
+	
 	public boolean verifierMotsCles(String lecture) {
 		// todo petit probleme je sais pas comment
 		return (true);
@@ -70,10 +84,8 @@ public class ControlleurRechercheParMotsCles {
 		}
 		for (int i = 0; i < listeTexte.size(); i++){
 			map.put(listeTexte.get(i),i+1 );
-			System.out.println(listeTexte.get(i));
-			System.out.println(map.get(listeTexte.get(i)));
+			
 		}
-		System.out.println("HEY");
 		return map;
 	}
 

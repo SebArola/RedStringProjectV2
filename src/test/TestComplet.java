@@ -28,7 +28,7 @@ public class TestComplet {
 		controleuCreerProfil.creerProfilAdmin("Lemaire", "Tara", "tar");
 		controleuCreerProfil.creerProfilAdmin("admin", "admin", "0");
 		
-		ControlleurRechercheParMotsCles controlrpmc = new ControlleurRechercheParMotsCles();
+		ControlleurRechercheParMotsCles controlrpmc = ControlleurRechercheParMotsCles.getInstance();
 		ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
 		ArrayList<DescripteurTexte> liste;
 		try {

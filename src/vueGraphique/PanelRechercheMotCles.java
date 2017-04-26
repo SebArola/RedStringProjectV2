@@ -49,7 +49,7 @@ public class PanelRechercheMotCles extends JPanel {
 	public PanelRechercheMotCles() {
 		super();
 		this.ctrl_comparraison = new ControlleurComparaisonFichier();
-		this.ctrl_rechercheMotClesTXT = new ControlleurRechercheParMotsCles();
+		this.ctrl_rechercheMotClesTXT = ControlleurRechercheParMotsCles.getInstance();
 		this.ctrl_rechercheMotClesIm = new ControlleurRechercheImage();
 		this.setLayout(new GridLayout(6, 3));
 		this.panelBar = new JPanel(new GridLayout(2, 1));
@@ -296,7 +296,7 @@ public class PanelRechercheMotCles extends JPanel {
 		if (resultat != null) {
 			tabMotCles = resultat.keySet().toArray();
 			tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
-			
+
 			if (tabMotCles.length > 0)
 
 			{
@@ -306,7 +306,8 @@ public class PanelRechercheMotCles extends JPanel {
 					Runtime runtime = Runtime.getRuntime();
 					try {
 
-						runtime.exec(new String[] { "gedit", (String) tabMotCles[0] });
+						runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD() + "/Data/Textes/"
+								+ (String) tabMotCles[0] + ".xml" });
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -340,9 +341,10 @@ public class PanelRechercheMotCles extends JPanel {
 							k = 0;
 							this.panelResultat[j].removeAll();
 						}
-						String nom = (String) tabMotCles[i];
-						nom = nom.substring(nom.lastIndexOf("\\"));
-						jb_resultat[i] = new JButton(nom + " " + resultat.get((String) tabMotCles[i]) + "%");
+						// String nom = (String) tabMotCles[i];
+						// nom = nom.substring(nom.lastIndexOf("/"));
+						jb_resultat[i] = new JButton(
+								(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
 						jb_resultat[i].addActionListener(new ActionListener() {
 
 							@Override
@@ -350,7 +352,9 @@ public class PanelRechercheMotCles extends JPanel {
 								Runtime runtime = Runtime.getRuntime();
 								try {
 									JButton thisJB = (JButton) e.getSource();
-									runtime.exec(new String[] { "gedit", thisJB.getText() });
+									String chemin = thisJB.getText().substring(0,thisJB.getText().lastIndexOf(" "));
+									runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD()
+											+ "/Data/Textes/" + chemin+ ".xml" });
 								} catch (IOException exception) {
 									exception.printStackTrace();
 								}
@@ -504,8 +508,9 @@ public class PanelRechercheMotCles extends JPanel {
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
 				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Aucun résultat");
 			}
-			JOptionPane.showMessageDialog(this, "Aucun résultat");
 			resultat = null;
 		}
 

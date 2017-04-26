@@ -10,7 +10,7 @@ import vueText.BoundaryRechercheParMotsCles;
 
 public class TestRechercheParMotsCles {
 	public static void main(String[] args) throws IOException {
-		ControlleurRechercheParMotsCles controlrpmc = new ControlleurRechercheParMotsCles();
+		ControlleurRechercheParMotsCles controlrpmc = ControlleurRechercheParMotsCles.getInstance();
 		BoundaryRechercheParMotsCles brpmc = new BoundaryRechercheParMotsCles(controlrpmc);
 
 		ControleurGenerationDescripteurTexte cgdt = new ControleurGenerationDescripteurTexte();
