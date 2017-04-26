@@ -261,6 +261,7 @@ public class PanelRechercheMotCles extends JPanel {
 		switch (type) {
 		case "Texte":
 			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
+			System.out.println(this.resultat.keySet().size());
 			break;
 		case "Image":
 			Couleur c = null;
@@ -293,20 +294,13 @@ public class PanelRechercheMotCles extends JPanel {
 			break;
 		}
 		if (resultat != null) {
-
 			tabMotCles = resultat.keySet().toArray();
 			tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
-			// for (Object motcles : tabPourcentage) {
-			// System.out.println("Resultat n°" + i + " :\n - Fichier : " +
-			// motcles
-			// +
-			// "\n - Similaritée : "
-			// + resultat.get(motcles));
-			// i++;
-			// }
+			
 			if (tabMotCles.length > 0)
 
 			{
+				System.out.println("HEY");
 
 				if (type.equals("Texte")) {
 					Runtime runtime = Runtime.getRuntime();
@@ -510,8 +504,8 @@ public class PanelRechercheMotCles extends JPanel {
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
 				}
-
 			}
+			JOptionPane.showMessageDialog(this, "Aucun résultat");
 			resultat = null;
 		}
 

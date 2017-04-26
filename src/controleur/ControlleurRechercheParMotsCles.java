@@ -68,8 +68,12 @@ public class ControlleurRechercheParMotsCles {
 			}
 
 		}
-		for (int i = 0; i < listeTexte.size(); i++)
+		for (int i = 0; i < listeTexte.size(); i++){
 			map.put(listeTexte.get(i),i+1 );
+			System.out.println(listeTexte.get(i));
+			System.out.println(map.get(listeTexte.get(i)));
+		}
+		System.out.println("HEY");
 		return map;
 	}
 
