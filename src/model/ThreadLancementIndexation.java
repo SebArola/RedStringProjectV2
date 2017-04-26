@@ -1,40 +1,54 @@
 package model;
 
+import java.util.Calendar;
+import java.util.Observable;
 
-public class ThreadLancementIndexation extends Thread{
+public class ThreadLancementIndexation /*extends Thread*/  extends Observable implements Runnable{
 	
 	private Descripteur descripteur=new Descripteur();
 	private TypeFichier type;
 	private int nbMots;
+	private boolean conditionArret=true;
+	private String descripteurGenere="";
+	private Calendar calendar=Calendar.getInstance();
+	int minuteReference;
 	
-	/*methods*/
-	private void lancerIndexation()  throws Exception {
-		
-		try {
-			final Process p=Runtime.getRuntime().exec("./CodePhase1/Src/Indexation/./controlleurIndexation.o");
-			System.out.println("Je suis passe dans le lancerIndexation");
-			descripteur.getDescripteurGenere(type, nbMots);
-			System.out.println("Type: "+type+ " "+nbMots);
-			//System.out.println(" "+p.getOutputStream().toString());;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-	
+	public ThreadLancementIndexation(TypeFichier type, int nbMots){
+		this.type=type;
+		this.nbMots=nbMots;
+		minuteReference=calendar.get(Calendar.MINUTE);
 	}
+	/*methods*/
 	
 	public void run(){
-		try {
-			System.out.println("Je suis passe danss le Run");
-			this.lancerIndexation();
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}
+		do {
+			try {
+				Thread.sleep(20000);
+				int minute = calendar.get(Calendar.MINUTE);
+				if((minute-minuteReference)<1){
+					minuteReference=minute;
+					descripteurGenere=descripteur.getDescripteurGenere(type, nbMots);
+				}
+				descripteurGenere=descripteur.getDescripteurGenere(type, nbMots);
+				//System.out.println(descripteurGenere+"\n Je suis dans run");
+				
+				//System.out.println("Je suis passe dans le Run");
+				conditionArret=false;
+				//this.lancerIndexation();
+			} catch (Exception e) {			
+				e.printStackTrace();
+			}
+		} while (conditionArret);
+		
 	}
 
 	public void genererDescripteur(TypeFichier type, int nbMots) {
 		this.type=type;
 		this.nbMots=nbMots;
 		
+	}
+	public String getDescripteurGenere(){
+		return descripteurGenere;
 	}
 		
 }
