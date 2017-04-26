@@ -1,6 +1,8 @@
 package vueGraphique;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -28,10 +30,18 @@ public class Fenetre extends JFrame {
 	private JPanel jpn_souspanel;
 	private PanelMenuAdministrateur panelMenuAdmin;
 	private ControleurConnexionAdmin ctrl_coAdmin;
+	private FrameHistorique historique;
 
 	public Fenetre() {
 		super("2SATER");
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.historique = new FrameHistorique();
+		
 		this.setSize(840, 475);
+		historique.setLocation((dim.width / 2 - this.getWidth() / 2) + this.getWidth()+2,
+				(dim.height / 2 - this.getHeight() / 2));
+		historique.setVisible(true);
+		historique.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -53,7 +63,7 @@ public class Fenetre extends JFrame {
 		this.jm_menu.setIcon(new ImageIcon("Icon/menu_icon.png"));
 		this.jmitem_menu = new JMenuItem[4];
 
-		this.jmitem_menu[0] = new JMenuItem("Recherche par mots clés");
+		this.jmitem_menu[0] = new JMenuItem("Recherche");
 		this.jmitem_menu[1] = new JMenuItem("Comparaison de fichier");
 		this.jmitem_menu[2] = new JMenuItem("Connexion Administrateur");
 		this.jmitem_menu[3] = new JMenuItem("Quitter");
@@ -153,6 +163,7 @@ public class Fenetre extends JFrame {
 	protected void fermer() {
 		if (JOptionPane.showConfirmDialog(this, "Voulez vous quitter ?", "Quitter",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			this.historique.dispose();
 			this.dispose();
 		}
 	}

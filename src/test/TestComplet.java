@@ -13,6 +13,7 @@ import model.BDDescripteurImage;
 import model.DescripteurTexte;
 import model.fichierConfig;
 import vueGraphique.Fenetre;
+import vueGraphique.FrameHistorique;
 import vueText.BoundaryRechercheParMotsCles;
 
 public class TestComplet {
@@ -48,6 +49,7 @@ public class TestComplet {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		fen.setLocation(dim.width / 2 - fen.getWidth() / 2, dim.height / 2 - fen.getHeight() / 2);
 		fen.setVisible(true);
+		
 	}
 	
 	public static void main(String args[]){
