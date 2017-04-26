@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -255,20 +256,30 @@ public class PanelRechercheMotCles extends JPanel {
 
 	public void lancementRechercheMotCles(String motcles, String type) {
 		this.jtxtf_barRecherche.setText("Entrez les mot cles");
+
 		switch (type) {
 		case "Texte":
 			this.resultat = this.ctrl_rechercheMotClesTXT.rechercheTexte(motcles);
 			break;
 		case "Image":
-			try {
-				switch(motcles){
-				case "Bleu":
-					this.resultat = this.ctrl_rechercheMotClesIm.rechercheImage(Couleur.BLEU);
-				}
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			Couleur c = null;
+			if (motcles.equals("Bleu") || motcles.equals("bleu") || motcles.equals("blue") || motcles.equals("Blue")
+					|| motcles.equals("b")) {
+
+				c = Couleur.BLEU;
+
+			} else if (motcles.equals("Rouge") || motcles.equals("rouge") || motcles.equals("red")
+					|| motcles.equals("Red") || motcles.equals("r")) {
+				c = Couleur.ROUGE;
+			} else if (motcles.equals("Vert") || motcles.equals("vert") || motcles.equals("green")
+					|| motcles.equals("Green") || motcles.equals("v") || motcles.equals("g")) {
+				c = Couleur.VERT;
+			} else {
+				JOptionPane.showMessageDialog(this, "Erreur, veuillez entrer rouge,vert ou bleu");
 			}
+			if (c != null)
+				this.resultat = this.ctrl_rechercheMotClesIm.rechercheImage(c);
+
 			break;
 		case "Son":
 			try {
@@ -281,12 +292,15 @@ public class PanelRechercheMotCles extends JPanel {
 		tabMotCles = resultat.keySet().toArray();
 		tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
 		// for (Object motcles : tabPourcentage) {
-		// System.out.println("Resultat n°" + i + " :\n - Fichier : " + motcles +
+		// System.out.println("Resultat n°" + i + " :\n - Fichier : " + motcles
+		// +
 		// "\n - Similaritée : "
 		// + resultat.get(motcles));
 		// i++;
 		// }
-		if (tabMotCles.length > 0) {
+		if (tabMotCles.length > 0)
+
+		{
 
 			if (type.equals("Texte")) {
 				Runtime runtime = Runtime.getRuntime();

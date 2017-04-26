@@ -22,16 +22,10 @@ public class Descripteur extends Observable{
 		//int nbMot;
 		try{
 
-			lectureImage=new BufferedReader(new FileReader("./Data/base_descripteur_image.txt"));
-			lectureSon=new BufferedReader(new FileReader("./Data/base_descripteur_son.txt"));
-			lectureTexte=new BufferedReader(new FileReader("./Data/base_descripteur_texte.txt"));
+			lectureImage=new BufferedReader(new FileReader(fichierConfig.getInstance().getCheminBD()+"/Data/base_descripteur_image.txt"));
+			lectureSon=new BufferedReader(new FileReader(fichierConfig.getInstance().getCheminBD()+"/Data/base_descripteur_son.txt"));
+			lectureTexte=new BufferedReader(new FileReader(fichierConfig.getInstance().getCheminBD()+"/Data/base_descripteur_texte.txt"));
 			
-			//try {
-				//Thread.sleep(2000);
-				//} catch (Exception e) {
-				// TODO: handle exception
-				//}
-			//String descripteurFichier=" ";
 			switch (typeFichier) {
 			case IMAGE:
 				

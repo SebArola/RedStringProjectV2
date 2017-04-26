@@ -37,7 +37,7 @@ public class BDDescripteurImage {
 		String[] ligneHisto;
 		int debutHistogramme = 0;
 		try{
-			InputStream ips=new FileInputStream("/home/sebastien/Documents/RedStringProjectV2/Data/base_descripteur_image.txt"); 
+			InputStream ips=new FileInputStream(fichierConfig.getInstance().getCheminBD()+"/Data/base_descripteur_image.txt"); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
 			String ligne;

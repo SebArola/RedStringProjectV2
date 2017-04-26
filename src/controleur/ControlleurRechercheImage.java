@@ -14,7 +14,6 @@ public class ControlleurRechercheImage {
 	
 	public HashMap<String, Integer> rechercheImage(Couleur c){
 		HashMap<String, Integer> resultat = new HashMap<String, Integer>();
-		String stringResultat = "";
 		for(DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()){
 			switch (c){
 			case ROUGE:
