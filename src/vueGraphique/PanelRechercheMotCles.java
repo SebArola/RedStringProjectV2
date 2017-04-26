@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controleur.ControleurHistorique;
 import controleur.ControlleurComparaisonFichier;
 import controleur.ControlleurRechercheImage;
 import controleur.ControlleurRechercheParMotsCles;
@@ -45,6 +46,7 @@ public class PanelRechercheMotCles extends JPanel {
 	private int i; // ça c'est gitan faite pas gaffe
 	private ControlleurRechercheParMotsCles ctrl_rechercheMotClesTXT;
 	private ControlleurRechercheImage ctrl_rechercheMotClesIm;
+	private ControleurHistorique ctrl_historique;
 
 	public PanelRechercheMotCles() {
 		super();
@@ -56,6 +58,7 @@ public class PanelRechercheMotCles extends JPanel {
 		this.panelTypeFic = new JPanel(new GridLayout(3, 4));
 		this.jb_confirm = new JButton();
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
+		this.ctrl_historique = new ControleurHistorique();
 
 		this.jtxtf_barRecherche = new JTextField("Entrez les mot cles");
 		this.panelBar.add(new JLabel("Recherche"));
@@ -297,10 +300,7 @@ public class PanelRechercheMotCles extends JPanel {
 			tabMotCles = resultat.keySet().toArray();
 			tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
 
-			if (tabMotCles.length > 0)
-
-			{
-				System.out.println("HEY");
+			if (tabMotCles.length > 0){
 
 				if (type.equals("Texte")) {
 					Runtime runtime = Runtime.getRuntime();
@@ -364,6 +364,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(motcles, type, i);
 
 				} else if (type.equals("Image")) {
 					JFrame image = new JFrame("Premier résultat");
@@ -450,6 +451,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(motcles, type, i);
 				} else if (type.equals("Son")) {
 					Runtime runtime = Runtime.getRuntime();
 					try {
@@ -507,6 +509,7 @@ public class PanelRechercheMotCles extends JPanel {
 
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(motcles, type, i);
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Aucun résultat");

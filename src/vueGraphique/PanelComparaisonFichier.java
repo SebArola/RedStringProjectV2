@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controleur.ControleurHistorique;
 import controleur.ControlleurComparaisonFichier;
 import model.TypeFichier;
 import model.fichierConfig;
@@ -39,6 +40,7 @@ public class PanelComparaisonFichier extends JPanel {
 	private HashMap<String, Integer> resultat;
 	private JButton jb_confirm;
 	private Object tabChemin[];
+	private ControleurHistorique ctrl_historique;
 	private int i; // ça c'est gitan faite pas gaffe
 
 	public PanelComparaisonFichier() {
@@ -49,6 +51,7 @@ public class PanelComparaisonFichier extends JPanel {
 		this.panelTypeFic = new JPanel(new GridLayout(3, 4));
 		this.jb_confirm = new JButton();
 		this.jb_confirm.setIcon(new ImageIcon("Icon/confirm.png"));
+		this.ctrl_historique = new ControleurHistorique();
 
 		this.jtxtf_barRecherche = new JTextField("Entrez le nom du fichier");
 		this.panelBar.add(new JLabel("Comparaison de fichier"));
@@ -339,9 +342,10 @@ public class PanelComparaisonFichier extends JPanel {
 
 							}
 						});
-
+						
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(chemin, type, i);
 
 				} else if (type.equals("Image")) {
 					// gpicview
@@ -458,6 +462,7 @@ public class PanelComparaisonFichier extends JPanel {
 
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(chemin, type, i);
 				} else if (type.equals("Son")) {
 					Runtime runtime = Runtime.getRuntime();
 					try {
@@ -515,11 +520,13 @@ public class PanelComparaisonFichier extends JPanel {
 
 						this.panelResultat[j].add(jb_resultat[i]);
 					}
+					this.ctrl_historique.addRecherche(chemin, type, i);
 				}
 
 			} else {
 				JOptionPane.showMessageDialog(this, "Aucun résultat");
 			}
+			
 		}
 		resultat = null;
 	}

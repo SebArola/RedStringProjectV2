@@ -23,13 +23,14 @@ public class FrameHistorique extends JFrame implements Observer {
 		this.jt_tableau = new JTable(historique, new String[] {"Recherche","Type fichier", "Nb résultat"});
 		this.getContentPane().add(this.jt_tableau.getTableHeader(), BorderLayout.NORTH);
 		this.getContentPane().add(this.jt_tableau, BorderLayout.CENTER);
- 
+		this.ctrl_historique.addObserver(this);
 		this.pack();
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		String[] recherche = (String[]) arg1;
+
 		if(this.nbElement>=this.historique.length){
 			String[][] tab_temp = this.historique;
 			this.historique = new String[this.nbElement+10][3];

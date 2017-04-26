@@ -24,8 +24,8 @@ public class Historique extends Observable{
 	 */
 	public void addRecherche(String ... recherche){
 		if(recherche.length == 3){
-			historique.add(recherche);
 			this.setChanged();
+			historique.add(recherche);
 			this.notifyObservers(recherche);
 		}
 	}	 
