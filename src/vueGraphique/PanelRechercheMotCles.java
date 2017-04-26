@@ -28,6 +28,7 @@ import controleur.ControlleurRechercheImage;
 import controleur.ControlleurRechercheParMotsCles;
 import model.Couleur;
 import model.TypeFichier;
+import model.fichierConfig;
 
 @SuppressWarnings("serial")
 public class PanelRechercheMotCles extends JPanel {
@@ -340,8 +341,9 @@ public class PanelRechercheMotCles extends JPanel {
 						k = 0;
 						this.panelResultat[j].removeAll();
 					}
-					jb_resultat[i] = new JButton(
-							(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+					String nom = (String) tabMotCles[i];
+					nom = nom.substring(nom.lastIndexOf("\\"));
+					jb_resultat[i] = new JButton(nom + " " + resultat.get((String) tabMotCles[i]) + "%");
 					jb_resultat[i].addActionListener(new ActionListener() {
 
 						@Override
@@ -411,13 +413,15 @@ public class PanelRechercheMotCles extends JPanel {
 						k = 0;
 						this.panelResultat[j].removeAll();
 					}
-					jb_resultat[i] = new JButton(
-							(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+					String nom = (String) tabMotCles[i];
+					nom = nom.substring(nom.lastIndexOf("/") + 1);
+					jb_resultat[i] = new JButton(nom + " " + resultat.get((String) tabMotCles[i]) + "%");
 					jb_resultat[i].addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							JFrame image = new JFrame("Premier résultat");
+							JButton thisJB = (JButton) e.getSource();
+							JFrame image = new JFrame(thisJB.getText());
 							class panelImage extends JPanel {
 								Image resultat;
 
@@ -430,8 +434,10 @@ public class PanelRechercheMotCles extends JPanel {
 									g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
 								}
 							}
-							JButton thisJB = (JButton) e.getSource();
-							image.add(new panelImage(thisJB.getText()));
+							System.out.println(
+									fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/" + thisJB.getText());
+							image.add(new panelImage(fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/"
+									+ thisJB.getText().substring(0, thisJB.getText().lastIndexOf(" "))));
 							image.setSize(300, 200);
 							Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 							image.setLocation(dim.width / 2 - image.getWidth() / 2,

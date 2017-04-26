@@ -9,71 +9,94 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BDDescripteurImage {
-	//avec hashmap
-	//private List<DescripteurImage> listeDescripteurImage = new ArrayList<>();
+	// avec hashmap
+	// private List<DescripteurImage> listeDescripteurImage = new ArrayList<>();
 	private HashMap<String, DescripteurImage> listeDescripteurImage = new HashMap();
-	private BDDescripteurImage(){
-		/*listeDescripteurImage.put("imageRVB/testDomineRouge1.jpg", new DescripteurImage("imageRVB/testDomineRouge1.jpg", 47, 30, 23));
-		listeDescripteurImage.put("imageRVB/testDomineRouge2.jpg", new DescripteurImage("imageRVB/testDomineRouge2.jpg", 35, 31, 34));
-		listeDescripteurImage.put("imageRVB/testDomineVert1.jpg", new DescripteurImage("imageRVB/testDomineVert1.jpg", 12, 56, 32));
-		listeDescripteurImage.put("imageRVB/testDomineVert2.jpg", new DescripteurImage("imageRVB/testDomineVert2.jpg", 17, 58, 25));*/
+
+	private BDDescripteurImage() {
+		/*
+		 * listeDescripteurImage.put("imageRVB/testDomineRouge1.jpg", new
+		 * DescripteurImage("imageRVB/testDomineRouge1.jpg", 47, 30, 23));
+		 * listeDescripteurImage.put("imageRVB/testDomineRouge2.jpg", new
+		 * DescripteurImage("imageRVB/testDomineRouge2.jpg", 35, 31, 34));
+		 * listeDescripteurImage.put("imageRVB/testDomineVert1.jpg", new
+		 * DescripteurImage("imageRVB/testDomineVert1.jpg", 12, 56, 32));
+		 * listeDescripteurImage.put("imageRVB/testDomineVert2.jpg", new
+		 * DescripteurImage("imageRVB/testDomineVert2.jpg", 17, 58, 25));
+		 */
 	}
-	private static class BDDescripteurImageHolder{
+
+	private static class BDDescripteurImageHolder {
 		private final static BDDescripteurImage instance = new BDDescripteurImage();
 	}
-	
-	public static BDDescripteurImage getInstance(){
+
+	public static BDDescripteurImage getInstance() {
 		return BDDescripteurImageHolder.instance;
 	}
-	
-	public HashMap<String, DescripteurImage> getAllDescripteursImage(){
+
+	public HashMap<String, DescripteurImage> getAllDescripteursImage() {
 		return this.listeDescripteurImage;
 	}
-	
-	public void genBaseDescripteurImage(){
-		String lecture="";
+
+	public void genBaseDescripteurImage() {
+		String lecture = "";
 		String[] descSplit;
 		String[] ligneDesc;
 		String[] ligneHisto;
 		int debutHistogramme = 0;
-		try{
-			InputStream ips=new FileInputStream(fichierConfig.getInstance().getCheminBD()+"/Data/base_descripteur_image.txt"); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
+		try {
+			InputStream ips = new FileInputStream(
+					fichierConfig.getInstance().getCheminBD() + "/Data/base_descripteur_image.txt");
+			InputStreamReader ipsr = new InputStreamReader(ips);
+			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
-			while ((ligne=br.readLine())!=null){
-				lecture+=ligne+"\n";
+			while ((ligne = br.readLine()) != null) {
+				lecture += ligne + "\n";
 			}
-			br.close(); 
-		}		
-		catch (Exception e){
+			br.close();
+		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		descSplit = lecture.split("\n;\n");		//on sépare les différents descripteurs
-		for(String s : descSplit){
+		descSplit = lecture.split("\n;\n"); // on sépare les différents
+											// descripteurs
+		for (String s : descSplit) {
 			List<Integer> histo = new ArrayList<>();
-			ligneDesc = s.split("\n");			//on sépare les lignes du descripteur
-			String chemin = ligneDesc[0];
+			ligneDesc = s.split("\n"); // on sépare les lignes du descripteur
+			
 			int nbCouleurs = Integer.parseInt(ligneDesc[1]);
-			if(nbCouleurs == 3){								//on écrit les pourcentages de dominance
+			String chemin ="";
+			if (nbCouleurs == 3) { // on écrit les pourcentages de dominance
+				chemin = fichierConfig.getInstance().getCheminBD()+"/Data/IMG_RGB"
+						+ ligneDesc[0].substring(ligneDesc[0].lastIndexOf("/"));
 				int r = Integer.parseInt(ligneDesc[2]);
 				int v = Integer.parseInt(ligneDesc[3]);
 				int b = Integer.parseInt(ligneDesc[4]);
 				debutHistogramme = 5;
-				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin, r, v, b));		//on crée le descripteur
-			}else if(nbCouleurs == 1){
+				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin, r, v, b)); // on
+																								// crée
+																								// le
+																								// descripteur
+			} else if (nbCouleurs == 1) {
+				 chemin = fichierConfig.getInstance().getCheminBD()+"/Data/IMG_NG"
+						+ ligneDesc[0].substring(ligneDesc[0].lastIndexOf("/"));
 				debutHistogramme = 2;
-				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin));				//on crée le descripteur
+				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin)); // on
+																						// crée
+																						// le
+																						// descripteur
 			}
 			int i = 0;
-			for (String ligneHistogramme : ligneDesc){
-				if(i >= debutHistogramme){
+			for (String ligneHistogramme : ligneDesc) {
+				if (i >= debutHistogramme) {
 					ligneHisto = ligneHistogramme.split(" ");
-					histo.add(Integer.parseInt(ligneHisto[1]));		//on crée l'histogramme
+					histo.add(Integer.parseInt(ligneHisto[1])); // on crée
+																// l'histogramme
 				}
 				i++;
 			}
-			this.listeDescripteurImage.get(chemin).setHistogramme(histo);		//on ajoute l'histogramme
+			this.listeDescripteurImage.get(chemin).setHistogramme(histo); // on
+																			// ajoute
+																			// l'histogramme
 		}
 	}
 }
