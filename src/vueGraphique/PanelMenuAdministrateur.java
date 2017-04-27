@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import model.TypeFichier;
 import model.fichierConfig;
 
 public class PanelMenuAdministrateur extends JPanel {
@@ -27,6 +28,7 @@ public class PanelMenuAdministrateur extends JPanel {
 	private JButton jb_indexationImage;
 	private JButton jb_indexationTexte;
 	private JButton jb_indexationSon;
+	private FrameIndexation fIndexation;
 
 	public PanelMenuAdministrateur() {
 
@@ -41,6 +43,10 @@ public class PanelMenuAdministrateur extends JPanel {
 		this.tabbedPane.add(this.jp_indexation, "Lancement indexation");
 
 		this.add(tabbedPane);
+		
+		
+		//Frame Indexation
+				
 
 		this.gestionPanel();
 
@@ -125,6 +131,7 @@ public class PanelMenuAdministrateur extends JPanel {
 	}
 
 	private void gestionPanel() {
+		fIndexation=FrameIndexation.getInstance();
 		this.jb_save.addActionListener(new ActionListener() {
 
 			@Override
@@ -139,6 +146,39 @@ public class PanelMenuAdministrateur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				jb_cancel_action();
 
+			}
+		});
+		
+		//======>gestion tabPane Indexation
+		this.jb_indexationImage.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				fIndexation.lancementIndexation(TypeFichier.IMAGE);
+				fIndexation.setVisible(true);
+				//fIndexation.panIndexation(TypeFichier.IMAGE);
+				
+			}
+		});
+		//actionListenerIndexationSon
+		this.jb_indexationSon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fIndexation.lancementIndexation(TypeFichier.SON);
+				fIndexation.setVisible(true);
+				
+			}
+		});
+		
+		//ActionListenerIndexationTexte
+		this.jb_indexationTexte.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fIndexation.lancementIndexation(TypeFichier.TEXTE);
+				fIndexation.setVisible(true);
+				
 			}
 		});
 	}
@@ -172,7 +212,7 @@ public class PanelMenuAdministrateur extends JPanel {
 			fichierConfig.getInstance().setSeuilComparaisonSon(Integer.parseInt(this.jtxtf_tab[3].getText()));
 			fichierConfig.getInstance().setNbQuantif(Integer.parseInt(this.jtxtf_tab[4].getText()));
 			if (!fichierConfig.getInstance().saveFichierConfig()) {
-				JOptionPane.showMessageDialog(this, "Chemin d'accés introuvable\nSauvegarde annulée");
+				JOptionPane.showMessageDialog(this, "Chemin d'accés introuvable.Verifier le chemin\nSauvegarde annulée");
 			}
 		}
 	}
