@@ -11,7 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -23,12 +25,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controleur.ControleurGenerationDescripteurSon;
 import controleur.ControleurHistorique;
+import controleur.ControleurRechercheSonExtraitSonore;
 import controleur.ControlleurComparaisonFichier;
 import controleur.ControlleurRechercheImage;
 import controleur.ControlleurRechercheParMotsCles;
 import model.Couleur;
-import model.TypeFichier;
+import model.DescripteurSon;
 import model.fichierConfig;
 
 @SuppressWarnings("serial")
@@ -288,18 +292,23 @@ public class PanelRechercheMotCles extends JPanel {
 
 			break;
 		case "Son":
+			ControleurGenerationDescripteurSon cgds = new ControleurGenerationDescripteurSon();
+			ArrayList<DescripteurSon> list;
 			try {
-				this.resultat = this.ctrl_comparraison.comparaisonFichier(motcles, TypeFichier.SON);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				//DescripteurSon extrait = ControleurRechercheSonExtraitSonore.getInstance().getADescripteur(motcles);
+				DescripteurSon extrait = new ControleurGenerationDescripteurSon().creationDescripteurSonTEST().get(0);
+				if(extrait !=null){
+					this.resultat = ControleurRechercheSonExtraitSonore.getInstance().rechercheEnregistrementAudio(extrait);
+				}
+			} catch (IOException e2) {
+				e2.printStackTrace();
 			}
-			break;
 		}
 		if (resultat != null) {
 			tabMotCles = resultat.keySet().toArray();
 			tabMotCles = this.quickSort(tabMotCles, 0, tabMotCles.length - 1);
 
-			if (tabMotCles.length > 0){
+			if (tabMotCles.length > 0) {
 
 				if (type.equals("Texte")) {
 					Runtime runtime = Runtime.getRuntime();
@@ -351,9 +360,9 @@ public class PanelRechercheMotCles extends JPanel {
 								Runtime runtime = Runtime.getRuntime();
 								try {
 									JButton thisJB = (JButton) e.getSource();
-									String chemin = thisJB.getText().substring(0,thisJB.getText().lastIndexOf(" "));
-									runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD()
-											+ "/Textes/" + chemin+ ".xml" });
+									String chemin = thisJB.getText().substring(0, thisJB.getText().lastIndexOf(" "));
+									runtime.exec(new String[] { "gedit",
+											fichierConfig.getInstance().getCheminBD() + "/Textes/" + chemin + ".xml" });
 								} catch (IOException exception) {
 									exception.printStackTrace();
 								}
@@ -452,10 +461,12 @@ public class PanelRechercheMotCles extends JPanel {
 					}
 					this.ctrl_historique.addRecherche(motcles, type, i);
 				} else if (type.equals("Son")) {
+					String cheminComplet =fichierConfig.getInstance().getCheminBD() + "/SON_REQUETE/"+(String) tabMotCles[0]; 
 					Runtime runtime = Runtime.getRuntime();
 					try {
 
-						runtime.exec(new String[] { "play", (String) tabMotCles[0] });
+						runtime.exec(new String[] { "play", cheminComplet });
+						System.out.println(cheminComplet);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -490,7 +501,7 @@ public class PanelRechercheMotCles extends JPanel {
 							this.panelResultat[j].removeAll();
 						}
 						jb_resultat[i] = new JButton(
-								(String) tabMotCles[i] + " " + resultat.get((String) tabMotCles[i]) + "%");
+								(String) tabMotCles[i] + " Occurence :" + resultat.get((String) tabMotCles[i]) );
 						jb_resultat[i].addActionListener(new ActionListener() {
 
 							@Override

@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import controleur.ControleurGenerationDescripteurSon;
+import controleur.ControleurGenerationDescripteurTexte;
 import controleur.ControlleurRechercheImage;
 
 /**
@@ -32,9 +34,6 @@ public class fichierConfig {
 	 * fichier de configuration.
 	 */
 	private fichierConfig() {
-		//loadFichierConfig();
-		this.seuilComparaisonImage = 50;
-		this.cheminBD = "/home/etienne/RedStringProject/Data";
 	}
 
 	public static fichierConfig getInstance() {
@@ -48,21 +47,31 @@ public class fichierConfig {
 		String fic = this.seuilComparaisonImage + ";" + this.seuilComparaisonTexte + ";" + this.seuilComparaisonSon
 				+ ";" + this.nbQuantif + ";" + this.nbMots + ";" + this.cheminBD;
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(this.cheminBD + "/config.txt"));
+			FileOutputStream fos = new FileOutputStream(new File("config.txt"));
 			fos.write(fic.getBytes());
 		} catch (FileNotFoundException e) {
 			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("fichierConfig.java méthode saveFichierConfig");
 		}
-		BDDescripteurImage.getInstance().genBaseDescripteurImage();
+		try {
+			BDDescripteurImage.getInstance().genBaseDescripteurImage();
+		} catch (FileNotFoundException e1) {
+			return false;
+		}
+		try {
+			ControleurGenerationDescripteurTexte.getInstance().creationDescripteurTexte();
+		} catch (IOException e) {
+			return false;
+		}
 		return true;
 	}
 
 	public void loadFichierConfig(){
 		String load= "";
 		try {
-			FileInputStream fis = new FileInputStream("Data/config.txt");
+			FileInputStream fis = new FileInputStream("config.txt");
 
 			byte[] buf = new byte[1];  
 		    int n = 0;

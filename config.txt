@@ -1,0 +1,1 @@
+60;20;27;3;5;/home/sebastien/Documents/RedStringProjectV2/Data

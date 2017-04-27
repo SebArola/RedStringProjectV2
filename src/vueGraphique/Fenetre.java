@@ -131,18 +131,19 @@ public class Fenetre extends JFrame {
 		if(login!=null){
 			mdp = (String) JOptionPane.showInputDialog(null, "Entrez le mdp :", "Identification",
 					JOptionPane.PLAIN_MESSAGE);
-		}
-		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
-			fichierConfig.getInstance().loadFichierConfig();
-			this.jp_mainPanel.remove(this.panelRFichier);
-			this.jp_mainPanel.remove(this.panelRMotCles);
-			this.jp_mainPanel.add(this.panelMenuAdmin);
-			this.jp_mainPanel.repaint();
-			this.jp_mainPanel.revalidate();
-		}else{
-			JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
+			if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
+				fichierConfig.getInstance().loadFichierConfig();
+				this.jp_mainPanel.remove(this.panelRFichier);
+				this.jp_mainPanel.remove(this.panelRMotCles);
+				this.jp_mainPanel.add(this.panelMenuAdmin);
+				this.jp_mainPanel.repaint();
+				this.jp_mainPanel.revalidate();
+			}else{
+				JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
 
+			}
 		}
+		
 		
 	}
 

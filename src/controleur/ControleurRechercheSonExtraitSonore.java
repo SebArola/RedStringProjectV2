@@ -8,8 +8,20 @@ import model.DescripteurSon;
 
 public class ControleurRechercheSonExtraitSonore {
 
-	public ArrayList<DescripteurSon> listeDescripteur = new ArrayList<DescripteurSon>();
+	public ArrayList<DescripteurSon> listeDescripteur ;
+	private static ControleurRechercheSonExtraitSonore instance;
+	
+	private ControleurRechercheSonExtraitSonore(){
+		this.listeDescripteur = new ArrayList<DescripteurSon>();
+	}
 
+	public static ControleurRechercheSonExtraitSonore getInstance(){
+		if(instance == null){
+			instance = new ControleurRechercheSonExtraitSonore();
+		}
+		return instance;
+	}
+	
 	public HashMap<String, Integer> rechercheEnregistrementAudio(DescripteurSon extrait) throws FileNotFoundException {
 		HashMap<String, Integer> mapSon = new HashMap<String, Integer>();
 		int nombre = 0;
@@ -37,6 +49,16 @@ public class ControleurRechercheSonExtraitSonore {
 
 	public void ajouterDescripteurListe(ArrayList<DescripteurSon> liste) {
 		this.listeDescripteur = liste;
+	}
+	
+	public DescripteurSon getADescripteur(String nom){
+		for(DescripteurSon desc : this.listeDescripteur){
+			//System.out.println(desc.getNom()+" = "+nom);
+			if(desc.getNom().equals(nom)){
+				return desc;
+			}
+		}
+		return null;
 	}
 
 	public void afficherListe() {

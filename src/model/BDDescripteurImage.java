@@ -2,6 +2,8 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -38,24 +40,28 @@ public class BDDescripteurImage {
 		return this.listeDescripteurImage;
 	}
 
-	public void genBaseDescripteurImage() {
+	public void genBaseDescripteurImage() throws FileNotFoundException {
 		String lecture = "";
 		String[] descSplit;
 		String[] ligneDesc;
 		String[] ligneHisto;
 		int debutHistogramme = 0;
-		try {
-			InputStream ips = new FileInputStream("Data/base_descripteur_image.txt");
+		
+			InputStream ips = new FileInputStream(fichierConfig.getInstance().getCheminBD()+"/base_descripteur_image.txt");
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
-			while ((ligne = br.readLine()) != null) {
-				lecture += ligne + "\n";
+			try {
+				while ((ligne = br.readLine()) != null) {
+					lecture += ligne + "\n";
+				}
+				br.close();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			br.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+		
 		descSplit = lecture.split("\n;\n"); // on sépare les différents
 											// descripteurs
 		for (String s : descSplit) {
