@@ -31,17 +31,21 @@ public class Fenetre extends JFrame {
 	private PanelMenuAdministrateur panelMenuAdmin;
 	private ControleurConnexionAdmin ctrl_coAdmin;
 	private FrameHistorique historique;
-
+	private FrameIndexation jf_indexation;
+	
 	public Fenetre() {
 		super("2SATER");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.historique = new FrameHistorique();
-		
+		this.jf_indexation=FrameIndexation.getInstance();//frame indexation
+				
 		this.setSize(840, 475);
 		historique.setLocation((dim.width / 2 - this.getWidth() / 2) + this.getWidth()+2,
 				(dim.height / 2 - this.getHeight() / 2));
 		historique.setVisible(true);
 		historique.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+	
+		
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -164,6 +168,7 @@ public class Fenetre extends JFrame {
 		if (JOptionPane.showConfirmDialog(this, "Voulez vous quitter ?", "Quitter",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			this.historique.dispose();
+			this.jf_indexation.dispose();
 			this.dispose();
 		}
 	}
