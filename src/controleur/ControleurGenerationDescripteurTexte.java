@@ -52,7 +52,7 @@ public class ControleurGenerationDescripteurTexte {
 
 		String lecture = "";
 		try {
-			File fileDir = new File(fichierConfig.getInstance().getCheminBD() + "/Data/base_descripteur_texte.txt");
+			File fileDir = new File(fichierConfig.getInstance().getCheminBD() + "/base_descripteur_texte.txt");
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
 

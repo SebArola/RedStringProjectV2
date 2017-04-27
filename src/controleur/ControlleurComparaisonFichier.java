@@ -40,7 +40,7 @@ public class ControlleurComparaisonFichier {
 		String chemin = ""; // chemin>
 		switch (type) {
 		case TEXTE:
-			chemin = fichierConfig.getInstance().getCheminBD() + "/Data/Textes/" + nom;
+			chemin = fichierConfig.getInstance().getCheminBD() + "/Textes/" + nom;
 			ControleurGenerationDescripteurTexte cgdt = ControleurGenerationDescripteurTexte.getInstance();
 			DescripteurTexte desc = cgdt.getADescripteurTexte(nom);
 			ArrayList<DescripteurTexte> listeBaseDeDonnee = cgdt.getListeDescripteurTexte();
@@ -56,9 +56,9 @@ public class ControlleurComparaisonFichier {
 		case IMAGE:
 			if (nom.contains(".jpg") || nom.contains(".bmp")) {
 				if (nom.contains(".jpg")) {
-					chemin = fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/" + nom;
+					chemin = fichierConfig.getInstance().getCheminBD() + "/IMG_RGB/" + nom;
 				} else if (nom.contains(".bmp")) {
-					chemin = fichierConfig.getInstance().getCheminBD() + "/Data/IMG_NG/" + nom;
+					chemin = fichierConfig.getInstance().getCheminBD() + "/IMG_NG/" + nom;
 				}
 				DescripteurImage descDonne = BDDescripteurImage.getInstance().getAllDescripteursImage().get(chemin);
 				for (DescripteurImage d : BDDescripteurImage.getInstance().getAllDescripteursImage().values()) {

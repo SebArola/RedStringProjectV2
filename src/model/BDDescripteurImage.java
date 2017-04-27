@@ -65,7 +65,7 @@ public class BDDescripteurImage {
 			int nbCouleurs = Integer.parseInt(ligneDesc[1]);
 			String chemin ="";
 			if (nbCouleurs == 3) { // on écrit les pourcentages de dominance
-				chemin = fichierConfig.getInstance().getCheminBD()+"/Data/IMG_RGB"
+				chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_RGB"
 						+ ligneDesc[0].substring(ligneDesc[0].lastIndexOf("/"));
 				int r = Integer.parseInt(ligneDesc[2]);
 				int v = Integer.parseInt(ligneDesc[3]);
@@ -76,7 +76,7 @@ public class BDDescripteurImage {
 																								// le
 																								// descripteur
 			} else if (nbCouleurs == 1) {
-				 chemin = fichierConfig.getInstance().getCheminBD()+"/Data/IMG_NG"
+				 chemin = fichierConfig.getInstance().getCheminBD()+"/IMG_NG"
 						+ ligneDesc[0].substring(ligneDesc[0].lastIndexOf("/"));
 				debutHistogramme = 2;
 				this.listeDescripteurImage.put(chemin, new DescripteurImage(chemin)); // on

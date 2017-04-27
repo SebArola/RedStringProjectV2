@@ -48,7 +48,7 @@ public class fichierConfig {
 		String fic = this.seuilComparaisonImage + ";" + this.seuilComparaisonTexte + ";" + this.seuilComparaisonSon
 				+ ";" + this.nbQuantif + ";" + this.nbMots + ";" + this.cheminBD;
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(this.cheminBD + "/Data/config.txt"));
+			FileOutputStream fos = new FileOutputStream(new File(this.cheminBD + "/config.txt"));
 			fos.write(fic.getBytes());
 		} catch (FileNotFoundException e) {
 			return false;

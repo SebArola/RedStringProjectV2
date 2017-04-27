@@ -20,13 +20,15 @@ public class ControleurRechercheSonExtraitSonore {
 
 		for (int i = 0; i < listeDescripteur.size(); i++) {
 			DescripteurSon lecture = listeDescripteur.get(i);
-			Texte = lecture.getDescripteur();//descripteur.substring(0, lecture.descripteur.length() - 1);
-
-			nombre = 0;
-			nombre = (" " + Texte + " ").split(Partie).length - 1;
-			System.out.println("Liste SIZE = "+listeDescripteur.size()+ "  NOMBRE = "+nombre);
-			if (nombre > 0) {
-				mapSon.put(lecture.getNom() ,nombre);
+			if(!(extrait.getNom().equals(lecture.getNom()))){
+				Texte = lecture.getDescripteur();//descripteur.substring(0, lecture.descripteur.length() - 1);
+	
+				nombre = 0;
+				nombre = (" " + Texte + " ").split(Partie).length - 1;
+				System.out.println("Liste SIZE = "+listeDescripteur.size()+ "  NOMBRE = "+nombre);
+				if (nombre > 0) {
+					mapSon.put(lecture.getNom() ,nombre);
+				}
 			}
 		}
 

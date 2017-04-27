@@ -6,14 +6,14 @@ import java.util.HashMap;
 import model.DescripteurTexte;
 
 public class ControlleurRechercheParMotsCles {
-	private ArrayList<String> listeMotsPlus;
-	private ArrayList<String> listeMotsMoins ;
-	private ArrayList<DescripteurTexte> listeDescripteurTexte;
+	
 	private static ControlleurRechercheParMotsCles instance;
+	
+	private ArrayList<DescripteurTexte> listeDescripteurTexte;
 
 	private  ControlleurRechercheParMotsCles(){
-		this.listeMotsPlus = new ArrayList<String>();
-		this.listeMotsMoins = new ArrayList<String>();
+		/*this.listeMotsPlus = new ArrayList<String>();
+		this.listeMotsMoins = new ArrayList<String>();*/
 		this.listeDescripteurTexte = new ArrayList<DescripteurTexte>();
 	}
 	
@@ -29,7 +29,7 @@ public class ControlleurRechercheParMotsCles {
 		return (true);
 	}
 
-	public void afficherArray() {
+	/*public void afficherArray() {
 
 		System.out.println("Les mots en moins sont =>");
 		for (int i = 0; i < listeMotsMoins.size(); i++)
@@ -37,10 +37,12 @@ public class ControlleurRechercheParMotsCles {
 		System.out.println("Les mots en plus sont =>");
 		for (int i = 0; i < listeMotsPlus.size(); i++)
 			System.out.println("=" + listeMotsPlus.get(i) + "=");
-	}
+	}*/
 
 	public HashMap<String, Integer> rechercheTexte(String lecture) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		ArrayList<String> listeMotsPlus = new ArrayList<>();
+		ArrayList<String> listeMotsMoins = new ArrayList<>() ;
 
 		int nombre = (" " + lecture + " ").split(" ").length - 1;
 		String[] decoupe = lecture.split(" ");
@@ -82,9 +84,9 @@ public class ControlleurRechercheParMotsCles {
 			}
 
 		}
+		map.clear();
 		for (int i = 0; i < listeTexte.size(); i++){
 			map.put(listeTexte.get(i),i+1 );
-			
 		}
 		return map;
 	}

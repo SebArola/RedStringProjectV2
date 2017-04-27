@@ -419,7 +419,7 @@ public class PanelComparaisonFichier extends JPanel {
 									Runtime runtime = Runtime.getRuntime();
 									try {
 										runtime.exec(new String[] { "gpicview",
-												fichierConfig.getInstance().getCheminBD() + "/Data/IMG_NG/" + thisJB
+												fichierConfig.getInstance().getCheminBD() + "/IMG_NG/" + thisJB
 														.getText().substring(0, thisJB.getText().lastIndexOf(" ")) });
 									} catch (IOException t) {
 										t.printStackTrace();
@@ -440,7 +440,7 @@ public class PanelComparaisonFichier extends JPanel {
 									}
 
 									image.add(new panelImage(fichierConfig.getInstance().getCheminBD()
-											+ "/Data/IMG_RGB/"
+											+ "/IMG_RGB/"
 											+ thisJB.getText().substring(0, thisJB.getText().lastIndexOf(" "))));
 
 									image.setSize(300, 200);

@@ -305,7 +305,7 @@ public class PanelRechercheMotCles extends JPanel {
 					Runtime runtime = Runtime.getRuntime();
 					try {
 
-						runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD() + "/Data/Textes/"
+						runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD() + "/Textes/"
 								+ (String) tabMotCles[0] + ".xml" });
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -353,7 +353,7 @@ public class PanelRechercheMotCles extends JPanel {
 									JButton thisJB = (JButton) e.getSource();
 									String chemin = thisJB.getText().substring(0,thisJB.getText().lastIndexOf(" "));
 									runtime.exec(new String[] { "gedit", fichierConfig.getInstance().getCheminBD()
-											+ "/Data/Textes/" + chemin+ ".xml" });
+											+ "/Textes/" + chemin+ ".xml" });
 								} catch (IOException exception) {
 									exception.printStackTrace();
 								}
@@ -437,7 +437,7 @@ public class PanelRechercheMotCles extends JPanel {
 										g.drawImage(resultat, 0, 0, getWidth(), getHeight(), this);
 									}
 								}
-								image.add(new panelImage(fichierConfig.getInstance().getCheminBD() + "/Data/IMG_RGB/"
+								image.add(new panelImage(fichierConfig.getInstance().getCheminBD() + "/IMG_RGB/"
 										+ thisJB.getText().substring(0, thisJB.getText().lastIndexOf(" "))));
 								image.setSize(300, 200);
 								Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
