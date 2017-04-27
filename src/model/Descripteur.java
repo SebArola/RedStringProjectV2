@@ -45,7 +45,7 @@ public class Descripteur extends Observable{
 					labels[0]="1";
 					labels[1]=descripteurFichier;
 					
-						super.notifyObservers(labels); //descripteur ici est un toString, qui contiet tout mon descripteur
+					super.notifyObservers(labels); //descripteur ici est un toString, qui contiet tout mon descripteur
 						//System.out.println(labels[1]);
 					//}
 				} while (descripteurParcours!=null);
@@ -68,18 +68,20 @@ public class Descripteur extends Observable{
 				} while (descripteurParcours!=null);
 				break;
 			case SON:
+				int length;
 				do {
 					super.setChanged();
 					//String descripteurFichier=" ";	//permet d'enregistrer le fichier descripteur
-					String labels2[]=new String[2]; //le label contient le numéro correspondant au typeFichier, et la base
+					String labels[]=new String[2]; //le label contient le numéro correspondant au typeFichier, et la base
 					descripteurParcours+=lectureSon.readLine();
+					length=descripteurParcours.length();
 					descripteurFichier+=descripteurParcours+"\n";
 					
-					labels2[0]="3";
-					labels2[1]=descripteurFichier;
+					labels[0]="3";
+					labels[1]=descripteurFichier;
 					if(descripteurParcours!=null)		//pour eviter d'afficher le null, marquant la fin du fichier
-						super.notifyObservers(labels2);
-				} while (descripteurParcours!=null);
+						super.notifyObservers(labels);
+				} while (descripteurParcours!=null && length<=500);
 				break;
 			default:
 				break;
