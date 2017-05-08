@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controleur.ControleurConnexionAdmin;
+import vueGraphique.ZDialog;
 import model.fichierConfig;
 
 @SuppressWarnings("serial")
@@ -126,24 +127,21 @@ public class Fenetre extends JFrame {
 
 	protected void panelMenuAdministrateur() {
 		String mdp = "";
-		String login = (String) JOptionPane.showInputDialog(null, "Entrez le login :", "Identification",
-				JOptionPane.PLAIN_MESSAGE);
-		if(login!=null){
-			mdp = (String) JOptionPane.showInputDialog(null, "Entrez le mdp :", "Identification",
-					JOptionPane.PLAIN_MESSAGE);
-			if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
-				fichierConfig.getInstance().loadFichierConfig();
-				this.jp_mainPanel.remove(this.panelRFichier);
-				this.jp_mainPanel.remove(this.panelRMotCles);
-				this.jp_mainPanel.add(this.panelMenuAdmin);
-				this.jp_mainPanel.repaint();
-				this.jp_mainPanel.revalidate();
-			}else{
-				JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
+		ZDialog zd = new ZDialog(null, "Identification", true);
+		 String login=zd.getLoginSaisie();
+		 if(login!=null)
+			 mdp=zd.getMdpSaisie();
+		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
+			fichierConfig.getInstance().loadFichierConfig();
+			this.jp_mainPanel.remove(this.panelRFichier);
+			this.jp_mainPanel.remove(this.panelRMotCles);
+			this.jp_mainPanel.add(this.panelMenuAdmin);
+			this.jp_mainPanel.repaint();
+			this.jp_mainPanel.revalidate();
+		}else{
+			JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
 
-			}
 		}
-		
 		
 	}
 
