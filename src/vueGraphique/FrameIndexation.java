@@ -31,12 +31,12 @@ public class FrameIndexation extends JFrame implements Observer{
 	
 	private FrameIndexation(){
 		super("indexation");
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		Dimension dim=Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(500, 400);
 		this.setLocation((dim.width / 2 - this.getWidth() / 2) - this.getWidth()-10,
 				(dim.height / 2 - this.getHeight() / 2));
 		//this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.controleurIndexation=new ControleurIndexation();
 		controleurIndexation.connectObservers(this);
 		

@@ -284,8 +284,9 @@ public class PanelComparaisonFichier extends JPanel {
 				if (type.equals("Texte")) {
 					Runtime runtime = Runtime.getRuntime();
 					try {
-
-						runtime.exec(new String[] { "gedit", (String) tabChemin[0] });
+						String temp =  "";
+						temp = fichierConfig.getInstance().getCheminBD() + "/Textes/"+(String) tabChemin[0]+".xml";
+						runtime.exec(new String[] { "gedit", temp });
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

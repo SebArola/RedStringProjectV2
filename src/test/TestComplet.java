@@ -53,7 +53,7 @@ public class TestComplet {
 
 		Fenetre fen = new Fenetre();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		fen.setLocation(dim.width / 2 - fen.getWidth() / 2, dim.height / 2 - fen.getHeight() / 2);
+		fen.setLocation((dim.width / 2 - fen.getWidth()/ 2)-28, dim.height / 2 - fen.getHeight() / 2);
 		fen.setVisible(true);
 
 	}

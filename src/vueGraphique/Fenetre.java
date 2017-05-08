@@ -39,8 +39,8 @@ public class Fenetre extends JFrame {
 		this.historique = new FrameHistorique();
 		this.jf_indexation=FrameIndexation.getInstance();//frame indexation
 				
-		this.setSize(840, 475);
-		historique.setLocation((dim.width / 2 - this.getWidth() / 2) + this.getWidth()+2,
+		this.setSize(920, 475);
+		historique.setLocation((dim.width / 2 - this.getWidth() / 2) + this.getWidth(),
 				(dim.height / 2 - this.getHeight() / 2));
 		historique.setVisible(true);
 		historique.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
