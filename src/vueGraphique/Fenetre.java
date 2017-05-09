@@ -128,20 +128,21 @@ public class Fenetre extends JFrame {
 	protected void panelMenuAdministrateur() {
 		String mdp = "";
 		ZDialog zd = new ZDialog(null, "Identification", true);
-		 String login=zd.getLoginSaisie();
-		 if(login!=null)
-			 mdp=zd.getMdpSaisie();
-		if((login!=null && mdp != null) && this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
-			fichierConfig.getInstance().loadFichierConfig();
-			this.jp_mainPanel.remove(this.panelRFichier);
-			this.jp_mainPanel.remove(this.panelRMotCles);
-			this.jp_mainPanel.add(this.panelMenuAdmin);
-			this.jp_mainPanel.repaint();
-			this.jp_mainPanel.revalidate();
-		}else{
-			JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
+		String login=zd.getLoginSaisie();
+		mdp=zd.getMdpSaisie();
+		if(login!=null && mdp != null){
+			if(this.ctrl_coAdmin.connexionAdministrateur(login, mdp) ){
+				fichierConfig.getInstance().loadFichierConfig();
+				this.jp_mainPanel.remove(this.panelRFichier);
+				this.jp_mainPanel.remove(this.panelRMotCles);
+				this.jp_mainPanel.add(this.panelMenuAdmin);
+				this.jp_mainPanel.repaint();
+				this.jp_mainPanel.revalidate();
+			} else{
+				JOptionPane.showMessageDialog(this, "Login ou mot de passe incorrect");
 
-		}
+			}
+		} 
 		
 	}
 

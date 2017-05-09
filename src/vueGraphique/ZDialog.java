@@ -68,7 +68,7 @@ private void initComponent() {
 	    okBouton.addActionListener(new ActionListener(){
 
 	      public void actionPerformed(ActionEvent arg0) {        
-	    	  mdpSaisie=jpf_passWord.getText();
+	    	  mdpSaisie=String.copyValueOf(jpf_passWord.getPassword());
 	    	  loginSaisie=jtf_login.getText();
 	        //zInfo = new ZDialogInfo(nom.getText(), (String)sexe.getSelectedItem(), getAge(), (String)cheveux.getSelectedItem() ,getTaille());
 
