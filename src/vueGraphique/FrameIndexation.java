@@ -36,7 +36,7 @@ public class FrameIndexation extends JFrame implements Observer{
 		this.setSize(500, 400);
 		this.setLocation((dim.width / 2 - this.getWidth() / 2) - this.getWidth()-10,
 				(dim.height / 2 - this.getHeight() / 2));
-		//this.setVisible(true);		this.controleurIndexation=new ControleurIndexation();
+		this.controleurIndexation=new ControleurIndexation();
 		controleurIndexation.connectObservers(this);
 		
 		///s====================>		
